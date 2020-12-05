@@ -2,27 +2,27 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-const Petition = require('./../models/Petition.model')
+const Center = require('./../models/Center.model')
 
 // Endpoints
 router.get('/', (req, res) => {
 
-    Petition
+    Center
         .find()
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.get('/petitionById/:petition_id', (req, res) => {
+router.get('/centerById/:center_id', (req, res) => {
 
-    if (!mongoose.Types.ObjectId.isValid(req.params.petition_id)) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.center_id)) {
 
         return res.status(404).json({ message: 'Invalid ID' })
     }
 
-    Petition
-        .findById(req.params.petition_id)
+    Center
+        .findById(req.params.center_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
@@ -30,22 +30,20 @@ router.get('/petitionById/:petition_id', (req, res) => {
 
 router.post('/new', (req, res) => {
 
-    Petition
+    Center
         .create(req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.put('/edit/:petition_id', (req, res) => {
+router.put('/edit/:center_id', (req, res) => {
 
-    Petition
-        .findByIdAndUpdate(req.params.petition_id, req.body)
+    Center
+        .findByIdAndUpdate(req.params.center_id, req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
-
-
 
 module.exports = router

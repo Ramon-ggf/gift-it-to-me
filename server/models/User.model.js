@@ -28,6 +28,10 @@ const userSchema = new Schema({
     image: {
         type: String,
         default: 'https://www.pngfind.com/pngs/m/93-938050_png-file-transparent-white-user-icon-png-download.png'
+    },
+    status: {
+        type: Boolean,
+        default: true
     }
 
 }, {

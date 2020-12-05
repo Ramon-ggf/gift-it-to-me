@@ -2,50 +2,40 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-const Petition = require('./../models/Petition.model')
+const User = require('./../models/User.model')
 
 // Endpoints
 router.get('/', (req, res) => {
 
-    Petition
+    User
         .find()
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.get('/petitionById/:petition_id', (req, res) => {
+router.get('/userById/:user_id', (req, res) => {
 
-    if (!mongoose.Types.ObjectId.isValid(req.params.petition_id)) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.user_id)) {
 
         return res.status(404).json({ message: 'Invalid ID' })
     }
 
-    Petition
-        .findById(req.params.petition_id)
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
-
-router.post('/new', (req, res) => {
-
-    Petition
-        .create(req.body)
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
-
-router.put('/edit/:petition_id', (req, res) => {
-
-    Petition
-        .findByIdAndUpdate(req.params.petition_id, req.body)
+    User
+        .findById(req.params.user_id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
 
+router.put('/edit/:user_id', (req, res) => {
+
+    User
+        .findByIdAndUpdate(req.params.user_id, req.body)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
+})
 
 module.exports = router

@@ -23,7 +23,6 @@ const petitionSchema = new Schema({
     image: {
         type: String,
         default: 'https://www.vhv.rs/dpng/d/11-119235_free-gift-icon-png-transparent-png.png',
-        required: true
     },
     owner: {
         type: Schema.Types.ObjectId,
@@ -40,12 +39,10 @@ const petitionSchema = new Schema({
     },
     status: {
         type: Boolean,
-        required: true,
         default: true
     },
     sent: {
         type: Boolean,
-        required: true,
         default: false
     }
 
