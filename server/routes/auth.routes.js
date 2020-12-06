@@ -8,11 +8,17 @@ const User = require('./../models/User.model')
 // Endpoints
 router.post('/signup', (req, res) => {
 
-    const { name, lastname, password, email, role, image } = req.body
+    let { name, lastname, password, email, role, image } = req.body
 
     if (!name || !lastname || !password || !email) {
 
         return res.status(400).json({ message: 'Debes rellenar todos los campos.' })
+
+    }
+
+    if (!image) {
+
+        image = undefined
 
     }
 
@@ -25,10 +31,10 @@ router.post('/signup', (req, res) => {
     User
         .findOne({ email })
         .then(response => {
-            
+
             if (response) {
 
-                return res.status(400).json({message: 'El usuario ya existe.'})
+                return res.status(400).json({ message: 'El usuario ya existe.' })
 
             }
 
@@ -45,7 +51,7 @@ router.post('/signup', (req, res) => {
 })
 
 router.post('/login', (req, res, next) => {
-    
+
     passport.authenticate('local', (err, theUser, failureDetails) => {
 
         if (err) {

@@ -11,9 +11,8 @@ const express = require('express')
 const app = express()
 
 // Configs
-
-require('./configs/middleware.config')(app)
 require('./configs/cors.config')(app)
+require('./configs/middleware.config')(app)
 require('./configs/passport.config')(app)
 
 
