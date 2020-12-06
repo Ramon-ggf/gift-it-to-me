@@ -15,7 +15,7 @@ export default class SignupForm extends Component {
             password: '',
             email: '',
             role: '',
-            image: '',
+            image: undefined,
             status: true
 
         }

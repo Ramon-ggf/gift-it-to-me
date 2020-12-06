@@ -16,12 +16,6 @@ router.post('/signup', (req, res) => {
 
     }
 
-    if (!image) {
-
-        image = undefined
-
-    }
-
     if (password.length < 3) {
 
         return res.status(400).json({ message: 'La contraseña debe contener al menos 8 caracteres.' })

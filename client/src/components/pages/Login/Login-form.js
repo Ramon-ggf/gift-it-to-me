@@ -27,7 +27,10 @@ export default class LoginForm extends Component {
 
         this.authService
             .login(this.state)
-            .then(response => console.log(response.data))
+            .then(response => {
+                this.props.storeUser(response.data)
+                this.props.history.push('/')
+            })
             .catch(err => console.log(err))
 
     }
