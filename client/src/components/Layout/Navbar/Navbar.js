@@ -62,7 +62,7 @@ export default class Navigation extends Component {
 
                         }
                         <Link to="/profile">
-                            <Nav.Link as="div">Hola, {this.props.loggedUser ? this.props.loggedUser.username : 'invitado'}</Nav.Link>
+                            {this.props.loggedUser && <Nav.Link as="div">Mi perfil</Nav.Link> }
                         </Link>
                     </Nav>
                 </Navbar.Collapse>
