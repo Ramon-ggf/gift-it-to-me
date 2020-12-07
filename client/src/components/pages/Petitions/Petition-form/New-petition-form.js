@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PetitionService from './../../../service/petitions.service'
+import PetitionService from '../../../../service/petitions.service'
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 

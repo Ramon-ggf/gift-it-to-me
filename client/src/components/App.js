@@ -6,7 +6,8 @@ import { Switch, Route } from 'react-router-dom'
 import Navigation from './Layout/Navbar/Navbar'
 import SignupForm from './pages/Signup/Signup-form'
 import LoginForm from './pages/Login/Login-form'
-import PetitionForm from './pages/Petitions/New-petition-form'
+import PetitionForm from './pages/Petitions/Petition-form/New-petition-form'
+import PetitionsList from './pages/Petitions/Petitions-list/Petitions-list'
 
 
 class App extends Component {
@@ -47,7 +48,8 @@ class App extends Component {
 
             <Route path="/signup" render={props => <SignupForm storeUser={this.setUser} {...props} />} />
             <Route path="/login" render={props => <LoginForm storeUser={this.setUser} {...props} />} />
-            <Route path="/petitions" render={() => <PetitionForm loggedUser={this.state.loggedInUser}/>}/>
+            <Route path="/petitions" render={() => <PetitionsList />} />
+            <Route path="/petitions/:petition_id" render={() => <PetitionsList />}/>
 
           </Switch>
         </main>
