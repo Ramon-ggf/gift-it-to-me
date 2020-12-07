@@ -1,18 +1,19 @@
 import { Col, Card, Button, ButtonGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const PetitionCard = ({_id, image, title, description}) => {
+const CenterCard = ({_id, image, name, address}) => {
 
 
     return (
         <Col md={4}>
             <Card>
                 <Card.Img variant="top" src={image} />
+                <hr/>
                 <Card.Body>
-                    <Card.Title>{title}</Card.Title>
-                    <Card.Text>{description}</Card.Text>
+                    <Card.Title>{name}</Card.Title>
+                    <Card.Text>{address}</Card.Text>
 
-                    <Link className="btn btn-dark btn-block btn-sm" to={`/petitions/${_id}`}>Ver detalles</Link>
+                    <Link className="btn btn-dark btn-block btn-sm" to={`/centers/${_id}`}>Ver detalles</Link>
 
                 </Card.Body>
             </Card>
@@ -22,4 +23,4 @@ const PetitionCard = ({_id, image, title, description}) => {
 
 }
 
-export default PetitionCard
+export default CenterCard

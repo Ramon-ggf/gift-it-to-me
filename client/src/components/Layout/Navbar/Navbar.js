@@ -40,6 +40,9 @@ export default class Navigation extends Component {
                         <Link to="/">
                             <Nav.Link as="div">Inicio</Nav.Link>
                         </Link>
+                        <Link to="/centers">
+                            <Nav.Link as="div">Centros</Nav.Link>
+                        </Link>
                         <Link to="/petitions">
                             <Nav.Link as="div">Regalos</Nav.Link>
                         </Link>

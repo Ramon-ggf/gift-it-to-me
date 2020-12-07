@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default class AuthService {
+export default class PetitionService {
 
     constructor() {
 

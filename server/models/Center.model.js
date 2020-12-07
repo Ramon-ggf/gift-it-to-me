@@ -23,6 +23,10 @@ const centerSchema = new Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String,
+        default: 'https://pngimage.net/wp-content/uploads/2018/06/silueta-casa-png-.png'
+    },
     status: {
         type: Boolean,
         default: true
