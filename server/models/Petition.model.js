@@ -35,7 +35,9 @@ const petitionSchema = new Schema({
         sparse: true
     },
     center: {
-        type: String
+        type: Schema.Types.ObjectId,
+        ref: "Center",
+        sparse: true
     },
     status: {
         type: Boolean,

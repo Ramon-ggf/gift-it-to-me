@@ -9,6 +9,7 @@ import LoginForm from './pages/Login/Login-form'
 import PetitionForm from './pages/Petitions/Petition-form/New-petition-form'
 import PetitionsList from './pages/Petitions/Petitions-list/Petitions-list'
 import CentersList from './../components/pages/Centers/Center-list/Centers-list'
+import PetitionDetails from './pages/Petitions/Petition-details/Petition-details'
 
 
 class App extends Component {
@@ -50,7 +51,7 @@ class App extends Component {
             <Route path="/signup" render={props => <SignupForm storeUser={this.setUser} {...props} />} />
             <Route path="/login" render={props => <LoginForm storeUser={this.setUser} {...props} />} />
             <Route path="/petitions" render={() => <PetitionsList />} />
-            <Route path="/petitions/:petition_id" render={() => <PetitionsList />} />
+            <Route path="/petitions/:petition_id" render={props => <PetitionDetails {...props}/>} />
             <Route path="/centers" render={() => <CentersList />} />
 
           </Switch>

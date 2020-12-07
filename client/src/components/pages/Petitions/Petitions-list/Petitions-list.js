@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container, Row} from 'react-bootstrap'
+import { Container, Row, Col, CardDeck } from 'react-bootstrap'
 
 
 import PetitionService from '../../../../service/petitions.service'
@@ -33,10 +33,20 @@ export default class PetitionsList extends Component {
     render() {
         return (
             <>
-                <h1>Lista de wishes</h1>
 
-                {this.state.petitions.map(elm => <PetitionCard key={elm._id} {...elm}/>)}
-                
+                <Container>
+
+                    <h1>Lista de wishes</h1>
+
+                    <Row>
+                        <CardDeck>
+
+                            {this.state.petitions.map(elm => <PetitionCard key={elm._id} {...elm} />)}
+                            
+                        </CardDeck>
+                    </Row>
+                </Container>
+
             </>
         )
     }
