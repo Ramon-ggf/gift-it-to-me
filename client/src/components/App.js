@@ -10,6 +10,8 @@ import PetitionForm from './pages/Petitions/Petition-form/New-petition-form'
 import PetitionsList from './pages/Petitions/Petitions-list/Petitions-list'
 import CentersList from './../components/pages/Centers/Center-list/Centers-list'
 import PetitionDetails from './pages/Petitions/Petition-details/Petition-details'
+import CenterDetails from './pages/Centers/Center-details/Center-details';
+
 
 
 class App extends Component {
@@ -50,10 +52,10 @@ class App extends Component {
 
             <Route path="/signup" render={props => <SignupForm storeUser={this.setUser} {...props} />} />
             <Route path="/login" render={props => <LoginForm storeUser={this.setUser} {...props} />} />
-            <Route path="/petitions" render={() => <PetitionsList />} />
+            <Route path="/petitions" exact render={() => <PetitionsList />} />
             <Route path="/petitions/:petition_id" render={props => <PetitionDetails {...props}/>} />
-            <Route path="/centers" render={() => <CentersList />} />
-
+            <Route path="/centers" exact render={() => <CentersList />} />
+            <Route path="/centers/:center_id" render={props => <CenterDetails {...props}/>} />
           </Switch>
         </main>
 
