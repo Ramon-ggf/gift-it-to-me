@@ -1,14 +1,17 @@
-import { Col, Card, Button, ButtonGroup } from 'react-bootstrap'
+import { Col, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import './Petition-card.css'
+
 
 const PetitionCard = ({_id, image, title, description}) => {
 
 
     return (
         <Col md={4}>
-            <Card>
-                <Card.Img variant="top" src={image} />
+            <Card className="wish-card">
+                <Card.Img variant="top" src={image} alt={title}/>
                 <Card.Body>
+                    
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{description}</Card.Text>
 
