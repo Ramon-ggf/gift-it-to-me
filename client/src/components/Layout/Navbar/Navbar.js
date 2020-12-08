@@ -23,7 +23,7 @@ export default class Navigation extends Component {
     render() {
 
         return (
-            <Navbar bg="dark" variant="dark" expand="md" style={{ marginBottom: '50px' }}>
+            <Navbar expand="md" style={{ marginBottom: '50px', backgroundColor: '#00334e'}}>
                 {/* <Link to="/">
                     <Navbar.Brand >
                         <img
@@ -37,32 +37,32 @@ export default class Navigation extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Link to="/">
-                            <Nav.Link as="div">Inicio</Nav.Link>
+                        <Link to="/" >
+                            <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Inicio</Nav.Link>
                         </Link>
-                        <Link to="/centers">
-                            <Nav.Link as="div">Centros</Nav.Link>
+                        <Link to="/centers" >
+                            <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Centros</Nav.Link>
                         </Link>
                         <Link to="/petitions">
-                            <Nav.Link as="div">Regalos</Nav.Link>
+                            <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Regalos</Nav.Link>
                         </Link>
                         {
                             this.props.loggedUser
                                 ?
-                                <Nav.Link as="div" onClick={this.logOut}>Cerrar sesión</Nav.Link>
+                                <Nav.Link style={{ color: '#F6F5F5' }} onClick={this.logOut}>Cerrar sesión</Nav.Link>
                                 :
                                 <>
                                     <Link to="/signup">
-                                        <Nav.Link as="div">Registrarse</Nav.Link>
+                                        <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Registrarse</Nav.Link>
                                     </Link>
                                     <Link to="/login">
-                                        <Nav.Link as="div">Iniciar sesión</Nav.Link>
+                                        <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Iniciar sesión</Nav.Link>
                                     </Link>
                                 </>
 
                         }
                         <Link to="/profile">
-                            {this.props.loggedUser && <Nav.Link as="div">Mi perfil</Nav.Link> }
+                            {this.props.loggedUser && <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Mi perfil</Nav.Link> }
                         </Link>
                     </Nav>
                 </Navbar.Collapse>

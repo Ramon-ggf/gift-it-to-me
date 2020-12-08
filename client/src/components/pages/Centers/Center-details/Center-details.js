@@ -1,6 +1,8 @@
 import { Component } from 'react'
 import CenterService from './../../../../service/center.service'
 
+import { Link } from 'react-router-dom'
+
 import { Container, Row, Col, Card, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 export default class CenterDetails extends Component {
@@ -49,7 +51,12 @@ export default class CenterDetails extends Component {
                                         <ListGroupItem>{`Teléfono: ${this.state.center.phone}`}</ListGroupItem>
                                         <ListGroupItem>{`Horarios: ${this.state.center.opening}`}</ListGroupItem>
                                     </ListGroup>
-                                    </Card>
+
+                                    {this.props.user && this.props.user.role === 'ADMIN' &&
+                                        
+                                        <Link to={`/center/edit/${this.state.center._id}`}>Editar centro</Link>
+                                    }
+                                </Card>
                             </Col>
                         </Row>
                     </Container>

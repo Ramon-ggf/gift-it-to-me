@@ -1,25 +1,83 @@
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
+import { Container, Row, Col } from 'react-bootstrap'
 
-const Profile = props => {
+import './Profile-page.css'
+
+const Profile = ({ user }) => {
 
     return (
 
         <>
 
-            <h1>Bienvenid@, {props.user.name}</h1>
-            <figure>
-                <img src={props.user.image} alt={props.user.name} />
-            </figure>
-            <p>Nombre: {props.user.name}</p>
-            <p>Apellidos: {props.user.lastname}</p>
-            <p>Email: {props.user.email}</p>
+            {
+                user ?
 
-            <hr />
-            <Link className="btn btn-info" to="#">Editar perfil</Link>
-            <Link className="btn btn-info" to="#">Darse de baja</Link>
-            
+                    <Container>
+
+                        <div className='welcome'>
+                            <h1>Bienvenid@, {user.name}</h1>
+                        </div>
+
+                        <Row>
+
+                            <Col md={3}>
+                                <figure>
+                                    <img className="user-image" src={user.image} alt={user.name} />
+                                </figure>
+                            </Col>
+
+                            <Col md={4}>
+                                <p>Nombre: {user.name}</p> <hr />
+                                <p>Apellidos: {user.lastname}</p> <hr />
+                                <p>Email: {user.email}</p> <hr />
+                            </Col>
+
+                            <Col md={3} className="action-btn">
+
+                                {
+                                    user.role === 'ADMIN' &&
+                                    <>
+
+                                        <Link className="btn btn-info action" to="#">Gestionar usuarios</Link>
+                                        <Link className="btn btn-info action" to="#">Gestionar centros</Link>
+
+                                    </>
+                                }
+
+                                {
+                                    user.role === 'ADMIN' || user.role === 'RECEIVER' &&
+
+                                    <>
+                                        <Link className="btn btn-info action" to="#">Crear nueva</Link>
+                                    </>
+                                }
+
+                                <Link className="btn btn-info action" to="#">Gestionar regalos</Link>
+
+                            </Col>
+
+                        </Row>
+
+                        <div className="profile-btn">
+
+                                <Link className="btn btn-info action" to="/profile/edit">Editar perfil</Link>
+                                <Link className="btn btn-info action" to="#">Darse de baja</Link>
+
+                        </div>
+                        
+                    </Container>
+
+
+                    : <Redirect to="/" />
+            }
+
         </>
+
+
+
+
+
 
     )
 

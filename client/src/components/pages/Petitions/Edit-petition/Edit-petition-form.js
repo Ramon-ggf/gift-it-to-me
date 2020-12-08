@@ -3,10 +3,10 @@ import PetitionService from '../../../../service/petitions.service'
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
-export default class PetitionForm extends Component {
+export default class PetitionEdit extends Component {
 
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
 
         this.state = {
 
@@ -15,15 +15,23 @@ export default class PetitionForm extends Component {
             age: '',
             sex: '',
             image: undefined,
-            owner: this.props.loggedUser ? this.props.loggedUser._id : undefined,
-            giver: undefined,
-            center: undefined,
-            status: undefined,
-            sent: undefined
+            owner: undefined,
+            center: undefined
 
         }
 
         this.petitionService = new PetitionService()
+    }
+
+
+    componentDidMount = () => this.refreshState()
+
+    refreshState = () => {
+
+        this.petitionService
+            .getById(this.props.match.params.petition_id)
+            .then(response => this.setState({ title: response.data.title, description: response.data.description, age: response.data.age, sex: response.data.sex, image: response.data.image, owner: response.data.owner, center: response.data.center }))
+            .catch(err => console.log(err))
     }
 
 
@@ -34,8 +42,12 @@ export default class PetitionForm extends Component {
         e.preventDefault()
 
         this.petitionService
-            .createNew(this.state)
-            .then(response => console.log(response))
+            .editPetition(this.props.match.params.petition_id, this.state)
+            .then(response => {
+
+                this.props.history.push(`/petitions/${this.props.match.params.petition_id}`)
+                console.log(response.data)
+            })
             .catch(err => console.log(err))
 
     }
@@ -47,9 +59,11 @@ export default class PetitionForm extends Component {
 
             <div>
 
-                <Container>
-                    <Row>
-                        <Col md={{ span: 6, offset: 3 }}>
+                { this.props.user && this.props.user._id === this.state.owner &&
+
+                    <Container>
+                        <Row>
+                            <Col md={{ span: 6, offset: 3 }}>
 
                             <Form onSubmit={this.onSubmitHandler}>
                                 <Form.Group controlId="title">
@@ -73,16 +87,20 @@ export default class PetitionForm extends Component {
                                         <option value={"no definido"}>No definido</option>
                                     </Form.Control>
                                 </Form.Group>
+                                <Form.Group controlId="center">
+                                    <Form.Label>Centro</Form.Label>
+                                    <Form.Control name="center" type="text" value={this.state.center} onChange={this.onChangeHandler} />
+                                </Form.Group>
                                 <Form.Group controlId="image">
                                     <Form.Label>Imagen</Form.Label>
                                     <Form.Control name="image" type="text" value={this.state.image} onChange={this.onChangeHandler} />
                                 </Form.Group>
-                                <Button variant="dark" block type="submit">Crear nuevo deseo</Button>
+                                <Button variant="dark" block type="submit">Editar regalo</Button>
                             </Form>
-
-                        </Col>
-                    </Row>
-                </Container>
+                            </Col>
+                        </Row>
+                    </Container>
+                }
 
             </div>
 

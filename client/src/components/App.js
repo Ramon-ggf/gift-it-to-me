@@ -1,4 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+
 import React, { Component } from 'react'
 import AuthService from './../service/auth.service'
 import { Switch, Route } from 'react-router-dom'
@@ -12,6 +14,9 @@ import CentersList from './../components/pages/Centers/Center-list/Centers-list'
 import PetitionDetails from './pages/Petitions/Petition-details/Petition-details'
 import CenterDetails from './pages/Centers/Center-details/Center-details'
 import Profile from './pages/Profiles/Profile-page/Profile-page'
+import ProfileEdit from './pages/Profiles/Profile-edit/Profile-edit-form'
+import CenterEdit from './pages/Centers/Center-edit/Center-edit-form'
+import PetitionEdit from './pages/Petitions/Edit-petition/Edit-petition-form'
 
 
 class App extends Component {
@@ -54,11 +59,14 @@ class App extends Component {
             <Route path="/signup" render={props => <SignupForm storeUser={this.setUser} {...props} />} />
             <Route path="/login" render={props => <LoginForm storeUser={this.setUser} {...props} />} />
             <Route path="/petitions" exact render={() => <PetitionsList />} />
-            <Route path="/petitions/:petition_id" render={props => <PetitionDetails {...props}/>} />
+            <Route path="/petitions/:petition_id" exact render={props => <PetitionDetails user={this.state.loggedInUser} {...props} />} />
+            <Route path="/petitions/edit/:petition_id" render={props => <PetitionEdit user={this.state.loggedInUser} {...props} />} />
             <Route path="/centers" exact render={() => <CentersList />} />
-            <Route path="/centers/:center_id" render={props => <CenterDetails {...props} />} />
-            <Route path="/profile" render={() => <Profile user={this.state.loggedInUser} />} />
-
+            <Route path="/centers/:center_id" render={props => <CenterDetails user={this.state.loggedInUser} {...props} />} />
+            <Route path="/profile" exact render={props => <Profile user={this.state.loggedInUser} {...props}/>} />
+            <Route path="/profile/edit" exact render={() => <ProfileEdit user={this.state.loggedInUser} />} />
+            <Route path="/center/edit/:center_id" render={props => <CenterEdit user={this.state.loggedInUser} {...props} />} />
+            
           </Switch>
         </main>
 

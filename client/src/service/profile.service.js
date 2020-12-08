@@ -12,6 +12,6 @@ export default class ProfileService {
 
     getAll = () => this.apiHandler.get('/')
     getById = user_id => this.apiHandler.get(`/userById/${user_id}`)
-    editPetition = (user_id, userData) => this.apiHandler.put(`/edit/${user_id}`, userData)
+    editProfile = (user_id, userData) => this.apiHandler.put(`/edit/${user_id}`, userData)
 
 }
