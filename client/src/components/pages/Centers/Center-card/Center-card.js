@@ -1,25 +1,29 @@
 import { Col, Card, Button, ButtonGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const CenterCard = ({_id, image, name, address}) => {
+import './Center-card.css'
+
+const CenterCard = ({ _id, image, name, address }) => {
 
 
     return (
-        <Col md={4}>
-            <Card>
-                <Card.Img variant="top" src={image} />
-                <hr/>
-                <Card.Body>
-                    <Card.Title>{name}</Card.Title>
-                    <Card.Text>{address}</Card.Text>
+        <>
+            <li><Link to={`/centers/${_id}`}>{name}</Link><p>{address}</p></li>
 
-                    <Link className="btn btn-dark btn-block btn-sm" to={`/centers/${_id}`}>Ver detalles</Link>
+        </>
+        // <Card>
+        //     <Card.Img variant="top" src={image} />
+        //     <hr/>
+        //     <Card.Body>
+        //         <Card.Title>{name}</Card.Title>
+        //         <Card.Text>{address}</Card.Text>
 
-                </Card.Body>
-            </Card>
-        </Col>
+        //         
+
+        //     </Card.Body>
+        // </Card>
+
     )
-
 
 }
 

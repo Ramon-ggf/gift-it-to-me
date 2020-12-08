@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container, Row} from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 
 import CenterService from '../../../../service/center.service'
@@ -35,7 +35,15 @@ export default class CentersList extends Component {
             <Container>
                 <h1>Lista de Centros</h1>
                 <Row>
-                {this.state.centers.map(elm => <CenterCard key={elm._id} {...elm}/>)}
+                    <Col md={4}>
+
+                        <ul>
+
+                            {this.state.centers.map(elm => <CenterCard key={elm._id} {...elm} />)}
+                            
+                        </ul>
+
+                    </Col>
                 </Row>
             </Container>
         )
