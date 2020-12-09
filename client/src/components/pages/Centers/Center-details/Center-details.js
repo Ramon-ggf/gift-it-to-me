@@ -41,7 +41,7 @@ export default class CenterDetails extends Component {
                             <Col md={{ span: 8, offset: 2 }}>
 
                                 <Card>
-                                    <Card.Img variant="top" src={this.state.center.image} />
+                                    <Card.Img variant="top" src={this.state.center.image} style={{height: 250, width: '100%', objectFit: 'cover'}}/>
                                     <Card.Body>
                                         <Card.Title>{this.state.center.name}</Card.Title>
                                         <Card.Text>{this.state.center.address}</Card.Text>

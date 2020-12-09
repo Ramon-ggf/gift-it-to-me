@@ -8,7 +8,7 @@ const Center = require('./../models/Center.model')
 router.get('/', (req, res) => {
 
     Center
-        .find()
+        .find({status: true})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 

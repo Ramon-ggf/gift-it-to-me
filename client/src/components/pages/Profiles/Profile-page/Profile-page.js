@@ -39,8 +39,8 @@ const Profile = ({ user }) => {
                                     user.role === 'ADMIN' &&
                                     <>
 
-                                        <Link className="btn btn-info action" to="#">Gestionar usuarios</Link>
-                                        <Link className="btn btn-info action" to="#">Gestionar centros</Link>
+                                        <Link className="btn btn-info action" to="/users">Gestionar usuarios</Link>
+                                        <Link className="btn btn-info action" to="/centers">Gestionar centros</Link>
 
                                     </>
                                 }
@@ -53,7 +53,7 @@ const Profile = ({ user }) => {
                                     </>
                                 }
 
-                                <Link className="btn btn-info action" to="#">Gestionar regalos</Link>
+                                <Link className="btn btn-info action" to="/petitions">Gestionar regalos</Link>
 
                             </Col>
 
@@ -61,7 +61,7 @@ const Profile = ({ user }) => {
 
                         <div className="profile-btn">
 
-                                <Link className="btn btn-info action" to="/profile/edit">Editar perfil</Link>
+                            <Link className="btn btn-info action" to={`/profile/edit/${user._id}`}>Editar perfil</Link>
                                 <Link className="btn btn-info action" to="#">Darse de baja</Link>
 
                         </div>

@@ -4,21 +4,32 @@ import ProfileService from './../../../../service/profile.service'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
 export default class EditProfile extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
 
         this.state = {
 
-            name: this.props.user.name,
-            lastname: this.props.user.lastname,
+            name: undefined,
+            lastname: undefined,
             password: undefined,
-            email: this.props.user.email,
-            image: this.props.user.image,
+            email: undefined,
+            image: undefined
 
         }
 
         this.profileService = new ProfileService()
     }
+
+    componentDidMount = () => this.refreshState()
+
+    refreshState = () => {
+
+        this.profileService
+            .getById(this.props.match.params.user_id)
+            .then(response => this.setState({ name: response.data.name, lastname: response.data.lastname, email: response.data.email, image: response.data.image }))
+            .catch(err => console.log(err))
+    }
+
 
     onChangeHandler = e => {
 
@@ -31,14 +42,30 @@ export default class EditProfile extends Component {
         e.preventDefault()
 
         this.profileService
-            .editProfile(this.props.user._id, this.state)
-            .then(response => console.log(response.data))
+            .editProfile(this.props.match.params.user_id, this.state)
+            .then(response => {
+
+                if (this.props.match.params.user_id === this.props.user._id) {
+
+                    this.props.storeUser(response.data)
+                    this.props.history.push('/profile')
+                    console.log(response.data)
+
+                } else {
+
+                    this.props.history.push('/users')
+
+                }
+
+            })
             .catch(err => console.log(err))
 
 
     }
 
     render() {
+
+        console.log(this.props.user._id)
 
         return (
             <div>

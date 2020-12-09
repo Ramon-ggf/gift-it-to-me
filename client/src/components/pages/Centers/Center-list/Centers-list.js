@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 
 import CenterService from '../../../../service/center.service'
-import CenterCard from './../../Centers/Center-card/Center-card'
+import CenterCard from '../Center-card/List-item'
 
 export default class CentersList extends Component {
     constructor() {
@@ -30,7 +30,20 @@ export default class CentersList extends Component {
 
     }
 
+    changeStatus = e => {
+
+
+  
+        this.centerService
+        .editCenter(e.target.value, {status: false})
+        .then(response => this.refreshCenters())
+        .catch(err => console.log(err))
+
+
+    }
+
     render() {
+
         return (
             <Container>
                 <h1>Lista de Centros</h1>
@@ -39,8 +52,8 @@ export default class CentersList extends Component {
 
                         <ul>
 
-                            {this.state.centers.map(elm => <CenterCard key={elm._id} {...elm} />)}
-                            
+                            {this.state.centers.map(center => <CenterCard key={center._id} {...center} userLogged={this.props.user} delete={ this.changeStatus}/>)}
+
                         </ul>
 
                     </Col>

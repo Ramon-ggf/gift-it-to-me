@@ -17,6 +17,7 @@ import Profile from './pages/Profiles/Profile-page/Profile-page'
 import ProfileEdit from './pages/Profiles/Profile-edit/Profile-edit-form'
 import CenterEdit from './pages/Centers/Center-edit/Center-edit-form'
 import PetitionEdit from './pages/Petitions/Edit-petition/Edit-petition-form'
+import UsersList from './pages/Users/Users-list'
 
 
 class App extends Component {
@@ -61,11 +62,12 @@ class App extends Component {
             <Route path="/petitions" exact render={() => <PetitionsList />} />
             <Route path="/petitions/:petition_id" exact render={props => <PetitionDetails user={this.state.loggedInUser} {...props} />} />
             <Route path="/petitions/edit/:petition_id" render={props => <PetitionEdit user={this.state.loggedInUser} {...props} />} />
-            <Route path="/centers" exact render={() => <CentersList />} />
+            <Route path="/centers" exact render={() => <CentersList  user={this.state.loggedInUser}/>} />
             <Route path="/centers/:center_id" render={props => <CenterDetails user={this.state.loggedInUser} {...props} />} />
             <Route path="/profile" exact render={props => <Profile user={this.state.loggedInUser} {...props}/>} />
-            <Route path="/profile/edit" exact render={() => <ProfileEdit user={this.state.loggedInUser} />} />
+            <Route path="/profile/edit/:user_id" exact render={props => <ProfileEdit storeUser={this.setUser} user={this.state.loggedInUser} {...props}/>} />
             <Route path="/center/edit/:center_id" render={props => <CenterEdit user={this.state.loggedInUser} {...props} />} />
+            <Route path="/users" exact render={() => <UsersList user={this.state.loggedInUser}/>} />
             
           </Switch>
         </main>

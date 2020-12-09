@@ -8,7 +8,7 @@ const User = require('./../models/User.model')
 router.get('/', (req, res) => {
 
     User
-        .find()
+        .find({status: true})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
