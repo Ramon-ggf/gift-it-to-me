@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
+import {Link} from 'react-router-dom'
+
 
 import CenterService from '../../../../service/center.service'
 import CenterCard from '../Center-card/List-item'
@@ -30,17 +32,7 @@ export default class CentersList extends Component {
 
     }
 
-    changeStatus = e => {
 
-
-  
-        this.centerService
-        .editCenter(e.target.value, {status: false})
-        .then(response => this.refreshCenters())
-        .catch(err => console.log(err))
-
-
-    }
 
     render() {
 
@@ -50,9 +42,14 @@ export default class CentersList extends Component {
                 <Row>
                     <Col md={4}>
 
+                        {this.props.user && this.props.user.role === 'ADMIN' &&
+
+                            <Link to="/centers/new">Crear nuevo centro</Link>
+                        }
+
                         <ul>
 
-                            {this.state.centers.map(center => <CenterCard key={center._id} {...center} userLogged={this.props.user} delete={ this.changeStatus}/>)}
+                            {this.state.centers.map(center => <CenterCard key={center._id} {...center} userLogged={this.props.user} />)}
 
                         </ul>
 

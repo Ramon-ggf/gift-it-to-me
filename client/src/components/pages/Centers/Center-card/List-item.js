@@ -16,15 +16,6 @@ const ListItem = props => {
                         <Link to={`/centers/${props._id}`}>{props.name}</Link>
                         <p>{props.address}</p>
 
-                        {props.userLogged && props.userLogged.role === 'ADMIN' ?
-
-                            <>
-                                <Link className="btn btn-info" to={`/profile/edit/${props._id}`}>Editar</Link>
-                                <Button className="btn btn-info" onClick={props.delete} value={props._id}>Eliminar</Button>
-                            </>
-
-                            : null}
-
                     </li>
 
                     :

@@ -4,7 +4,7 @@ const Petition = require('./../models/Petition.model')
 
 const dbtitle = 'finalproject20'
 
-mongoose.connect('mongodb+srv://gifit:gifit123@cluster0.7hs5u.mongodb.net/finalproject20')
+mongoose.connect(`${process.env.DB_REMOTE}`)
 
 const petitions = [
     {
