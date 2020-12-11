@@ -40,7 +40,7 @@ router.post('/new', (req, res) => {
 router.put('/edit/:petition_id', (req, res) => {
 
     Petition
-        .findByIdAndUpdate(req.params.petition_id, req.body)
+        .findByIdAndUpdate(req.params.petition_id, req.body, {new: true})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 

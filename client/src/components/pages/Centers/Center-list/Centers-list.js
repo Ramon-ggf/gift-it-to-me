@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import {Container, Row} from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
+
+import {Link} from 'react-router-dom'
 
 
 import CenterService from '../../../../service/center.service'
-import CenterCard from './../../Centers/Center-card/Center-card'
+import CenterCard from '../Center-card/List-item'
 
 export default class CentersList extends Component {
     constructor() {
@@ -30,12 +32,28 @@ export default class CentersList extends Component {
 
     }
 
+
+
     render() {
+
         return (
             <Container>
                 <h1>Lista de Centros</h1>
                 <Row>
-                {this.state.centers.map(elm => <CenterCard key={elm._id} {...elm}/>)}
+                    <Col md={4}>
+
+                        {this.props.user && this.props.user.role === 'ADMIN' &&
+
+                            <Link to="/centers/new">Crear nuevo centro</Link>
+                        }
+
+                        <ul>
+
+                            {this.state.centers.map(center => <CenterCard key={center._id} {...center} userLogged={this.props.user} />)}
+
+                        </ul>
+
+                    </Col>
                 </Row>
             </Container>
         )

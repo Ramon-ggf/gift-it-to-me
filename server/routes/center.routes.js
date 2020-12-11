@@ -8,7 +8,7 @@ const Center = require('./../models/Center.model')
 router.get('/', (req, res) => {
 
     Center
-        .find()
+        .find({status: true})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
@@ -40,7 +40,7 @@ router.post('/new', (req, res) => {
 router.put('/edit/:center_id', (req, res) => {
 
     Center
-        .findByIdAndUpdate(req.params.center_id, req.body)
+        .findByIdAndUpdate(req.params.center_id, req.body, {new: true})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 

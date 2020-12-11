@@ -8,7 +8,7 @@ const User = require('./../models/User.model')
 router.get('/', (req, res) => {
 
     User
-        .find()
+        .find({status: true})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
@@ -32,7 +32,7 @@ router.get('/userById/:user_id', (req, res) => {
 router.put('/edit/:user_id', (req, res) => {
 
     User
-        .findByIdAndUpdate(req.params.user_id, req.body)
+        .findByIdAndUpdate(req.params.user_id, req.body, {new: true})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
