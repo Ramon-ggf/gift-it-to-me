@@ -4,8 +4,6 @@ import { Button } from 'react-bootstrap'
 
 const ListItem = props => {
 
-    console.log(props)
-
     return (
         <>
             {

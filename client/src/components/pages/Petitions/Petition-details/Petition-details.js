@@ -3,7 +3,7 @@ import PetitionService from './../../../../service/petitions.service'
 
 import { Link } from 'react-router-dom'
 
-import { Container, Row, Col, Card, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Container, Row, Col, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 
 export default class PetitionDetails extends Component {
     constructor() {
@@ -11,7 +11,8 @@ export default class PetitionDetails extends Component {
 
         this.state = {
 
-            petition: undefined
+            petition: undefined,
+            changeButton: undefined
 
         }
 
@@ -23,7 +24,51 @@ export default class PetitionDetails extends Component {
 
         this.petitionService
             .getById(this.props.match.params.petition_id)
-            .then(response => this.setState({ petition: response.data }))
+            .then(response => {
+                this.setState({ petition: response.data, changeButton: response.data.giver === this.props.user._id })
+
+            })
+            .catch(err => console.log(err))
+
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+
+        if (prevState.changeButton !== this.state.changeButton) {
+
+            // this.setState({changeButton: this.state.changeButton})
+            this.componentDidMount()
+        }
+
+    }
+
+    changeStatus = e => {
+
+        let updateInfo
+
+        if (e.target.name === "delete") {
+
+            updateInfo = { sent: true }
+
+        } else if (e.target.name === "match") {
+
+            updateInfo = { status: false, giver: this.props.user._id }
+            //this.setState({changeButton : !this.state.changeButton})
+
+        } else if (e.target.name === "unmatch") {
+
+            updateInfo = { status: true, giver: null }
+            //this.setState({changeButton : !this.state.changeButton})
+
+        }
+
+        this.petitionService
+            .editPetition(e.target.value, updateInfo)
+            .then(() => {
+
+                this.props.history.push('/petitions')
+
+            })
             .catch(err => console.log(err))
 
     }
@@ -51,14 +96,26 @@ export default class PetitionDetails extends Component {
                                         <ListGroupItem>{`Sexo: ${this.state.petition.sex}`}</ListGroupItem>
                                     </ListGroup>
                                     <Card.Body>
-                                        {this.state.petition.center ? <Card.Link href="#">Center:  {this.state.petition.center} </Card.Link> : 'NO HAYYYYY  '}
+                                        {this.state.petition.center ? <Card.Link href="#">Center:  {this.state.petition.center} </Card.Link> : 'NO HAYYYYY'}
                                         {this.state.petition.owner ? <Card.Link href="#">Soñador/a:  {this.state.petition.owner} </Card.Link> : 'NO HAYYYYY'}
                                     </Card.Body>
                                 </Card>
 
-                                { this.props.user && this.props.user._id === this.state.petition.owner &&
+                                {this.props.user ?
 
-                                    <Link to={`/petitions/edit/${this.state.petition._id}`}>Editar regalo</Link>
+                                    this.props.user._id === this.state.petition.owner || this.props.user.role === 'ADMIN' ?
+
+                                        <>
+                                            <Link to={`/petitions/edit/${this.state.petition._id}`}>Editar regalo</Link>
+                                            <Button className="btn btn-info" name="delete" onClick={this.changeStatus} value={this.state.petition._id}>Eliminar</Button>
+                                        </>
+
+                                        :
+
+                                        <Button className="btn btn-info" name={this.state.changeButton ? 'unmatch' : 'match'} onClick={this.changeStatus} value={this.state.petition._id}>{this.state.changeButton ? 'Desregalar' : 'Regalar'}</Button>
+                                    :
+
+                                    null
 
                                 }
 

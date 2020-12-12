@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 
 export default class UserForm extends Component {
 
@@ -25,8 +25,6 @@ export default class UserForm extends Component {
     
     componentDidUpdate = (prevProps) => {
 
-        console.log(this.props, prevProps)
-
         if (this.props.loggedUser !== prevProps.loggedUser) {
 
             this.setState({ name: this.props.loggedUser.name, lastname: this.props.loggedUser.lastname, email: this.props.loggedUser.email, role: this.props.loggedUser.role})
@@ -44,7 +42,7 @@ export default class UserForm extends Component {
 
             <div>
 
-                <Form onSubmit={(e) =>  this.props.loggedUser ? this.props.edit(e, this.state) : this.props.create(e, this.state)}>
+                <Form onSubmit={(e) => e.target[6].name === 'button-edit' ? this.props.edit(e, this.state) : this.props.create(e, this.state)}>
                     <Form.Group controlId="name">
                         <Form.Label>Nombre</Form.Label>
                         <Form.Control name="name" type="text" value={this.state.name} onChange={this.onChangeHandler} />
@@ -74,8 +72,16 @@ export default class UserForm extends Component {
                         <Form.Label>Imagen</Form.Label>
                         <Form.Control name="image" type="text" value={this.state.image} onChange={this.onChangeHandler} />
                     </Form.Group>
-                    <Button variant="dark" block type="submit">{this.props.loggedUser ? 'Editar perfil' : 'Registro'}</Button>
-                    <Button variant="dark" block type="submit">Registrarse como 'receiver'</Button>
+                    
+                    {
+                        this.props.path.includes('edit') ?
+                            
+                    <Button variant="dark" block name="button-edit" type="submit">Editar perfil</Button>
+                            :
+                    <Button variant="dark" block name="button-sign" type="submit">Registrar usuario</Button>
+                    
+                    }
+                    
                 </Form>
 
             </div>

@@ -8,7 +8,7 @@ const Petition = require('./../models/Petition.model')
 router.get('/', (req, res) => {
 
     Petition
-        .find()
+        .find({sent: false})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 

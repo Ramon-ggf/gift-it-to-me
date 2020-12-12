@@ -1,0 +1,24 @@
+.main-content {
+
+    background-image: url('./Pictures/big-gift.jpg');
+    background-repeat: 'no-repeat';
+    background-size: cover;
+    background-position: center;
+    height: 700px;
+
+
+}
+
+.main-text {
+
+margin-top: 200px;
+text-align: justify;
+line-height: 30px;
+
+}
+
+.main-info {
+
+width: 500px
+
+}

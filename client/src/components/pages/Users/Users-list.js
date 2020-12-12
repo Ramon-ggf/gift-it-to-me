@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
+import {Link} from 'react-router-dom'
 
 import ProfileService from './../../../service/profile.service'
 import UserItem from '../Centers/Center-card/List-item'
@@ -49,7 +50,9 @@ export default class UsersList extends Component {
                     <Container>
                         <h1>Lista de usuarios</h1>
                         <Row>
-                            <Col md={4}>
+                        <Col md={4}>
+                            
+                        <Link className="btn btn-info" to="/users/new">Crear nuevo usuario</Link>
 
                                 <ul>
 

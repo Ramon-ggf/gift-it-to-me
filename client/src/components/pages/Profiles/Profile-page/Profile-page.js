@@ -4,39 +4,41 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 import './Profile-page.css'
 
-const Profile = ({ user }) => {
+const Profile = props => {
+
+    console.log(props.user)
 
     return (
 
         <>
 
             {
-                user ?
+                props.user ?
 
                     <Container>
 
                         <div className='welcome'>
-                            <h1>Bienvenid@, {user.name}</h1>
+                            <h1>Bienvenid@, {props.user.name}</h1>
                         </div>
 
                         <Row>
 
                             <Col md={3}>
                                 <figure>
-                                    <img className="user-image" src={user.image} alt={user.name} />
+                                    <img className="user-image" src={props.user.image} alt={props.user.name} />
                                 </figure>
                             </Col>
 
                             <Col md={4}>
-                                <p>Nombre: {user.name}</p> <hr />
-                                <p>Apellidos: {user.lastname}</p> <hr />
-                                <p>Email: {user.email}</p> <hr />
+                                <p>Nombre: {props.user.name}</p> <hr />
+                                <p>Apellidos: {props.user.lastname}</p> <hr />
+                                <p>Email: {props.user.email}</p> <hr />
                             </Col>
 
                             <Col md={3} className="action-btn">
 
                                 {
-                                    user.role === 'ADMIN' &&
+                                    props.user.role === 'ADMIN' &&
                                     <>
 
                                         <Link className="btn btn-info action" to="/users">Gestionar usuarios</Link>
@@ -46,14 +48,14 @@ const Profile = ({ user }) => {
                                 }
 
                                 {
-                                    user.role === 'ADMIN' || user.role === 'RECEIVER' &&
+                                   props.user.role === 'ADMIN' || props.user.role === 'RECEIVER' &&
 
                                     <>
                                         <Link className="btn btn-info action" to="#">Crear nueva</Link>
                                     </>
                                 }
 
-                                <Link className="btn btn-info action" to="/petitions">Gestionar regalos</Link>
+                                <Link className="btn btn-info action" to="/profile/mypetitions">Gestionar regalos</Link>
 
                             </Col>
 
@@ -61,8 +63,8 @@ const Profile = ({ user }) => {
 
                         <div className="profile-btn">
 
-                            <Link className="btn btn-info action" to={`/profile/edit/${user._id}`}>Editar perfil</Link>
-                                <Link className="btn btn-info action" to="#">Darse de baja</Link>
+                            <Link className="btn btn-info action" to={`/profile/edit/${props.user._id}`}>Editar perfil</Link>
+                            <Link className="btn btn-info action" to="#">Darse de baja</Link>
 
                         </div>
                         

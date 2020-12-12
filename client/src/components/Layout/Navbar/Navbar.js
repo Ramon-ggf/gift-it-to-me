@@ -23,7 +23,7 @@ export default class Navigation extends Component {
     render() {
 
         return (
-            <Navbar expand="md" style={{ marginBottom: '50px', backgroundColor: '#00334e'}}>
+            <Navbar expand="md" style={{ marginBottom: '0px', backgroundColor: '#00334e'}}>
                 {/* <Link to="/">
                     <Navbar.Brand >
                         <img

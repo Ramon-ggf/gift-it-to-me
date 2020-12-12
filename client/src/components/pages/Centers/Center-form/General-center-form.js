@@ -26,7 +26,7 @@ export default class GeneralCenterForm extends Component {
     onSubmitCreate = (e, data) => {
 
         e.preventDefault()
-        console.log(data)
+
         this.centerService
             .createNew(data)
             .then(response => {

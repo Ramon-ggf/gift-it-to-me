@@ -29,11 +29,16 @@ export default class GeneralUserForm extends Component {
     onSubmitCreate = (e, userData) => {
 
         e.preventDefault()
-        console.log(userData)
+
         this.authService
             .signup(userData)
             .then(response => {
-                console.log(response.data)
+
+                this.props.user ?
+                this.props.history.push("/users")
+                    :
+                this.props.storeUser(response.data)
+
             })
             .catch(err => console.log(err))
 
@@ -42,6 +47,7 @@ export default class GeneralUserForm extends Component {
     onSubmitEdit= (e, userData) => {
 
         e.preventDefault()
+
 
         this.profileService
             .editProfile(this.props.match.params.user_id, userData)
@@ -55,7 +61,7 @@ export default class GeneralUserForm extends Component {
 
     refreshState = () => {
 
-        if (this.props.match.params) {
+        if (this.props.match.params.user_id) {
 
             this.profileService
                 .getById(this.props.match.params.user_id)
@@ -85,7 +91,7 @@ export default class GeneralUserForm extends Component {
 
                             
 
-                            <ProfileForm loggedUser={ this.state.user} create={this.onSubmitCreate} edit={ this.onSubmitEdit}/>
+                            <ProfileForm loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={ this.props.match.path}/>
 
                         </Col>
                     </Row>
