@@ -91,7 +91,7 @@ export default class GeneralUserForm extends Component {
 
                             
 
-                            <ProfileForm loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={ this.props.match.path}/>
+                            <ProfileForm adminUser={ this.props.user} loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={ this.props.match.path}/>
 
                         </Col>
                     </Row>

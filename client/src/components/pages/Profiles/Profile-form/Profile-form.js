@@ -38,6 +38,8 @@ export default class UserForm extends Component {
 
     render() {
 
+        console.log(this.props)
+
         return (
 
             <div>
@@ -63,7 +65,7 @@ export default class UserForm extends Component {
                         <Form.Label>Rol</Form.Label>
                         <Form.Control as="select" name="role" value={this.state.role} onChange={this.onChangeHandler}>
                             <option>Seleccionar</option>
-                            <option value={"ADMIN"}>ADMIN</option>
+                            {this.props.adminUser && this.props.adminUser.role === 'ADMIN' && <option value={"ADMIN"}>ADMIN</option>}
                             <option value={"GIVER"}>GIVER</option>
                             <option value={"RECEIVER"}>RECEIVER</option>
                         </Form.Control>

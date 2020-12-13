@@ -77,7 +77,7 @@ class App extends Component {
             <Route path="/center/edit/:center_id" render={props => <GeneralCenterForm user={this.state.loggedInUser} {...props} />} />
 
             <Route path="/profile" exact render={() => <Profile user={this.state.loggedInUser}/>} />
-            <Route path="/profile/edit/:user_id" exact render={props => (this.state.loggedInUser._id === props.match.params
+            <Route path="/profile/edit/:user_id"  render={props => (this.state.loggedInUser._id === props.match.params
               .user_id || this.state.loggedInUser.role === 'ADMIN' ? <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} /> : <Redirect to="/"/>)} />
             <Route path="/profile/mypetitions" render={props => <PetitionsList user={this.state.loggedInUser} {...props}/>} />
             
