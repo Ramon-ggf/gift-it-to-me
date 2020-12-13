@@ -35,26 +35,35 @@ export default class GeneralUserForm extends Component {
             .then(response => {
 
                 this.props.user ?
-                this.props.history.push("/users")
+                    this.props.history.push("/users")
                     :
-                this.props.storeUser(response.data)
+                    this.props.storeUser(response.data.user)
 
             })
             .catch(err => console.log(err))
 
     }
 
-    onSubmitEdit= (e, userData) => {
+    onSubmitEdit = (e, userData) => {
 
         e.preventDefault()
+
+        console.log(this.props)
 
 
         this.profileService
             .editProfile(this.props.match.params.user_id, userData)
-            .then(response => {
-                this.props.history.push(`/profile`)
-                console.log(response.data)
-            })
+            .then(response => 
+
+                this.props.user._id === this.props.match.params.user_id ?
+                    (this.props.storeUser(response.data.user),
+                        this.props.history.push("/profile"))
+
+                    :
+
+                    this.props.history.push("/users")
+
+            )
             .catch(err => console.log(err))
 
     }
@@ -89,9 +98,9 @@ export default class GeneralUserForm extends Component {
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
 
-                            
 
-                            <ProfileForm adminUser={ this.props.user} loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={ this.props.match.path}/>
+
+                            <ProfileForm adminUser={this.props.user} loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={this.props.match.path} />
 
                         </Col>
                     </Row>

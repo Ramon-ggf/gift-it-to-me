@@ -22,14 +22,14 @@ export default class UserForm extends Component {
 
     }
 
-    
+
     componentDidUpdate = (prevProps) => {
 
         if (this.props.loggedUser !== prevProps.loggedUser) {
 
-            this.setState({ name: this.props.loggedUser.name, lastname: this.props.loggedUser.lastname, email: this.props.loggedUser.email, role: this.props.loggedUser.role})
+            this.setState({ name: this.props.loggedUser.name, lastname: this.props.loggedUser.lastname, email: this.props.loggedUser.email, role: this.props.loggedUser.role })
 
-        } 
+        }
     }
 
 
@@ -37,8 +37,6 @@ export default class UserForm extends Component {
 
 
     render() {
-
-        console.log(this.props)
 
         return (
 
@@ -62,28 +60,24 @@ export default class UserForm extends Component {
                         <Form.Control name="email" type="email" value={this.state.email} onChange={this.onChangeHandler} />
                     </Form.Group>
                     <Form.Group controlId="role">
-                        <Form.Label>Rol</Form.Label>
+                        <Form.Label>Elige el tipo de perfil</Form.Label>
                         <Form.Control as="select" name="role" value={this.state.role} onChange={this.onChangeHandler}>
                             <option>Seleccionar</option>
-                            {this.props.adminUser && this.props.adminUser.role === 'ADMIN' && <option value={"ADMIN"}>ADMIN</option>}
-                            <option value={"GIVER"}>GIVER</option>
-                            <option value={"RECEIVER"}>RECEIVER</option>
+                            {this.props.adminUser && this.props.adminUser.role === 'ADMIN' && <option value={"ADMIN"}>Admin</option>}
+                            <option value={"GIVER"}>Donante</option>
+                            <option value={"RECEIVER"}>Soñador/a</option>
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="image">
                         <Form.Label>Imagen</Form.Label>
                         <Form.Control name="image" type="text" value={this.state.image} onChange={this.onChangeHandler} />
                     </Form.Group>
-                    
-                    {
-                        this.props.path.includes('edit') ?
-                            
-                    <Button variant="dark" block name="button-edit" type="submit">Editar perfil</Button>
-                            :
-                    <Button variant="dark" block name="button-sign" type="submit">Registrar usuario</Button>
-                    
-                    }
-                    
+
+                    <Button variant="dark" block name={this.props.path.includes('edit') ? "button-edit" : "button-sign"} type="submit">
+                        {this.props.path.includes('edit') ? 'Editar perfil' : 'Registrar usuario'}
+                    </Button>
+
+
                 </Form>
 
             </div>

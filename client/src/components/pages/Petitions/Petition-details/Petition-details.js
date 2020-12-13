@@ -46,7 +46,7 @@ export default class PetitionDetails extends Component {
 
         let updateInfo
 
-        if (e.target.name === "delete") {
+        if (e.target.name === "delete" || e.target.name === "sent") {
 
             updateInfo = { sent: true }
 
@@ -111,8 +111,11 @@ export default class PetitionDetails extends Component {
                                         </>
 
                                         :
+                                        <>
+                                            <Button className="btn btn-info" name={this.state.changeButton ? 'unmatch' : 'match'} onClick={this.changeStatus} value={this.state.petition._id}>{this.state.changeButton ? 'Desregalar' : 'Regalar'}</Button>
 
-                                        <Button className="btn btn-info" name={this.state.changeButton ? 'unmatch' : 'match'} onClick={this.changeStatus} value={this.state.petition._id}>{this.state.changeButton ? 'Desregalar' : 'Regalar'}</Button>
+                                            {this.state.changeButton && <Button className="btn btn-info" name="sent" onClick={this.changeStatus} value={this.state.petition._id}>Enviado</Button>}
+                                        </>
                                     :
 
                                     null

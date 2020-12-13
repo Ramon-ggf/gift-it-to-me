@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PetitionService from '../../../../service/petitions.service'
+import CenterService from './../../../../service/center.service'
 
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -14,11 +15,13 @@ export default class GeneralPetitionForm extends Component {
 
         this.state = {
 
-            petition: undefined
+            petition: undefined,
+            centers: undefined
 
         }
 
         this.petitionService = new PetitionService()
+        this.centerService = new CenterService()
     }
 
     componentDidMount = () => this.refreshState()
@@ -52,18 +55,31 @@ export default class GeneralPetitionForm extends Component {
 
     refreshState = () => {
 
+        let prueba
+
         if (this.props.match.params.petition_id) {
 
-            this.petitionService
-                .getById(this.props.match.params.petition_id)
+            const centersPromise = this.centerService.getAll()
+
+            const petitionPromise = this.petitionService.getById(this.props.match.params.petition_id)
+
+            Promise.all([centersPromise, petitionPromise])
                 .then(response => {
-                    this.setState({ petition: response.data })
+
+                    this.setState({petition: response[1].data, centers: response[0].data})
+
                 })
                 .catch(err => console.log(err))
 
+
         } else {
 
-            this.setState({ petition: undefined })
+            this.centerService
+                .getAll()
+                .then(response => this.setState({ petition: undefined, centers: response.data }))
+                .catch(err => console.log(err))
+
+            
 
         }
 
@@ -71,6 +87,8 @@ export default class GeneralPetitionForm extends Component {
 
 
     render() {
+
+    console.log(this.state)
 
         return (
 
@@ -85,14 +103,14 @@ export default class GeneralPetitionForm extends Component {
                                 <Row>
                                     <Col md={{ span: 6, offset: 3 }}>
 
-                                        <PetitionForm petition={this.state.petition} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
+                                        <PetitionForm centers={ this.state.centers} petition={this.state.petition} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
 
                                     </Col>
                                 </Row>
                             </Container>
 
                             :
-                            
+
                             <Redirect to="/petitions" />
 
                         :
@@ -103,7 +121,7 @@ export default class GeneralPetitionForm extends Component {
                                 <Row>
                                     <Col md={{ span: 6, offset: 3 }}>
 
-                                        <PetitionForm create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
+                                        <PetitionForm centers={ this.state.centers} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
 
                                     </Col>
                                 </Row>

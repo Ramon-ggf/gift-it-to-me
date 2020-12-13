@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
+const {connectionChecker, roleChecker} = require ('../middlewares/custom.middlewares')
+
 const Center = require('./../models/Center.model')
 
 // Endpoints
@@ -28,7 +30,7 @@ router.get('/centerById/:center_id', (req, res) => {
 
 })
 
-router.post('/new', (req, res) => {
+router.post('/new', connectionChecker, roleChecker(['ADMIN']),(req, res) => {
 
     Center
         .create(req.body)
@@ -37,7 +39,7 @@ router.post('/new', (req, res) => {
 
 })
 
-router.put('/edit/:center_id', (req, res) => {
+router.put('/edit/:center_id', connectionChecker, roleChecker(['ADMIN']), (req, res) => {
 
     Center
         .findByIdAndUpdate(req.params.center_id, req.body, {new: true})

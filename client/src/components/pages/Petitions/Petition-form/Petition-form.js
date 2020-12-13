@@ -9,13 +9,13 @@ export default class PetitionForm extends Component {
 
         this.state = {
 
-            title: this.props.petition ? this.props.petition.title : '',
-            description: this.props.petition ? this.props.petition.description : '',
-            age: this.props.petition ? this.props.petition.age : '',
-            sex: this.props.petition ? this.props.petition.sex : '',
+            title: undefined,
+            description: undefined,
+            age: undefined,
+            sex: undefined,
             image: undefined,
-            owner: this.props.user ? this.props.user._id : undefined,
-            center: this.props.petition ? this.props.petition.center : undefined,
+            owner: this.props.petition ? this.props.petition.owner : this.props.user._id,
+            center: undefined,
             status: undefined,
             sent: undefined
 
@@ -35,6 +35,8 @@ export default class PetitionForm extends Component {
     onChangeHandler = e => this.setState({ [e.target.name]: e.target.value })
 
     render() {
+
+        console.log(this.props, this.state)
 
         return (
 
@@ -62,6 +64,13 @@ export default class PetitionForm extends Component {
                                 <option value={"masculino"}>Masculino</option>
                                 <option value={"femenino"}>Femenino</option>
                                 <option value={"no definido"}>No definido</option>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group controlId="center">
+                            <Form.Label>Centro de recogida</Form.Label>
+                            <Form.Control as="select" name="center" value={this.state.center} onChange={this.onChangeHandler}>
+                                <option>Seleccionar</option>
+                                {this.props.centers && this.props.centers.map(elm => <option key={ elm._id} value={ elm._id}>{ elm.name}</option>)}
                             </Form.Control>
                         </Form.Group>
                         <Form.Group controlId="image">

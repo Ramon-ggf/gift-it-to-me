@@ -19,9 +19,6 @@ export default class PetitionsList extends Component {
 
         this.petitionService = new PetitionService()
 
-        // this.visiblePets = this.state.petitions.filter(elm => elm.status === true)
-        // this.myPetsGiver = this.state.petitions.filter(elm => elm.status === true && elm.giver === this.props.user._id)
-        // this.myPetsReceiver = this.state.petitions.filter(elm => elm.status === true && elm.owner === this.props.user._id)
 
     }
 
@@ -33,7 +30,7 @@ export default class PetitionsList extends Component {
 
         if (prevProps !== this.props || prevProps === undefined) {
 
-            console.log(prevProps)
+
             this.refreshPetitions()
 
         }
@@ -41,10 +38,8 @@ export default class PetitionsList extends Component {
 
     refreshPetitions = () => {
 
-        //let visiblePets
+        
         let myPetitions
-        //let myPetsGiver = this.state.petitions.filter(elm => elm.status === true && elm.giver === this.props.user._id)
-        //let myPetsReceiver = this.state.petitions.filter(elm => elm.status === true && elm.owner === this.props.user._id)
 
         this.petitionService
             .getAll()
@@ -83,18 +78,13 @@ export default class PetitionsList extends Component {
             .catch(err => console.log(err))
 
 
-        // this.petitionService
-        //     .getAll()
-        //     .then(response => this.setState({ petitions: response.data }))
-        //     .catch(err => console.log(err))
-
     }
 
 
 
     render() {
 
-        console.log(this.state.petitions, this.props.match.path)
+  
 
         return (
             <>

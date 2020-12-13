@@ -2,10 +2,12 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
+const {connectionChecker, roleChecker} = require ('../middlewares/custom.middlewares')
+
 const User = require('./../models/User.model')
 
 // Endpoints
-router.get('/', (req, res) => {
+router.get('/', connectionChecker, roleChecker(['ADMIN']), (req, res) => {
 
     User
         .find({status: true})
@@ -29,7 +31,7 @@ router.get('/userById/:user_id', (req, res) => {
 })
 
 
-router.put('/edit/:user_id', (req, res) => {
+router.put('/edit/:user_id', connectionChecker, (req, res) => {
 
     User
         .findByIdAndUpdate(req.params.user_id, req.body, {new: true})
