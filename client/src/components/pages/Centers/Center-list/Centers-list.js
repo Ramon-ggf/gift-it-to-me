@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 import CenterService from '../../../../service/center.service'
 import CenterCard from '../Center-card/List-item'
 
-export default class CentersList extends Component {
+class CentersList extends Component {
     constructor() {
         super()
 
@@ -32,7 +33,7 @@ export default class CentersList extends Component {
 
     }
 
-
+    
 
     render() {
 
@@ -54,8 +55,26 @@ export default class CentersList extends Component {
                         </ul>
 
                     </Col>
+
+                    <Col md={8}>
+                        <Map google={this.props.google} zoom={14}initialCenter={{lat: 40.437075, lng: -3.694048}}>
+
+                            <Marker onClick={this.onMarkerClick}
+                                name={'Current location'} />
+
+                            <InfoWindow onClose={this.onInfoWindowClose}>
+                                <div>
+                                    <h1>MApa</h1>
+                                </div>
+                            </InfoWindow>
+                        </Map>
+                    </Col>
                 </Row>
             </Container>
         )
     }
 }
+
+export default GoogleApiWrapper({
+    apiKey: (process.env.REACT_APP_API_KEY)
+  })(CentersList)

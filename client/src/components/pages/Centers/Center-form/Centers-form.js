@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UploaderService from './../../../../service/uploader.service'
 
 import { Form, Button } from 'react-bootstrap'
 
@@ -19,6 +20,7 @@ export default class CenterForm extends Component {
 
         }
 
+        this.uploaderService = new UploaderService()
     }
 
 
@@ -29,6 +31,19 @@ export default class CenterForm extends Component {
             this.setState({ name: this.props.center.name, email: this.props.center.email, phone: this.props.center.phone, address: this.props.center.address, opening: this.props.center.opening })
 
         } 
+    }
+
+    handleImageUpload = e => {
+
+        const uploadData = new FormData()
+
+        uploadData.append('image', e.target.files[0])
+
+        this.uploaderService
+            .uploadImage(uploadData)
+            .then(response =>this.setState({ image: response.data.secure_url }))
+            .catch(err => console.log('ERRORRR!', err))
+
     }
 
     onChangeHandler = e => this.setState({ [e.target.name]: e.target.value })
@@ -62,7 +77,7 @@ export default class CenterForm extends Component {
                 </Form.Group>
                 <Form.Group controlId="image">
                     <Form.Label>Imagen</Form.Label>
-                    <Form.Control name="image" type="text" value={this.state.image} onChange={this.onChangeHandler} />
+                    <Form.Control name="image" type="file" onChange={this.handleImageUpload} />
                 </Form.Group>
 
 

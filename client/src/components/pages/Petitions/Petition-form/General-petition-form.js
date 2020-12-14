@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PetitionService from '../../../../service/petitions.service'
 import CenterService from './../../../../service/center.service'
 
+
 import { Container, Row, Col } from 'react-bootstrap'
 
 import { Redirect } from 'react-router-dom'
@@ -22,6 +23,7 @@ export default class GeneralPetitionForm extends Component {
 
         this.petitionService = new PetitionService()
         this.centerService = new CenterService()
+
     }
 
     componentDidMount = () => this.refreshState()
@@ -53,6 +55,25 @@ export default class GeneralPetitionForm extends Component {
 
     }
 
+    // handleImageUpload = e => {
+
+    //     const uploadData = new FormData()
+
+    //     uploadData.append('image', e.target.files[0])
+
+    //     console.log('estoy subiendo esto:', e.target.files[0])
+
+    //     this.uploaderService
+    //         .uploadImage(uploadData)
+    //         .then(response => {
+    //             this.setState({
+    //                 petition: { ...this.state.petition, image: response.data.secure_url }
+    //             })
+    //         })
+    //         .catch(err => console.log('ERRORRR!', err))
+
+    // }
+
     refreshState = () => {
 
         if (this.props.match.params.petition_id) {
@@ -64,7 +85,7 @@ export default class GeneralPetitionForm extends Component {
             Promise.all([centersPromise, petitionPromise])
                 .then(response => {
 
-                    this.setState({petition: response[1].data, centers: response[0].data})
+                    this.setState({ petition: response[1].data, centers: response[0].data })
 
                 })
                 .catch(err => console.log(err))
@@ -84,7 +105,7 @@ export default class GeneralPetitionForm extends Component {
 
     render() {
 
-    console.log(this.state)
+        console.log(this.state)
 
         return (
 
@@ -99,15 +120,15 @@ export default class GeneralPetitionForm extends Component {
                                 <Row>
                                     <Col md={{ span: 6, offset: 3 }}>
 
-                                        <PetitionForm centers={ this.state.centers} petition={this.state.petition} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
+                                        <PetitionForm centers={this.state.centers} petition={this.state.petition} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
 
                                     </Col>
                                 </Row>
                             </Container>
 
                             :
-
-                            <Redirect to="/petitions" />
+                            null
+                            //<Redirect to="/petitions" />
 
                         :
 
@@ -117,15 +138,15 @@ export default class GeneralPetitionForm extends Component {
                                 <Row>
                                     <Col md={{ span: 6, offset: 3 }}>
 
-                                        <PetitionForm centers={ this.state.centers} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
+                                        <PetitionForm petition={this.state.petition} centers={this.state.centers} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
 
                                     </Col>
                                 </Row>
                             </Container>
 
                             :
-
-                            <Redirect to="/petitions" />
+                            null
+                            //<Redirect to="/petitions" />
                 }
 
             </div>

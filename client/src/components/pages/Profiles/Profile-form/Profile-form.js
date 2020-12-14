@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import UploaderService from './../../../../service/uploader.service'
 
 import { Form, Button } from 'react-bootstrap'
 
@@ -20,6 +20,7 @@ export default class UserForm extends Component {
 
         }
 
+        this.uploaderService = new UploaderService()
     }
 
 
@@ -32,6 +33,18 @@ export default class UserForm extends Component {
         }
     }
 
+    handleImageUpload = e => {
+
+        const uploadData = new FormData()
+
+        uploadData.append('image', e.target.files[0])
+
+        this.uploaderService
+            .uploadImage(uploadData)
+            .then(response =>this.setState({ image: response.data.secure_url }))
+            .catch(err => console.log('ERRORRR!', err))
+
+    }
 
     onChangeHandler = e => this.setState({ [e.target.name]: e.target.value })
 
@@ -71,7 +84,7 @@ export default class UserForm extends Component {
                     </Form.Group>
                     <Form.Group controlId="image">
                         <Form.Label>Imagen</Form.Label>
-                        <Form.Control name="image" type="text" value={this.state.image} onChange={this.onChangeHandler} />
+                        <Form.Control name="image" type="file" onChange={this.handleImageUpload} />
                     </Form.Group>
 
                     <Button variant="dark" block name={this.props.path.includes('edit') ? "button-edit" : "button-sign"} type="submit">

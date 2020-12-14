@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
 
-const {connectionChecker, roleChecker} = require('../middlewares/custom.middlewares')
+
+const {connectionChecker, roleChecker, idPetitionChecker} = require('../middlewares/custom.middlewares')
 
 const Petition = require('./../models/Petition.model')
 
@@ -16,15 +16,12 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/petitionById/:petition_id', (req, res) => {
-
-    if (!mongoose.Types.ObjectId.isValid(req.params.petition_id)) {
-
-        return res.status(404).json({ message: 'Invalid ID' })
-    }
+router.get('/petitionById/:petition_id', idPetitionChecker, (req, res) => {
 
     Petition
         .findById(req.params.petition_id)
+        .populate('owner', 'name')
+        .populate('center', 'name')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
@@ -39,7 +36,7 @@ router.post('/new', (req, res) => {
 
 })
 
-router.put('/edit/:petition_id', (req, res) => {
+router.put('/edit/:petition_id', idPetitionChecker, (req, res) => {
 
     Petition
         .findByIdAndUpdate(req.params.petition_id, req.body, {new: true})

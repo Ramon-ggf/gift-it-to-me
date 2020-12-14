@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-const {connectionChecker, roleChecker} = require ('../middlewares/custom.middlewares')
+const {connectionChecker, roleChecker, idCenterChecker} = require ('../middlewares/custom.middlewares')
 
 const Center = require('./../models/Center.model')
 
@@ -16,12 +16,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/centerById/:center_id', (req, res) => {
-
-    if (!mongoose.Types.ObjectId.isValid(req.params.center_id)) {
-
-        return res.status(404).json({ message: 'Invalid ID' })
-    }
+router.get('/centerById/:center_id', idCenterChecker, (req, res) => {
 
     Center
         .findById(req.params.center_id)
@@ -39,7 +34,7 @@ router.post('/new', (req, res) => {
 
 })
 
-router.put('/edit/:center_id', (req, res) => {
+router.put('/edit/:center_id', idCenterChecker, (req, res) => {
 
     Center
         .findByIdAndUpdate(req.params.center_id, req.body, {new: true})

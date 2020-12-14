@@ -42,7 +42,7 @@ export default class PetitionDetails extends Component {
         } else if (e.target.name === "match") {
 
             updateInfo = { status: false, giver: this.props.user._id }
-     
+
         } else if (e.target.name === "unmatch") {
 
             updateInfo = { status: true, giver: null }
@@ -63,12 +63,15 @@ export default class PetitionDetails extends Component {
     fetchPetition = () => {
 
         this.petitionService
-        .getById(this.props.match.params.petition_id)
-        .then(response => {
-            this.setState({ petition: response.data, changeButton: ( this.props.user && response.data.giver === this.props.user._id) })
+            .getById(this.props.match.params.petition_id)
+            .then(response => {
 
-        })
-        .catch(err => console.log(err))
+                console.log(response.data.center)
+
+                this.setState({ petition: [response.data], changeButton: (this.props.user && response.data.giver === this.props.user._id) })
+
+            })
+            .catch(err => console.log(err))
 
     }
 
@@ -85,37 +88,37 @@ export default class PetitionDetails extends Component {
                             <Col md={{ span: 8, offset: 2 }}>
 
                                 <Card>
-                                    <Card.Img variant="top" src={this.state.petition.image} />
+                                    <Card.Img variant="top" src={this.state.petition[0].image} />
                                     <Card.Body>
-                                        <Card.Title>{this.state.petition.title}</Card.Title>
-                                        <Card.Text>{this.state.petition.description}</Card.Text>
+                                        <Card.Title>{this.state.petition[0].title}</Card.Title>
+                                        <Card.Text>{this.state.petition[0].description}</Card.Text>
                                     </Card.Body>
                                     <ListGroup className="list-group-flush">
-                                        <ListGroupItem>{`Edad: ${this.state.petition.age}`}</ListGroupItem>
-                                        <ListGroupItem>{`Sexo: ${this.state.petition.sex}`}</ListGroupItem>
+                                        <ListGroupItem>{`Edad: ${this.state.petition[0].age}`}</ListGroupItem>
+                                        <ListGroupItem>{`Sexo: ${this.state.petition[0].sex}`}</ListGroupItem>
                                     </ListGroup>
                                     <Card.Body>
-                                        {this.state.petition.center && <Card.Link href="#">Centro elegido:  {this.state.petition.center} </Card.Link> }
-                                        {this.state.petition.owner && <Card.Link href="#">Soñador/a:  {this.state.petition.owner} </Card.Link> }
+                                        {this.state.petition[0].center && <Card.Text>Centro elegido: <Link to={`/centers/${this.state.petition[0].center._id}`}>  {this.state.petition[0].center.name}</Link></Card.Text>}
+                                        {this.state.petition[0].owner && <Card.Text>Soñador/a:  {this.state.petition[0].owner.name} </Card.Text>}
                                     </Card.Body>
                                 </Card>
 
                                 {this.props.user ?
 
-                                    this.props.user._id === this.state.petition.owner || this.props.user.role === 'ADMIN' ?
+                                    this.props.user._id === this.state.petition[0].owner._id || this.props.user.role === 'ADMIN' ?
 
                                         <>
-                                            <Link className="btn btn-info" to={`/petitions/edit/${this.state.petition._id}`}>Editar regalo</Link>
-                                            <Button className="btn btn-info" name="delete" onClick={this.changeStatus} value={this.state.petition._id}>Eliminar</Button>
+                                            <Link className="btn btn-info" to={`/petitions/edit/${this.state.petition[0]._id}`}>Editar regalo</Link>
+                                            <Button className="btn btn-info" name="delete" onClick={this.changeStatus} value={this.state.petition[0]._id}>Eliminar</Button>
                                         </>
 
                                         :
                                         <>
-                                            <Button className="btn btn-info" name={this.state.changeButton ? 'unmatch' : 'match'} onClick={this.changeStatus} value={this.state.petition._id}>{this.state.changeButton ? 'Desregalar' : 'Regalar'}</Button>
+                                            <Button className="btn btn-info" name={this.state.changeButton ? 'unmatch' : 'match'} onClick={this.changeStatus} value={this.state.petition[0]._id}>{this.state.changeButton ? 'Desregalar' : 'Regalar'}</Button>
 
-                                            {this.state.changeButton && <Button className="btn btn-info" name="sent" onClick={this.changeStatus} value={this.state.petition._id}>Enviado</Button>}
+                                            {this.state.changeButton && <Button className="btn btn-info" name="sent" onClick={this.changeStatus} value={this.state.petition[0]._id}>Enviado</Button>}
                                         </>
-                                    
+
                                     : null
                                 }
 

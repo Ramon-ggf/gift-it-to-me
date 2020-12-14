@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UploaderService from './../../../../service/uploader.service'
 
 import { Form, Button } from 'react-bootstrap'
 
@@ -21,6 +22,8 @@ export default class PetitionForm extends Component {
 
         }
 
+        this.uploaderService = new UploaderService()
+
     }
 
     componentDidUpdate = (prevProps) => {
@@ -30,6 +33,19 @@ export default class PetitionForm extends Component {
             this.setState({ title: this.props.petition.title, description: this.props.petition.description, age: this.props.petition.age, sex: this.props.petition.sex, owner: this.props.user._id, center: this.props.petition.center })
 
         }
+    }
+
+    handleImageUpload = e => {
+
+        const uploadData = new FormData()
+
+        uploadData.append('image', e.target.files[0])
+
+        this.uploaderService
+            .uploadImage(uploadData)
+            .then(response =>this.setState({ image: response.data.secure_url }))
+            .catch(err => console.log('ERRORRR!', err))
+
     }
 
     onChangeHandler = e => this.setState({ [e.target.name]: e.target.value })
@@ -74,7 +90,7 @@ export default class PetitionForm extends Component {
                         </Form.Group>
                         <Form.Group controlId="image">
                             <Form.Label>Imagen</Form.Label>
-                            <Form.Control name="image" type="text" value={this.state.image} onChange={this.onChangeHandler} />
+                            <Form.Control name="image" type="file" onChange={this.handleImageUpload} />
                         </Form.Group>
 
                         <Button variant="dark" block type="submit">{this.props.petition ? 'Editar regalo' : 'Crear regalo'}</Button>
