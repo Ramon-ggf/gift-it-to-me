@@ -1,10 +1,9 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-import Gift from './Pictures/gift-picture.jpg'
 
 import './Homepage.css'
-import Logo from './Pictures/logo.jpg'
+
 
 
 const HomePage = () => {

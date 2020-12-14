@@ -36,8 +36,6 @@ export default class PetitionForm extends Component {
 
     render() {
 
-        console.log(this.props, this.state)
-
         return (
 
             <div>
@@ -45,6 +43,7 @@ export default class PetitionForm extends Component {
                 <>
 
                     <Form onSubmit={(e) => this.props.petition ? this.props.edit(e, this.state) : this.props.create(e, this.state)}>
+                        
                         <Form.Group controlId="title">
                             <Form.Label>Título</Form.Label>
                             <Form.Control name="title" type="text" value={this.state.title} onChange={this.onChangeHandler} />
@@ -79,6 +78,7 @@ export default class PetitionForm extends Component {
                         </Form.Group>
 
                         <Button variant="dark" block type="submit">{this.props.petition ? 'Editar regalo' : 'Crear regalo'}</Button>
+
                     </Form >
 
                 </>

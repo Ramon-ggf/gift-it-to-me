@@ -7,7 +7,7 @@ const {connectionChecker, roleChecker} = require ('../middlewares/custom.middlew
 const User = require('./../models/User.model')
 
 // Endpoints
-router.get('/', connectionChecker, roleChecker(['ADMIN']), (req, res) => {
+router.get('/', (req, res) => {
 
     User
         .find({status: true})

@@ -48,9 +48,6 @@ export default class GeneralUserForm extends Component {
 
         e.preventDefault()
 
-        console.log(this.props)
-
-
         this.profileService
             .editProfile(this.props.match.params.user_id, userData)
             .then(response => 

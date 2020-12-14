@@ -29,10 +29,7 @@ export default class GeneralCenterForm extends Component {
 
         this.centerService
             .createNew(data)
-            .then(response => {
-                this.props.history.push("/centers")
-                console.log(response.data)
-            })
+            .then(() => this.props.history.push("/centers"))
             .catch(err => console.log(err))
 
     }
@@ -43,10 +40,7 @@ export default class GeneralCenterForm extends Component {
 
         this.centerService
             .editCenter(this.props.match.params.center_id, data)
-            .then(response => {
-                this.props.history.push(`/centers/${response.data._id}`)
-                console.log(response.data)
-            })
+            .then(response => this.props.history.push(`/centers/${response.data._id}`))
             .catch(err => console.log(err))
 
     }

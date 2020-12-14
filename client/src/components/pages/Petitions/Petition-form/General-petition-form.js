@@ -33,9 +33,7 @@ export default class GeneralPetitionForm extends Component {
 
         this.petitionService
             .createNew(petData)
-            .then(response => {
-                this.props.history.push("/petitions")
-            })
+            .then(() => this.props.history.push("/petitions"))
             .catch(err => console.log(err))
 
     }
@@ -47,15 +45,15 @@ export default class GeneralPetitionForm extends Component {
         this.petitionService
             .editPetition(this.props.match.params.petition_id, petData)
             .then(response => {
+
                 this.props.history.push(`/petitions/${response.data._id}`)
+
             })
             .catch(err => console.log(err))
 
     }
 
     refreshState = () => {
-
-        let prueba
 
         if (this.props.match.params.petition_id) {
 
@@ -78,8 +76,6 @@ export default class GeneralPetitionForm extends Component {
                 .getAll()
                 .then(response => this.setState({ petition: undefined, centers: response.data }))
                 .catch(err => console.log(err))
-
-            
 
         }
 

@@ -20,24 +20,13 @@ export default class PetitionDetails extends Component {
 
     }
 
-    componentDidMount = () => {
-
-        this.petitionService
-            .getById(this.props.match.params.petition_id)
-            .then(response => {
-                this.setState({ petition: response.data, changeButton: response.data.giver === this.props.user._id })
-
-            })
-            .catch(err => console.log(err))
-
-    }
+    componentDidMount = () => this.fetchPetition()
 
     componentDidUpdate = (prevProps, prevState) => {
 
         if (prevState.changeButton !== this.state.changeButton) {
 
-            // this.setState({changeButton: this.state.changeButton})
-            this.componentDidMount()
+            this.fetchPetition()
         }
 
     }
@@ -53,12 +42,10 @@ export default class PetitionDetails extends Component {
         } else if (e.target.name === "match") {
 
             updateInfo = { status: false, giver: this.props.user._id }
-            //this.setState({changeButton : !this.state.changeButton})
-
+     
         } else if (e.target.name === "unmatch") {
 
             updateInfo = { status: true, giver: null }
-            //this.setState({changeButton : !this.state.changeButton})
 
         }
 
@@ -70,6 +57,18 @@ export default class PetitionDetails extends Component {
 
             })
             .catch(err => console.log(err))
+
+    }
+
+    fetchPetition = () => {
+
+        this.petitionService
+        .getById(this.props.match.params.petition_id)
+        .then(response => {
+            this.setState({ petition: response.data, changeButton: ( this.props.user && response.data.giver === this.props.user._id) })
+
+        })
+        .catch(err => console.log(err))
 
     }
 
@@ -96,8 +95,8 @@ export default class PetitionDetails extends Component {
                                         <ListGroupItem>{`Sexo: ${this.state.petition.sex}`}</ListGroupItem>
                                     </ListGroup>
                                     <Card.Body>
-                                        {this.state.petition.center ? <Card.Link href="#">Center:  {this.state.petition.center} </Card.Link> : 'NO HAYYYYY'}
-                                        {this.state.petition.owner ? <Card.Link href="#">Soñador/a:  {this.state.petition.owner} </Card.Link> : 'NO HAYYYYY'}
+                                        {this.state.petition.center && <Card.Link href="#">Centro elegido:  {this.state.petition.center} </Card.Link> }
+                                        {this.state.petition.owner && <Card.Link href="#">Soñador/a:  {this.state.petition.owner} </Card.Link> }
                                     </Card.Body>
                                 </Card>
 
@@ -106,7 +105,7 @@ export default class PetitionDetails extends Component {
                                     this.props.user._id === this.state.petition.owner || this.props.user.role === 'ADMIN' ?
 
                                         <>
-                                            <Link to={`/petitions/edit/${this.state.petition._id}`}>Editar regalo</Link>
+                                            <Link className="btn btn-info" to={`/petitions/edit/${this.state.petition._id}`}>Editar regalo</Link>
                                             <Button className="btn btn-info" name="delete" onClick={this.changeStatus} value={this.state.petition._id}>Eliminar</Button>
                                         </>
 
@@ -116,10 +115,8 @@ export default class PetitionDetails extends Component {
 
                                             {this.state.changeButton && <Button className="btn btn-info" name="sent" onClick={this.changeStatus} value={this.state.petition._id}>Enviado</Button>}
                                         </>
-                                    :
-
-                                    null
-
+                                    
+                                    : null
                                 }
 
                             </Col>

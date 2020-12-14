@@ -14,7 +14,7 @@ import CenterDetails from './pages/Centers/Center-details/Center-details'
 import Profile from './pages/Profiles/Profile-page/Profile-page'
 import UsersList from './pages/Users/Users-list'
 import HomePage from './pages/Homepage/Home'
-import Footer from './../components/Layout/Navbar/Footer/Footer'
+import Footer from './../components/Layout/Footer/Footer'
 
 import GeneralCenterForm from './pages/Centers/Center-form/General-center-form'
 

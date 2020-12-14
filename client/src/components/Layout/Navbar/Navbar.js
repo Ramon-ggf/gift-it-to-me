@@ -32,7 +32,7 @@ export default class Navigation extends Component {
                             width="30"
                             height="30"
                             className="d-inline-block align-top"
-                        />{' '}PlanetCoaster_</Navbar.Brand>
+                        />{' '}Regala_me</Navbar.Brand>
                 </Link> */}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

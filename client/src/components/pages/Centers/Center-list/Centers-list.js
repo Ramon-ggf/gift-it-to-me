@@ -44,7 +44,7 @@ export default class CentersList extends Component {
 
                         {this.props.user && this.props.user.role === 'ADMIN' &&
 
-                            <Link to="/centers/new">Crear nuevo centro</Link>
+                            <Link className="btn btn-info" to="/centers/new">Crear nuevo centro</Link>
                         }
 
                         <ul>

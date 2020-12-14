@@ -23,6 +23,7 @@ const ListItem = props => {
                         <Link to={`/profile/${props._id}`}>{`${props.name} ${props.lastname}`}</Link>
                         <p>{props.email}</p>
                         <Link className="btn btn-info" to={`/profile/edit/${props._id}`}>Editar</Link>
+                        
                         <Button className="btn btn-info" onClick={props.delete} value={props._id}>Eliminar</Button>
 
                     </li>

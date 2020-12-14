@@ -45,31 +45,19 @@ export default class PetitionsList extends Component {
             .getAll()
             .then(response => {
 
-                //visiblePets = response.data.filter(elm => elm.status === true)
-
                 if (this.props.location.pathname.includes('/profile/mypetitions') && this.props.user.role === 'GIVER') {
 
                     myPetitions = response.data.filter(elm => elm.giver === this.props.user._id)
 
-                    console.log('soy giver', myPetitions)
-
-                    //return this.setState({ petitions: myPetitions })
 
                 } else if (this.props.location.pathname.includes('/profile/mypetitions') && this.props.user.role === 'RECEIVER') {
 
                     myPetitions=response.data.filter(elm => elm.owner === this.props.user._id)
 
-                    console.log('soy reciv', myPetitions)
-
-                    //return this.setState({ petitions: myPetitions })
 
                 } else {
 
-                    console.log('no soy nadie')
-
                     myPetitions= response.data.filter(elm => elm.status === true)
-
-                    //return this.setState({ petitions: myPetitions })
 
                 }
 

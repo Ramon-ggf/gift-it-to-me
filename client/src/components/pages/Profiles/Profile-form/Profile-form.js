@@ -43,6 +43,7 @@ export default class UserForm extends Component {
             <div>
 
                 <Form onSubmit={(e) => e.target[6].name === 'button-edit' ? this.props.edit(e, this.state) : this.props.create(e, this.state)}>
+
                     <Form.Group controlId="name">
                         <Form.Label>Nombre</Form.Label>
                         <Form.Control name="name" type="text" value={this.state.name} onChange={this.onChangeHandler} />
@@ -76,7 +77,6 @@ export default class UserForm extends Component {
                     <Button variant="dark" block name={this.props.path.includes('edit') ? "button-edit" : "button-sign"} type="submit">
                         {this.props.path.includes('edit') ? 'Editar perfil' : 'Registrar usuario'}
                     </Button>
-
 
                 </Form>
 
