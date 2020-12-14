@@ -30,7 +30,7 @@ router.get('/centerById/:center_id', (req, res) => {
 
 })
 
-router.post('/new', connectionChecker, roleChecker(['ADMIN']),(req, res) => {
+router.post('/new', (req, res) => {
 
     Center
         .create(req.body)
@@ -39,7 +39,7 @@ router.post('/new', connectionChecker, roleChecker(['ADMIN']),(req, res) => {
 
 })
 
-router.put('/edit/:center_id', connectionChecker, roleChecker(['ADMIN']), (req, res) => {
+router.put('/edit/:center_id', (req, res) => {
 
     Center
         .findByIdAndUpdate(req.params.center_id, req.body, {new: true})

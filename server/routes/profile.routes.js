@@ -31,7 +31,7 @@ router.get('/userById/:user_id', (req, res) => {
 })
 
 
-router.put('/edit/:user_id', connectionChecker, (req, res) => {
+router.put('/edit/:user_id', (req, res) => {
 
     User
         .findByIdAndUpdate(req.params.user_id, req.body, {new: true})

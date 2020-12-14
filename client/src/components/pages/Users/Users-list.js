@@ -31,18 +31,6 @@ export default class UsersList extends Component {
 
     }
 
-    changeStatus = e => {
-
-        this.profileService
-        .editProfile(e.target.value, {status: false})
-        .then(response => this.refreshUsers())
-        .catch(err => console.log(err))
-
-
-    }
-
-    
-
     render() {
         return (
             <>

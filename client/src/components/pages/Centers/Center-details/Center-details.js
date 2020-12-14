@@ -19,14 +19,7 @@ export default class CenterDetails extends Component {
 
     }
 
-    componentDidMount = () => {
-
-        this.centerService
-            .getById(this.props.match.params.center_id)
-            .then(response => this.setState({ center: response.data }))
-            .catch(err => console.log(err))
-
-    }
+    componentDidMount = () => this.refreshCenter()
 
     changeStatus = e => {
 
@@ -35,6 +28,14 @@ export default class CenterDetails extends Component {
             .then(() => this.props.history.push('/centers'))
             .catch(err => console.log(err))
 
+    }
+
+    refreshCenter = () => {
+
+        this.centerService
+            .getById(this.props.match.params.center_id)
+            .then(response => this.setState({ center: response.data }))
+            .catch(err => console.log(err))
     }
 
     render() {
@@ -64,8 +65,8 @@ export default class CenterDetails extends Component {
                                     {this.props.user && this.props.user.role === 'ADMIN' &&
 
                                         <>
-                                          <Link className="btn btn-info" to={`/center/edit/${this.state.center._id}`}>Editar</Link>
-                                          <Button className="btn btn-info" onClick={this.changeStatus} value={this.state.center._id}>Eliminar</Button>
+                                            <Link className="btn btn-info" to={`/center/edit/${this.state.center._id}`}>Editar</Link>
+                                            <Button className="btn btn-info" onClick={this.changeStatus} value={this.state.center._id}>Eliminar</Button>
                                         </>
                                     }
 

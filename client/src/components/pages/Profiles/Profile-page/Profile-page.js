@@ -6,7 +6,6 @@ import './Profile-page.css'
 
 const Profile = props => {
 
-    console.log(props.user)
 
     return (
 
@@ -44,14 +43,6 @@ const Profile = props => {
                                         <Link className="btn btn-info action" to="/users">Gestionar usuarios</Link>
                                         <Link className="btn btn-info action" to="/centers">Gestionar centros</Link>
 
-                                    </>
-                                }
-
-                                {
-                                   props.user.role === 'ADMIN' || props.user.role === 'RECEIVER' &&
-
-                                    <>
-                                        <Link className="btn btn-info action" to="#">Crear nueva</Link>
                                     </>
                                 }
 

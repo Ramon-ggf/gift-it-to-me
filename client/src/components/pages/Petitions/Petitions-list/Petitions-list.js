@@ -22,7 +22,7 @@ export default class PetitionsList extends Component {
 
     }
 
-    componentDidMount = () => this.componentDidUpdate()
+    componentDidMount = () => this.refreshPetitions()
 
 
 
