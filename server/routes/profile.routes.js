@@ -26,7 +26,7 @@ router.get('/userById/:user_id', idProfileChecker, (req, res) => {
 })
 
 
-router.put('/edit/:user_id', roleChecker(['ADMIN']), idProfileChecker, (req, res) => {
+router.put('/edit/:user_id', idProfileChecker, (req, res) => {
 
     User
         .findByIdAndUpdate(req.params.user_id, req.body, {new: true})

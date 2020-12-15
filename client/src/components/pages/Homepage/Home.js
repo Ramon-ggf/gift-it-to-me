@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-
+import Logo from './Logo.png'
 
 import './Homepage.css'
 
@@ -16,7 +16,9 @@ const HomePage = () => {
                         <Col md={6}>
 
                             <article className="main-text">
-                                <h1>Regala_me</h1>
+                                <figure>
+                                    <img src={Logo} style={{width: '500px'}}/>
+                                </figure>
 
                                 <div className="main-info">
                                     <h3>Mucha gente no tendrá regalos esta Navidad</h3>

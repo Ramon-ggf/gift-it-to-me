@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+import Logo from './Logo2.png'
+
 import AuthService from '../../../service/auth.service'
 
 
@@ -24,16 +26,16 @@ export default class Navigation extends Component {
 
         return (
             <Navbar expand="md" style={{ marginBottom: '0px', backgroundColor: '#00334e'}}>
-                {/* <Link to="/">
+                <Link to="/">
                     <Navbar.Brand >
                         <img
                             alt="Logotipo"
-                            src={logo}
+                            src={Logo}
                             width="30"
                             height="30"
                             className="d-inline-block align-top"
-                        />{' '}Regala_me</Navbar.Brand>
-                </Link> */}
+                        />{' '}<span style={{color: 'white'}}>Regala</span><span style={{color: '#ee6f57'}}>_me</span></Navbar.Brand>
+                </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">

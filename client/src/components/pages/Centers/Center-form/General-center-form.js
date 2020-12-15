@@ -3,7 +3,9 @@ import CenterService from '../../../../service/center.service'
 
 import CentersForm from './../../Centers/Center-form/Centers-form'
 
-import {Redirect} from 'react-router-dom'
+import Alert from './../../../shared/Alert/Alert'
+
+import { Redirect } from 'react-router-dom'
 
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -15,6 +17,8 @@ export default class GeneralCenterForm extends Component {
         this.state = {
 
             center: undefined,
+            showToast: false,
+            toastText: ''
 
         }
 
@@ -30,40 +34,40 @@ export default class GeneralCenterForm extends Component {
         this.centerService
             .createNew(data)
             .then(() => this.props.history.push("/centers"))
-            .catch(err => console.log(err))
+            .catch(err => this.handleToast(true, err.message))
 
     }
 
-    onSubmitEdit= (e, data) => {
+    onSubmitEdit = (e, data) => {
 
         e.preventDefault()
 
         this.centerService
             .editCenter(this.props.match.params.center_id, data)
             .then(response => this.props.history.push(`/centers/${response.data._id}`))
-            .catch(err => console.log(err))
+            .catch(err => this.handleToast(true, err.message))
 
     }
 
     refreshState = () => {
 
-        if (this.props.match) {
-            
+        if (this.props.match.params) {
+
             this.centerService
                 .getById(this.props.match.params.center_id)
-                .then(response => this.setState({center: response.data }))
+                .then(response => this.setState({ center: response.data }))
                 .catch(err => console.log(err))
 
         } else {
-            
-            this.setState({center: undefined })
+
+            this.setState({ center: undefined })
 
         }
- 
+
     }
 
 
-
+    handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
     render() {
 
@@ -72,7 +76,7 @@ export default class GeneralCenterForm extends Component {
             <div>
 
                 { this.props.user && this.props.user.role === 'ADMIN' ?
-                    
+
                     <Container>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
@@ -82,11 +86,11 @@ export default class GeneralCenterForm extends Component {
                             </Col>
                         </Row>
                     </Container>
-                    : 
-
-                    <Redirect to="/centers"/>
-
+                    :
+                    <Redirect to="/centers" />
                 }
+
+                <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
 
             </div>
 

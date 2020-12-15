@@ -5,7 +5,7 @@ import CenterService from './../../../../service/center.service'
 
 import { Container, Row, Col } from 'react-bootstrap'
 
-import { Redirect } from 'react-router-dom'
+import Alert from './../../../shared/Alert/Alert'
 
 import PetitionForm from '../Petition-form/Petition-form'
 
@@ -17,7 +17,9 @@ export default class GeneralPetitionForm extends Component {
         this.state = {
 
             petition: undefined,
-            centers: undefined
+            centers: undefined,
+            showToast: false,
+            toastText: ''
 
         }
 
@@ -36,7 +38,7 @@ export default class GeneralPetitionForm extends Component {
         this.petitionService
             .createNew(petData)
             .then(() => this.props.history.push("/petitions"))
-            .catch(err => console.log(err))
+            .catch(() => this.handleToast(true, 'Todos los campos deben estar completos'))
 
     }
 
@@ -51,28 +53,12 @@ export default class GeneralPetitionForm extends Component {
                 this.props.history.push(`/petitions/${response.data._id}`)
 
             })
-            .catch(err => console.log(err))
+            .catch(err => this.handleToast(true, err.message))
 
     }
 
-    // handleImageUpload = e => {
+    handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
-    //     const uploadData = new FormData()
-
-    //     uploadData.append('image', e.target.files[0])
-
-    //     console.log('estoy subiendo esto:', e.target.files[0])
-
-    //     this.uploaderService
-    //         .uploadImage(uploadData)
-    //         .then(response => {
-    //             this.setState({
-    //                 petition: { ...this.state.petition, image: response.data.secure_url }
-    //             })
-    //         })
-    //         .catch(err => console.log('ERRORRR!', err))
-
-    // }
 
     refreshState = () => {
 
@@ -88,7 +74,7 @@ export default class GeneralPetitionForm extends Component {
                     this.setState({ petition: response[1].data, centers: response[0].data })
 
                 })
-                .catch(err => console.log(err))
+                .catch(err => this.handleToast(true, err.message))
 
 
         } else {
@@ -96,7 +82,7 @@ export default class GeneralPetitionForm extends Component {
             this.centerService
                 .getAll()
                 .then(response => this.setState({ petition: undefined, centers: response.data }))
-                .catch(err => console.log(err))
+                .catch(err => this.handleToast(true, err.message))
 
         }
 
@@ -104,8 +90,6 @@ export default class GeneralPetitionForm extends Component {
 
 
     render() {
-
-        console.log(this.state)
 
         return (
 
@@ -128,25 +112,26 @@ export default class GeneralPetitionForm extends Component {
 
                             :
                             null
-                            //<Redirect to="/petitions" />
+
 
                         :
 
                         this.props.user.role === 'RECEIVER' || this.props.user.role === 'ADMIN' ?
+                            <>
+                                <Container>
+                                    <Row>
+                                        <Col md={{ span: 6, offset: 3 }}>
 
-                            <Container>
-                                <Row>
-                                    <Col md={{ span: 6, offset: 3 }}>
+                                            <PetitionForm petition={this.state.petition} centers={this.state.centers} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
 
-                                        <PetitionForm petition={this.state.petition} centers={this.state.centers} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
+                                        </Col>
+                                    </Row>
+                                </Container>
 
-                                    </Col>
-                                </Row>
-                            </Container>
-
+                                <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
+                            </>
                             :
                             null
-                            //<Redirect to="/petitions" />
                 }
 
             </div>

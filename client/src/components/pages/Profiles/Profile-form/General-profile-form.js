@@ -5,7 +5,7 @@ import ProfileService from '../../../../service/profile.service'
 
 import ProfileForm from '../Profile-form/Profile-form'
 
-//import {Redirect} from 'react-router-dom'
+import Alert from './../../../shared/Alert/Alert'
 
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -17,6 +17,8 @@ export default class GeneralUserForm extends Component {
         this.state = {
 
             user: undefined,
+            showToast: false,
+            toastText: ''
 
         }
 
@@ -40,7 +42,7 @@ export default class GeneralUserForm extends Component {
                     this.props.storeUser(response.data.user)
 
             })
-            .catch(err => console.log(err))
+            .catch(err => this.handleToast(true, err.message))
 
     }
 
@@ -61,7 +63,7 @@ export default class GeneralUserForm extends Component {
                     this.props.history.push("/users")
 
             )
-            .catch(err => console.log(err))
+            .catch(err => this.handleToast(true, err.message))
 
     }
 
@@ -82,7 +84,7 @@ export default class GeneralUserForm extends Component {
 
     }
 
-
+    handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
 
     render() {
@@ -103,7 +105,7 @@ export default class GeneralUserForm extends Component {
                     </Row>
                 </Container>
 
-
+                <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
             </div>
 
         )
