@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom'
 
-import { Button } from 'react-bootstrap'
-
 const ListItem = props => {
 
     return (
@@ -9,7 +7,7 @@ const ListItem = props => {
             {
                 props.address ?
 
-                    <li style={{ listStyle: 'none' }}>
+                    <li style={{ listStyle: 'none', border: '1px solid', borderRadius: '10px'}}>
 
                         <Link to={`/centers/${props._id}`}>{props.name}</Link>
                         <p>{props.address}</p>

@@ -16,6 +16,24 @@ router.get('/', (req, res) => {
 
 })
 
+router.get('/giverpetitions/:user_id', (req, res) => {
+
+    Petition
+        .find({giver: req.params.user_id, sent: false})
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
+router.get('/ownerpetitions/:user_id', (req, res) => {
+
+    Petition
+        .find({owner: req.params.user_id, sent: false})
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
 router.get('/petitionById/:petition_id', idPetitionChecker, (req, res) => {
 
     Petition

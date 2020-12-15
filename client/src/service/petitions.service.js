@@ -11,8 +11,9 @@ export default class PetitionService {
     }
 
     getAll = () => this.apiHandler.get('/')
+    getGiverPets = giver_id => this.apiHandler.get(`/giverpetitions/${giver_id}`)
+    getOwnerPets = owner_id => this.apiHandler.get(`/ownerpetitions/${owner_id}`)
     getById = petition_id => this.apiHandler.get(`/petitionById/${petition_id}`)
     createNew = petitionData => this.apiHandler.post('/new', petitionData)
     editPetition = (petition_id, petitionData) => this.apiHandler.put(`/edit/${petition_id}`, petitionData)
-
 }

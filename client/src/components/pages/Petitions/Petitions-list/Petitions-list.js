@@ -38,41 +38,35 @@ export default class PetitionsList extends Component {
 
     refreshPetitions = () => {
 
-        
-        let myPetitions
 
-        this.petitionService
-            .getAll()
-            .then(response => {
+        if (this.props.location.pathname.includes('/profile/mypetitions') && this.props.user.role === 'GIVER') {
 
-                if (this.props.location.pathname.includes('/profile/mypetitions') && this.props.user.role === 'GIVER') {
+            this.petitionService
+                .getGiverPets(this.props.user._id)
+                .then(response => this.setState({ petitions: response.data }))
+                .catch(err => console.log(err))
 
-                    myPetitions = response.data.filter(elm => elm.giver === this.props.user._id)
+        } else if (this.props.location.pathname.includes('/profile/mypetitions') && this.props.user.role === 'RECEIVER') {
 
+            this.petitionService
+                .getOwnerPets(this.props.user._id)
+                .then(response => this.setState({ petitions: response.data }))
+                .catch(err => console.log(err))
+        } else {
 
-                } else if (this.props.location.pathname.includes('/profile/mypetitions') && this.props.user.role === 'RECEIVER') {
-
-                    myPetitions=response.data.filter(elm => elm.owner === this.props.user._id)
-
-
-                } else {
-
-                    myPetitions= response.data.filter(elm => elm.status === true)
-
-                }
-
-                this.setState({ petitions: myPetitions })
-            })
-            .catch(err => console.log(err))
-
-
+            this.petitionService
+                .getAll()
+                .then(response => this.setState({ petitions: response.data }))
+                .catch(err => console.log(err))
+    
+        }
     }
 
 
 
     render() {
 
-  
+
 
         return (
             <>

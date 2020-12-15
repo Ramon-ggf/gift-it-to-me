@@ -57,14 +57,14 @@ class CentersList extends Component {
                     </Col>
 
                     <Col md={8}>
-                        <Map google={this.props.google} zoom={14}initialCenter={{lat: 40.437075, lng: -3.694048}}>
+                        <Map google={this.props.google} zoom={14} initialCenter={{lat: 40.437075, lng: -3.694048}}>
 
                             <Marker onClick={this.onMarkerClick}
                                 name={'Current location'} />
 
                             <InfoWindow onClose={this.onInfoWindowClose}>
                                 <div>
-                                    <h1>MApa</h1>
+                                    <h1>Mapa</h1>
                                 </div>
                             </InfoWindow>
                         </Map>

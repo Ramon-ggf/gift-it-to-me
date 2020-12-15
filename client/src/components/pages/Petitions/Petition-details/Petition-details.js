@@ -66,7 +66,7 @@ export default class PetitionDetails extends Component {
             .getById(this.props.match.params.petition_id)
             .then(response => {
 
-                console.log(response.data.center)
+                console.log(response.data)
 
                 this.setState({ petition: [response.data], changeButton: (this.props.user && response.data.giver === this.props.user._id) })
 
@@ -112,13 +112,15 @@ export default class PetitionDetails extends Component {
                                             <Button className="btn btn-info" name="delete" onClick={this.changeStatus} value={this.state.petition[0]._id}>Eliminar</Button>
                                         </>
 
-                                        :
+                                    :
+                                    
+                                    this.props.user.role === 'GIVER' &&
+
                                         <>
                                             <Button className="btn btn-info" name={this.state.changeButton ? 'unmatch' : 'match'} onClick={this.changeStatus} value={this.state.petition[0]._id}>{this.state.changeButton ? 'Desregalar' : 'Regalar'}</Button>
 
                                             {this.state.changeButton && <Button className="btn btn-info" name="sent" onClick={this.changeStatus} value={this.state.petition[0]._id}>Enviado</Button>}
                                         </>
-
                                     : null
                                 }
 
