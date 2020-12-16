@@ -100,7 +100,7 @@ export default class GeneralPetitionForm extends Component {
 
                         this.state.petition.owner._id === this.props.user._id || this.props.user.role === 'ADMIN' ?
 
-                            <Container>
+                            <Container style={{ padding: '50px' }} fluid>
                                 <Row>
                                     <Col md={{ span: 6, offset: 3 }}>
 

@@ -35,8 +35,10 @@ export default class UsersList extends Component {
         return (
             <>
                 { this.props.user && this.props.user.role === 'ADMIN' &&
-                    <Container>
-                        <h1>Lista de usuarios</h1>
+                    <Container style={{ padding: '50px' }} fluid>
+                    
+                    <h1 style={{ marginBottom: '50px' }}>Lista de usuarios</h1>
+                    
                         <Row>
                         <Col md={4}>
                             

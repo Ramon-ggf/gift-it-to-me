@@ -79,11 +79,14 @@ export default class PetitionDetails extends Component {
 
         return (
             <>
-                <h1>Detalles</h1>
+                
 
                 { this.state.petition ?
 
-                    <Container>
+                    <Container style={{ padding: '50px' }} fluid>
+
+                        <h1 style={{ marginBottom: '50px' }}>Detalles del regalo</h1>
+
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
 

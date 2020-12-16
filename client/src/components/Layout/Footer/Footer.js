@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <div>
             <Jumbotron fluid>
-                <Container>
+                <Container style={{height: '50px'}}>
                     <p>Regala_me footer</p>
                 </Container>
             </Jumbotron>

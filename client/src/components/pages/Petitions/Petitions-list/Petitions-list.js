@@ -71,9 +71,9 @@ export default class PetitionsList extends Component {
         return (
             <>
 
-                <Container>
+                <Container style={{padding: '50px'}} fluid>
 
-                    <h1>Lista de wishes</h1>
+                    <h1 style={{ marginBottom: '50px' }}>Lista de regalos</h1>
 
                     <Row>
 

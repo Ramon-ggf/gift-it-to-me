@@ -93,7 +93,8 @@ export default class GeneralUserForm extends Component {
 
             <div>
 
-                <Container style={{marginTop: "50px", marginBottom: "50px"}}>
+                <Container style={{ marginTop: "50px", marginBottom: "50px" }}>
+                    
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
                             <ProfileForm adminUser={this.props.user} loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={this.props.match.path} />

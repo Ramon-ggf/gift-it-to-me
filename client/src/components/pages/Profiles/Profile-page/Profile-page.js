@@ -12,7 +12,7 @@ const Profile = ({user}) => {
             {
                 user ?
 
-                    <Container>
+                    <Container style={{ padding: '50px' }} fluid>
 
                         <div className='welcome'>
                             <h1>Bienvenid@, {user.name}</h1>
