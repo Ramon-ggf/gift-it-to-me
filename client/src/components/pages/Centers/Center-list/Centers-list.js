@@ -100,7 +100,7 @@ class CentersList extends Component {
                         <Map google={this.props.google}
                             zoom={12} initialCenter={{ lat: 40.437075, lng: -3.694048 }}
                             loadingElement={<p>Cargando...</p>}
-                            style={{height: '500px', width: '900px', marginTop: '80px', marginLeft: '100px'}}
+                            style={{height: '500px', width: '750px', marginTop: '80px', marginLeft: '100px'}}
                         >
                             
                             {this.state.coord && this.state.coord.map((elm, idx) => <Marker key={idx} position={{ lat: elm[0].lat, lng: elm[0].lng }} title={ elm[0].name}/> )}

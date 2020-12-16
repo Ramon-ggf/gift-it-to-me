@@ -93,7 +93,7 @@ export default class PetitionsList extends Component {
 
                             {this.state.petitions ?
 
-                                this.state.petitions.map(elm => <PetitionCard key={elm._id} {...elm} />)
+                                this.state.petitions.map(elm => <PetitionCard key={elm._id} {...elm} user={this.props.user}/>)
 
                                 :
                                 'Loading...'

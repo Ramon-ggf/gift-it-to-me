@@ -10,7 +10,7 @@ const User = require('./../models/User.model')
 router.get('/', (req, res) => {
 
     User
-        .find({status: true})
+        .find({ status: true }).sort({name: 1})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
