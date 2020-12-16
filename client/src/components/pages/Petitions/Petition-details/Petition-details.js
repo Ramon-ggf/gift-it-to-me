@@ -83,9 +83,15 @@ export default class PetitionDetails extends Component {
 
                 { this.state.petition ?
 
+<<<<<<< HEAD
                     <Container style={{padding: '50px'}} fluid>
 
                         <h1 style={{ marginBottom: '50px' }}>Detalles</h1>
+=======
+                    <Container style={{ padding: '50px' }} fluid>
+
+                        <h1 style={{ marginBottom: '50px' }}>Detalles del regalo</h1>
+>>>>>>> tal
 
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>

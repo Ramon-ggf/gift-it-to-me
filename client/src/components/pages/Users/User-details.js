@@ -47,10 +47,12 @@ export default class UserDetails extends Component {
 
                     <>
 
+                        
+
                         <Container style={{ padding: '50px' }} fluid>
 
                             <h1 style={{ marginBottom: '50px' }}>Detalles de {this.state.user.name}</h1>
-
+                            
                             <Row>
 
                                 <Col md={{ span: 4, offset: 4 }}>

@@ -73,7 +73,11 @@ export default class PetitionsList extends Component {
 
                 <Container style={{padding: '50px'}} fluid>
 
+<<<<<<< HEAD
                     <h1 style={{marginBottom:'50px'}}>Lista de regalos</h1>
+=======
+                    <h1 style={{ marginBottom: '50px' }}>Lista de regalos</h1>
+>>>>>>> tal
 
                     <Row>
 

@@ -16,6 +16,7 @@ import UsersList from './pages/Users/Users-list'
 import HomePage from './pages/Homepage/Home'
 import Footer from './../components/Layout/Footer/Footer'
 import UserDetails from './pages/Users/User-details'
+import Info from './pages/Homepage/Info'
 
 import GeneralCenterForm from './pages/Centers/Center-form/General-center-form'
 
@@ -61,7 +62,8 @@ class App extends Component {
         <main>
           <Switch>
 
-            <Route path="/" exact render={() =>  <HomePage storeUser={this.setUser} user={this.state.loggedInUser} />} />
+            <Route path="/" exact render={() => <HomePage storeUser={this.setUser} user={this.state.loggedInUser} />} />
+            <Route path="/info" exact render={() => <Info storeUser={this.setUser} user={this.state.loggedInUser} />} />
             
             <Route path="/signup" render={props => (this.state.loggedInUser ? <Redirect to="/" /> : <GeneralProfileForm storeUser={this.setUser} user={ this.state.loggedInUser} {...props} /> )} />
             <Route path="/login" render={props => <LoginForm storeUser={this.setUser} {...props} />} />
