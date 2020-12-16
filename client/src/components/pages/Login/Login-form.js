@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import AuthService from './../../../service/auth.service'
 
+import Alert from './../../shared/Alert/Alert'
+
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
 export default class LoginForm extends Component {
@@ -11,7 +13,9 @@ export default class LoginForm extends Component {
         this.state = {
 
             password: '',
-            email: ''
+            email: '',
+            showToast: false,
+            toastText: ''
 
         }
 
@@ -31,17 +35,17 @@ export default class LoginForm extends Component {
                 this.props.storeUser(response.data)
                 this.props.history.push('/')
             })
-            .catch(err => console.log(err))
+            .catch(err => this.handleToast(true, err.message))
 
     }
 
+    handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
     render() {
 
         return (
 
             <div>
-
                 <Container>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
@@ -63,6 +67,7 @@ export default class LoginForm extends Component {
                     </Row>
                 </Container>
 
+                <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
             </div>
 
         )

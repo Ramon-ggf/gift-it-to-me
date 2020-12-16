@@ -6,6 +6,7 @@ export default class ProfileService {
 
         this.apiHandler = axios.create({
             baseURL: 'http://localhost:5000/api/profiles',
+            withCredentials: true
         })
     
     }

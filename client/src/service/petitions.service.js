@@ -6,6 +6,7 @@ export default class PetitionService {
 
         this.apiHandler = axios.create({
             baseURL: 'http://localhost:5000/api/petitions',
+            withCredentials: true
         })
     
     }

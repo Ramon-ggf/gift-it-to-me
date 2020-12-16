@@ -60,8 +60,10 @@ class CentersList extends Component {
                             })
                 })
 
-                console.log(all)
-                //this.setState({ coord: all})
+                // console.log(all)
+                // const everyThing = all.flat()
+                // console.log(everyThing)
+                // this.setState({ coord: everyThing})
 
             })
             .catch(err => console.log(err))
@@ -76,14 +78,14 @@ class CentersList extends Component {
         console.log(this.state.coord)
 
         return (
-            <Container>
-                <h1>Lista de Centros</h1>
+            <Container style={{padding: '50px'}} fluid>
+                <h1 style={{marginBottom:'50px'}}>Lista de Centros</h1>
                 <Row>
                     <Col md={4}>
 
                         {this.props.user && this.props.user.role === 'ADMIN' &&
 
-                            <Link className="btn btn-info" to="/centers/new">Crear nuevo centro</Link>
+                            <Link className="btn btn-info" style={{marginBottom: '25px'}} to="/centers/new">Crear nuevo centro</Link>
                         }
 
                         <ul>
@@ -97,7 +99,9 @@ class CentersList extends Component {
                     <Col md={8}>
                         <Map google={this.props.google}
                             zoom={12} initialCenter={{ lat: 40.437075, lng: -3.694048 }}
-                            loadingElement={<p>Cargando...</p>}>
+                            loadingElement={<p>Cargando...</p>}
+                            style={{height: '500px', width: '900px', marginTop: '80px', marginLeft: '100px'}}
+                        >
                             
                             {this.state.coord && this.state.coord.map((elm, idx) => <Marker key={idx} position={{ lat: elm[0].lat, lng: elm[0].lng }} title={ elm[0].name}/> )}
                         </Map>

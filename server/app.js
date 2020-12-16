@@ -9,17 +9,16 @@ require('./configs/debugger.config')
 // App
 const express = require('express')
 const app = express()
-const userLocal = require('./configs/local.user.config')
 
 // Configs
 require('./configs/cors.config')(app)
 require('./configs/middleware.config')(app)
 require('./configs/passport.config')(app)
 
+const middlewares = require("./configs/middleware.config");
+Object.keys(middlewares).forEach(key => app.use(middlewares[key]));
 
 // Routes index
 require('./routes')(app)
-
-app.use(userLocal)
 
 module.exports = app

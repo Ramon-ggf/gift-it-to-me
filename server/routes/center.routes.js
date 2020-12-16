@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/centerById/:center_id', idCenterChecker, (req, res) => {
+router.get('/centerById/:center_id',roleChecker(['ADMIN']), idCenterChecker, (req, res) => {
 
     Center
         .findById(req.params.center_id)

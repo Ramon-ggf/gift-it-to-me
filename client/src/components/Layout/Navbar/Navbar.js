@@ -39,31 +39,31 @@ export default class Navigation extends Component {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Link to="/" >
+                        <Link to="/" style={{textDecoration: 'none'}}>
                             <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Inicio</Nav.Link>
                         </Link>
-                        <Link to="/centers" >
+                        <Link to="/centers" style={{textDecoration: 'none'}}>
                             <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Centros</Nav.Link>
                         </Link>
-                        <Link to="/petitions">
+                        <Link to="/petitions" style={{textDecoration: 'none'}}>
                             <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Regalos</Nav.Link>
                         </Link>
                         {
                             this.props.loggedUser
                                 ?
-                                <Nav.Link style={{ color: '#F6F5F5' }} onClick={this.logOut}>Cerrar sesión</Nav.Link>
+                                <Nav.Link style={{ color: '#F6F5F5', textDecoration: 'none' }} onClick={this.logOut}>Cerrar sesión</Nav.Link>
                                 :
                                 <>
-                                    <Link to="/signup">
+                                    <Link to="/signup" style={{textDecoration: 'none'}}>
                                         <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Registrarse</Nav.Link>
                                     </Link>
-                                    <Link to="/login">
+                                    <Link to="/login" style={{textDecoration: 'none'}}>
                                         <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Iniciar sesión</Nav.Link>
                                     </Link>
                                 </>
 
                         }
-                        <Link to="/profile">
+                        <Link to="/profile" style={{textDecoration: 'none'}}>
                             {this.props.loggedUser && <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Mi perfil</Nav.Link> }
                         </Link>
                     </Nav>

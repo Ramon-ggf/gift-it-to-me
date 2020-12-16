@@ -1,3 +1,24 @@
 body {
   background-color: #F6F5F5;
+  font-family: 'Montserrat', Arial, sans-serif;
+  color:#393e46;
+}
+
+.btn {
+  background-color: #145374;
+}
+
+.card-btn {
+display: flex;
+justify-content: center;
+margin: 10px;
+}
+
+.edit-btn {
+margin-right: 100px;
+}
+
+.delete-btn {
+background-color: rgba(238, 111, 87, .9);
+border: 1px solid #EE6F57
 }
