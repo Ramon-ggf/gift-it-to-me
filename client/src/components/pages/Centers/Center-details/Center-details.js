@@ -44,8 +44,9 @@ export default class CenterDetails extends Component {
             <>
                 { this.state.center ?
 
-                    <Container fluid>
-                        <h1>Detalles del Centro</h1>
+                    <Container style={{ padding: '50px' }} fluid>
+                        
+                        <h1 style={{ marginBottom: '50px' }}>Detalles del Centro</h1>
 
                         <Row>
                             <Col md={{ span: 4, offset: 4 }}>

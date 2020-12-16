@@ -1,6 +1,6 @@
 import { Link, Redirect } from 'react-router-dom'
 
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col} from 'react-bootstrap'
 
 import './Profile-page.css'
 
@@ -12,7 +12,7 @@ const Profile = ({user}) => {
             {
                 user ?
 
-                    <Container>
+                    <Container style={{padding: '50px'}} fluid>
 
                         <div className='welcome'>
                             <h1>Bienvenid@, {user.name}</h1>

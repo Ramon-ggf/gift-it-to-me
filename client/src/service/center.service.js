@@ -5,7 +5,8 @@ export default class CenterService {
     constructor() {
 
         this.apiHandler = axios.create({
-            baseURL: 'http://localhost:5000/api/centers',
+            // baseURL: 'http://localhost:5000/api/centers',
+            baseURL: `${process.env.REACT_APP_API_URL}/centers`,
             withCredentials: true
         })
     

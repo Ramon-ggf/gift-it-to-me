@@ -35,12 +35,16 @@ export default class UsersList extends Component {
         return (
             <>
                 { this.props.user && this.props.user.role === 'ADMIN' &&
-                    <Container>
-                        <h1>Lista de usuarios</h1>
-                        <Row>
+                    
+                    <Container style={{ padding: '50px' }} fluid>
+                    
+                    <h1 style={{marginBottom:'50px'}}>Lista de usuarios</h1>
+                    
+                    <Row>
+                        
                         <Col md={4}>
                             
-                        <Link className="btn btn-info" to="/users/new">Crear nuevo usuario</Link>
+                        <Link className="btn btn-info" style={{marginBottom: '25px'}} to="/users/new">Crear nuevo usuario</Link>
 
                                 <ul>
 
@@ -48,8 +52,10 @@ export default class UsersList extends Component {
 
                                 </ul>
 
-                            </Col>
-                        </Row>
+                        </Col>
+                        
+                    </Row>
+                    
                     </Container>
                 }
             </>

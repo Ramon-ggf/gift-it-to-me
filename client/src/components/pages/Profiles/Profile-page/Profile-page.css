@@ -1,8 +1,8 @@
 .user-image{
-    height: 180px;
-    width: 171px;
-    object-fit: contain;
-}
+    height: 150px;
+    /* width: 171px;
+    object-fit: cover; */
+   }
 
 .welcome {
     text-align: center;

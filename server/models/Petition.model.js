@@ -22,7 +22,7 @@ const petitionSchema = new Schema({
     },
     image: {
         type: String,
-        default: 'https://www.vhv.rs/dpng/d/11-119235_free-gift-icon-png-transparent-png.png',
+        default: 'https://www.vippng.com/png/detail/70-707881_christmas-gift-comments-black-and-white-gift-box.png',
     },
     owner: {
         type: Schema.Types.ObjectId,

@@ -47,16 +47,18 @@ export default class UserDetails extends Component {
 
                     <>
 
-                        <h1>Detalles de {this.state.user.name}</h1>
+                        <Container style={{ padding: '50px' }} fluid>
 
-                        <Container>
+                            <h1 style={{ marginBottom: '50px' }}>Detalles de {this.state.user.name}</h1>
+
                             <Row>
-                                <Col md={{ span: 6, offset: 3 }}>
+
+                                <Col md={{ span: 4, offset: 4 }}>
 
                                     {this.props.user && this.props.user.role === 'ADMIN' ?
 
                                         <Card>
-                                            <Card.Img variant="top" src={this.state.user.image} style={{ height: 250, width: '100%', objectFit: 'cover' }} />
+                                            <Card.Img variant="top" src={this.state.user.image} style={{  height: 250, width: '100%', objectFit: 'cover'  }}/>
                                             <Card.Body>
                                                 <Card.Title>{this.state.user.name}{' '}{this.state.user.lastname}</Card.Title>
 
@@ -74,7 +76,9 @@ export default class UserDetails extends Component {
 
                                         : <Redirect to="/" />}
                                 </Col>
+
                             </Row>
+                            
                         </Container>
 
                     </>

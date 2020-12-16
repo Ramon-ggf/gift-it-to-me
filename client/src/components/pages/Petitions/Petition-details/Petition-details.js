@@ -79,16 +79,19 @@ export default class PetitionDetails extends Component {
 
         return (
             <>
-                <h1>Detalles</h1>
+                
 
                 { this.state.petition ?
 
-                    <Container>
+                    <Container style={{padding: '50px'}} fluid>
+
+                        <h1 style={{ marginBottom: '50px' }}>Detalles</h1>
+
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
 
                                 <Card>
-                                    <Card.Img variant="top" src={this.state.petition[0].image} />
+                                    <Card.Img className="imagen" variant="top" src={this.state.petition[0].image} style={{ height: '300px', width: '300px', objectFit: 'contain' }}/>
                                     <Card.Body>
                                         <Card.Title>{this.state.petition[0].title}</Card.Title>
                                         <Card.Text>{this.state.petition[0].description}</Card.Text>

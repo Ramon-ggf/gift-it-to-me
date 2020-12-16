@@ -71,9 +71,9 @@ export default class PetitionsList extends Component {
         return (
             <>
 
-                <Container>
+                <Container style={{padding: '50px'}} fluid>
 
-                    <h1>Lista de wishes</h1>
+                    <h1 style={{marginBottom:'50px'}}>Lista de regalos</h1>
 
                     <Row>
 
@@ -81,8 +81,7 @@ export default class PetitionsList extends Component {
 
                             this.props.user.role === 'ADMIN' || this.props.user.role === 'RECEIVER' ?
 
-                                <Link className="btn btn-info" to="/petitions/new"> Crear nuevo regalo</Link>
-
+                            <Link className="btn btn-info" style={{marginBottom: '25px'}} to="/petitions/new"> Crear nuevo regalo</Link>
 
                                 :
                                 null
