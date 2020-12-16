@@ -3,7 +3,9 @@ import CenterService from '../../../../service/center.service'
 
 import CentersForm from './../../Centers/Center-form/Centers-form'
 
-import {Redirect} from 'react-router-dom'
+import Alert from './../../../shared/Alert/Alert'
+
+import { Redirect } from 'react-router-dom'
 
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -15,6 +17,8 @@ export default class GeneralCenterForm extends Component {
         this.state = {
 
             center: undefined,
+            showToast: false,
+            toastText: ''
 
         }
 
@@ -26,50 +30,44 @@ export default class GeneralCenterForm extends Component {
     onSubmitCreate = (e, data) => {
 
         e.preventDefault()
-        console.log(data)
+
         this.centerService
             .createNew(data)
-            .then(response => {
-                this.props.history.push("/centers")
-                console.log(response.data)
-            })
-            .catch(err => console.log(err))
+            .then(() => this.props.history.push("/centers"))
+            .catch(() => this.handleToast(true, 'Error: no se ha podido crear el centro.'))
 
     }
 
-    onSubmitEdit= (e, data) => {
+    onSubmitEdit = (e, data) => {
 
         e.preventDefault()
 
         this.centerService
             .editCenter(this.props.match.params.center_id, data)
-            .then(response => {
-                this.props.history.push(`/centers/${response.data._id}`)
-                console.log(response.data)
-            })
-            .catch(err => console.log(err))
+            .then(response => this.props.history.push(`/centers/${response.data._id}`))
+            .catch(() => this.handleToast(true, 'Error: no se ha podido editar el centro.'))
 
     }
 
     refreshState = () => {
 
-        if (this.props.match) {
-            
+        if (this.props.match.params) {
+
             this.centerService
                 .getById(this.props.match.params.center_id)
-                .then(response => this.setState({center: response.data }))
+                .then(response => this.setState({ center: response.data }))
                 .catch(err => console.log(err))
 
         } else {
-            
-            this.setState({center: undefined })
+
+            this.setState({ center: undefined })
 
         }
- 
+
     }
 
 
-
+    handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
     render() {
 
@@ -78,7 +76,7 @@ export default class GeneralCenterForm extends Component {
             <div>
 
                 { this.props.user && this.props.user.role === 'ADMIN' ?
-                    
+
                     <Container>
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
@@ -88,11 +86,11 @@ export default class GeneralCenterForm extends Component {
                             </Col>
                         </Row>
                     </Container>
-                    : 
-
-                    <Redirect to="/centers"/>
-
+                    :
+                    <Redirect to="/centers" />
                 }
+
+                <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
 
             </div>
 

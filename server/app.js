@@ -15,6 +15,8 @@ require('./configs/cors.config')(app)
 require('./configs/middleware.config')(app)
 require('./configs/passport.config')(app)
 
+const middlewares = require("./configs/middleware.config");
+Object.keys(middlewares).forEach(key => app.use(middlewares[key]));
 
 // Routes index
 require('./routes')(app)

@@ -5,7 +5,7 @@ import ProfileService from '../../../../service/profile.service'
 
 import ProfileForm from '../Profile-form/Profile-form'
 
-//import {Redirect} from 'react-router-dom'
+import Alert from './../../../shared/Alert/Alert'
 
 import { Container, Row, Col } from 'react-bootstrap'
 
@@ -17,6 +17,8 @@ export default class GeneralUserForm extends Component {
         this.state = {
 
             user: undefined,
+            showToast: false,
+            toastText: ''
 
         }
 
@@ -29,33 +31,45 @@ export default class GeneralUserForm extends Component {
     onSubmitCreate = (e, userData) => {
 
         e.preventDefault()
-        console.log(userData)
+
         this.authService
             .signup(userData)
             .then(response => {
-                console.log(response.data)
+
+                this.props.user ?
+                    this.props.history.push("/users")
+                    :
+                    this.props.storeUser(response.data.user)
+
             })
-            .catch(err => console.log(err))
+            .catch(() => this.handleToast(true, 'Registro fallido, comprueba que todos los campos están rellenos.'))
 
     }
 
-    onSubmitEdit= (e, userData) => {
+    onSubmitEdit = (e, userData) => {
 
         e.preventDefault()
 
         this.profileService
             .editProfile(this.props.match.params.user_id, userData)
-            .then(response => {
-                this.props.history.push(`/profile`)
-                console.log(response.data)
-            })
-            .catch(err => console.log(err))
+            .then(response => 
+
+                this.props.user._id === this.props.match.params.user_id ?
+                    (this.props.storeUser(response.data.user),
+                        this.props.history.push("/profile"))
+
+                    :
+
+                    this.props.history.push("/users")
+
+            )
+            .catch(err => this.handleToast(true, 'Error: no se ha podido editar el perfil.'))
 
     }
 
     refreshState = () => {
 
-        if (this.props.match.params) {
+        if (this.props.match.params.user_id) {
 
             this.profileService
                 .getById(this.props.match.params.user_id)
@@ -70,7 +84,7 @@ export default class GeneralUserForm extends Component {
 
     }
 
-
+    handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
 
     render() {
@@ -79,19 +93,15 @@ export default class GeneralUserForm extends Component {
 
             <div>
 
-                <Container>
+                <Container style={{marginTop: "50px", marginBottom: "50px"}}>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
-
-                            
-
-                            <ProfileForm loggedUser={ this.state.user} create={this.onSubmitCreate} edit={ this.onSubmitEdit}/>
-
+                            <ProfileForm adminUser={this.props.user} loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={this.props.match.path} />
                         </Col>
                     </Row>
                 </Container>
 
-
+                <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
             </div>
 
         )

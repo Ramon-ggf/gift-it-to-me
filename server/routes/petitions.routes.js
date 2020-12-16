@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
+
+
+const {connectionChecker, roleChecker, idPetitionChecker} = require('../middlewares/custom.middlewares')
 
 const Petition = require('./../models/Petition.model')
 
@@ -8,27 +10,42 @@ const Petition = require('./../models/Petition.model')
 router.get('/', (req, res) => {
 
     Petition
-        .find()
+        .find({sent: false})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.get('/petitionById/:petition_id', (req, res) => {
+router.get('/giverpetitions/:user_id', roleChecker(['GIVER']), (req, res) => {
 
-    if (!mongoose.Types.ObjectId.isValid(req.params.petition_id)) {
+    Petition
+        .find({giver: req.params.user_id, sent: false})
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
 
-        return res.status(404).json({ message: 'Invalid ID' })
-    }
+})
+
+router.get('/ownerpetitions/:user_id', roleChecker(['RECEIVER']), (req, res) => {
+
+    Petition
+        .find({owner: req.params.user_id, sent: false})
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
+})
+
+router.get('/petitionById/:petition_id', idPetitionChecker, (req, res) => {
 
     Petition
         .findById(req.params.petition_id)
+        .populate('owner', 'name')
+        .populate('center', 'name')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.post('/new', (req, res) => {
+router.post('/new', connectionChecker, roleChecker(['ADMIN', 'RECEIVER']),(req, res) => {
 
     Petition
         .create(req.body)
@@ -37,7 +54,7 @@ router.post('/new', (req, res) => {
 
 })
 
-router.put('/edit/:petition_id', (req, res) => {
+router.put('/edit/:petition_id', connectionChecker, roleChecker(['ADMIN', 'RECEIVER']), idPetitionChecker, (req, res) => {
 
     Petition
         .findByIdAndUpdate(req.params.petition_id, req.body, {new: true})

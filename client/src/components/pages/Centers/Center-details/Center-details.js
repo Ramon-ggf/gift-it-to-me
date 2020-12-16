@@ -19,14 +19,7 @@ export default class CenterDetails extends Component {
 
     }
 
-    componentDidMount = () => {
-
-        this.centerService
-            .getById(this.props.match.params.center_id)
-            .then(response => this.setState({ center: response.data }))
-            .catch(err => console.log(err))
-
-    }
+    componentDidMount = () => this.refreshCenter()
 
     changeStatus = e => {
 
@@ -37,17 +30,25 @@ export default class CenterDetails extends Component {
 
     }
 
+    refreshCenter = () => {
+
+        this.centerService
+            .getById(this.props.match.params.center_id)
+            .then(response => this.setState({ center: response.data }))
+            .catch(err => console.log(err))
+    }
+
     render() {
 
         return (
             <>
-                <h1>Detalles del Centro</h1>
-
                 { this.state.center ?
 
-                    <Container>
+                    <Container fluid>
+                        <h1>Detalles del Centro</h1>
+
                         <Row>
-                            <Col md={{ span: 8, offset: 2 }}>
+                            <Col md={{ span: 4, offset: 4 }}>
 
                                 <Card>
                                     <Card.Img variant="top" src={this.state.center.image} style={{ height: 250, width: '100%', objectFit: 'cover' }} />
@@ -63,10 +64,10 @@ export default class CenterDetails extends Component {
 
                                     {this.props.user && this.props.user.role === 'ADMIN' &&
 
-                                        <>
-                                          <Link className="btn btn-info" to={`/center/edit/${this.state.center._id}`}>Editar</Link>
-                                          <Button className="btn btn-info" onClick={this.changeStatus} value={this.state.center._id}>Eliminar</Button>
-                                        </>
+                                        <div className="card-btn">
+                                        <Link className="btn btn-info edit-btn" to={`/center/edit/${this.state.center._id}`}>Editar</Link>
+                                        <Button className="btn btn-info delete-btn" onClick={this.changeStatus} value={this.state.center._id}>Eliminar</Button>
+                                        </div>
                                     }
 
                                 </Card>

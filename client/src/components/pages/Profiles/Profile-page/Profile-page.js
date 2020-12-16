@@ -4,12 +4,11 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 import './Profile-page.css'
 
-const Profile = ({ user }) => {
+const Profile = ({user}) => {
 
     return (
 
         <>
-
             {
                 user ?
 
@@ -45,15 +44,7 @@ const Profile = ({ user }) => {
                                     </>
                                 }
 
-                                {
-                                    user.role === 'ADMIN' || user.role === 'RECEIVER' &&
-
-                                    <>
-                                        <Link className="btn btn-info action" to="#">Crear nueva</Link>
-                                    </>
-                                }
-
-                                <Link className="btn btn-info action" to="/petitions">Gestionar regalos</Link>
+                                <Link className="btn btn-info action" to="/profile/mypetitions">Gestionar regalos</Link>
 
                             </Col>
 
@@ -62,23 +53,15 @@ const Profile = ({ user }) => {
                         <div className="profile-btn">
 
                             <Link className="btn btn-info action" to={`/profile/edit/${user._id}`}>Editar perfil</Link>
-                                <Link className="btn btn-info action" to="#">Darse de baja</Link>
+                            <Link className="btn btn-info action" to="#">Darse de baja</Link>
 
                         </div>
                         
                     </Container>
 
-
                     : <Redirect to="/" />
             }
-
-        </>
-
-
-
-
-
-
+        </> 
     )
 
 }

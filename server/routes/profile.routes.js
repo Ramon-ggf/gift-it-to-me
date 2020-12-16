@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
+const {connectionChecker, roleChecker, idProfileChecker} = require ('../middlewares/custom.middlewares')
+
 const User = require('./../models/User.model')
 
 // Endpoints
@@ -14,13 +16,8 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/userById/:user_id', (req, res) => {
-
-    if (!mongoose.Types.ObjectId.isValid(req.params.user_id)) {
-
-        return res.status(404).json({ message: 'Invalid ID' })
-    }
-
+router.get('/userById/:user_id', connectionChecker, roleChecker(['ADMIN']), idProfileChecker, (req, res) => {
+    
     User
         .findById(req.params.user_id)
         .then(response => res.json(response))
@@ -29,7 +26,7 @@ router.get('/userById/:user_id', (req, res) => {
 })
 
 
-router.put('/edit/:user_id', (req, res) => {
+router.put('/edit/:user_id', connectionChecker, idProfileChecker, (req, res) => {
 
     User
         .findByIdAndUpdate(req.params.user_id, req.body, {new: true})

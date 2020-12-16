@@ -4,4 +4,5 @@ module.exports = app => {
     app.use('/api/petitions', require('./petitions.routes.js'))
     app.use('/api/centers', require('./center.routes.js'))
     app.use('/api/profiles', require('./profile.routes.js'))
+    app.use('/api/uploader', require('./pictures.routes.js'))
 }

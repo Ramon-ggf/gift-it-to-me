@@ -1,19 +1,15 @@
 import { Link } from 'react-router-dom'
 
-import { Button } from 'react-bootstrap'
-
 const ListItem = props => {
-
-    console.log(props)
 
     return (
         <>
             {
                 props.address ?
 
-                    <li style={{ listStyle: 'none' }}>
+                    <li style={{ listStyle: 'none', border: '2px solid #8C8989', borderRadius: '10px', padding: '10px', margin:'15px 0 15px'}}>
 
-                        <Link to={`/centers/${props._id}`}>{props.name}</Link>
+                        <Link to={`/centers/${props._id}`} style={{textDecoration: 'none', color: '#393e46', fontWeight: 'bold', marginBottom: '10px'}}>{props.name}</Link>
                         <p>{props.address}</p>
 
                     </li>
@@ -22,10 +18,8 @@ const ListItem = props => {
 
                     <li style={{ listStyle: 'none' }}>
 
-                        <Link to={`/profile/${props._id}`}>{`${props.name} ${props.lastname}`}</Link>
+                        <Link to={`/users/${props._id}`}style={{textDecoration: 'none', color: '#393e46'}}>{`${props.name} ${props.lastname}`}</Link>
                         <p>{props.email}</p>
-                        <Link className="btn btn-info" to={`/profile/edit/${props._id}`}>Editar</Link>
-                        <Button className="btn btn-info" onClick={props.delete} value={props._id}>Eliminar</Button>
 
                     </li>
             }
