@@ -77,12 +77,8 @@ export default class GeneralCenterForm extends Component {
 
                 { this.props.user && this.props.user.role === 'ADMIN' ?
 
-<<<<<<< HEAD
-                    <Container style={{padding: '50px'}} fluid>
-=======
                     <Container style={{ padding: '50px' }} fluid>
 
->>>>>>> tal
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
 

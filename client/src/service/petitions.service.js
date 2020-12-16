@@ -1,14 +1,14 @@
 import axios from 'axios'
-import runtimeEnv from '@mars/heroku-js-runtime-env';
+//import runtimeEnv from '@mars/heroku-js-runtime-env';
 
-const env = runtimeEnv();
+//const env = runtimeEnv();
 export default class PetitionService {
 
     constructor() {
 
         this.apiHandler = axios.create({
             // baseURL: 'http://localhost:5000/api/petitions',
-            baseURL: `${env.REACT_APP_API_URL}/petitions`,
+            baseURL: `${process.env.REACT_APP_API_URL}/petitions`,
             withCredentials: true
         })
     

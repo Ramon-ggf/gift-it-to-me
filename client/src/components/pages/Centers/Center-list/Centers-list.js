@@ -75,21 +75,11 @@ class CentersList extends Component {
 
     render() {
 
-<<<<<<< HEAD
-        console.log(this.state.coord)
-
-        return (
-            <Container style={{ padding: '50px' }} fluid>
-                
-                <h1 style={{ marginBottom: '50px' }}>Lista de Centros</h1>
-                
-=======
           return (
               <Container style={{ padding: '50px' }} fluid>
                   
                   <h1 style={{ marginBottom: '50px' }}>Lista de Centros</h1>
                   
->>>>>>> tal
                 <Row>
                     <Col md={4}>
 
