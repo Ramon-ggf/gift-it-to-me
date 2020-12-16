@@ -16,9 +16,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/userById/:user_id', roleChecker(['ADMIN']), idProfileChecker, (req, res) => {
-
-    console.log('Ususario de editar perfil:', req.user)
+router.get('/userById/:user_id', connectionChecker, roleChecker(['ADMIN']), idProfileChecker, (req, res) => {
     
     User
         .findById(req.params.user_id)
@@ -28,7 +26,7 @@ router.get('/userById/:user_id', roleChecker(['ADMIN']), idProfileChecker, (req,
 })
 
 
-router.put('/edit/:user_id', idProfileChecker, (req, res) => {
+router.put('/edit/:user_id', connectionChecker, idProfileChecker, (req, res) => {
 
     User
         .findByIdAndUpdate(req.params.user_id, req.body, {new: true})

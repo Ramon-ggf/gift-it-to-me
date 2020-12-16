@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/giverpetitions/:user_id', (req, res) => {
+router.get('/giverpetitions/:user_id', roleChecker(['GIVER']), (req, res) => {
 
     Petition
         .find({giver: req.params.user_id, sent: false})
@@ -25,7 +25,7 @@ router.get('/giverpetitions/:user_id', (req, res) => {
 
 })
 
-router.get('/ownerpetitions/:user_id', (req, res) => {
+router.get('/ownerpetitions/:user_id', roleChecker(['RECEIVER']), (req, res) => {
 
     Petition
         .find({owner: req.params.user_id, sent: false})
@@ -45,7 +45,7 @@ router.get('/petitionById/:petition_id', idPetitionChecker, (req, res) => {
 
 })
 
-router.post('/new', (req, res) => {
+router.post('/new', connectionChecker, roleChecker(['ADMIN', 'RECEIVER']),(req, res) => {
 
     Petition
         .create(req.body)
@@ -54,7 +54,7 @@ router.post('/new', (req, res) => {
 
 })
 
-router.put('/edit/:petition_id', idPetitionChecker, (req, res) => {
+router.put('/edit/:petition_id', connectionChecker, roleChecker(['ADMIN', 'RECEIVER']), idPetitionChecker, (req, res) => {
 
     Petition
         .findByIdAndUpdate(req.params.petition_id, req.body, {new: true})

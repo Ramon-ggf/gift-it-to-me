@@ -34,7 +34,7 @@ export default class GeneralCenterForm extends Component {
         this.centerService
             .createNew(data)
             .then(() => this.props.history.push("/centers"))
-            .catch(err => this.handleToast(true, err.message))
+            .catch(() => this.handleToast(true, 'Error: no se ha podido crear el centro.'))
 
     }
 
@@ -45,7 +45,7 @@ export default class GeneralCenterForm extends Component {
         this.centerService
             .editCenter(this.props.match.params.center_id, data)
             .then(response => this.props.history.push(`/centers/${response.data._id}`))
-            .catch(err => this.handleToast(true, err.message))
+            .catch(() => this.handleToast(true, 'Error: no se ha podido editar el centro.'))
 
     }
 

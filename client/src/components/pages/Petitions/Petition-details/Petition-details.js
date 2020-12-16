@@ -85,7 +85,7 @@ export default class PetitionDetails extends Component {
 
                     <Container>
                         <Row>
-                            <Col md={{ span: 8, offset: 2 }}>
+                            <Col md={{ span: 6, offset: 3 }}>
 
                                 <Card>
                                     <Card.Img variant="top" src={this.state.petition[0].image} />
@@ -101,29 +101,28 @@ export default class PetitionDetails extends Component {
                                         {this.state.petition[0].center && <Card.Text>Centro elegido: <Link to={`/centers/${this.state.petition[0].center._id}`}>  {this.state.petition[0].center.name}</Link></Card.Text>}
                                         {this.state.petition[0].owner && <Card.Text>Soñador/a:  {this.state.petition[0].owner.name} </Card.Text>}
                                     </Card.Body>
+
+                                    {this.props.user ?
+
+                                        this.props.user._id === this.state.petition[0].owner._id || this.props.user.role === 'ADMIN' ?
+
+                                            <div className="card-btn">
+                                                <Link className="btn btn-info edit-btn" to={`/petitions/edit/${this.state.petition[0]._id}`}>Editar regalo</Link>
+                                                <Button className="btn btn-info delete-btn" name="delete" onClick={this.changeStatus} value={this.state.petition[0]._id}>Eliminar</Button>
+                                            </div>
+
+                                            :
+
+                                            this.props.user.role === 'GIVER' &&
+
+                                            <div className="card-btn">
+                                                <Button className="btn btn-info edit-btn" name={this.state.changeButton ? 'unmatch' : 'match'} onClick={this.changeStatus} value={this.state.petition[0]._id}>{this.state.changeButton ? 'No regalar' : 'Regalar'}</Button>
+
+                                                {this.state.changeButton && <Button className="btn btn-info" style={{marginLeft: '50px'}} name="sent" onClick={this.changeStatus} value={this.state.petition[0]._id}>Enviado</Button>}
+                                            </div>
+                                        : null
+                                    }
                                 </Card>
-
-                                {this.props.user ?
-
-                                    this.props.user._id === this.state.petition[0].owner._id || this.props.user.role === 'ADMIN' ?
-
-                                        <>
-                                            <Link className="btn btn-info" to={`/petitions/edit/${this.state.petition[0]._id}`}>Editar regalo</Link>
-                                            <Button className="btn btn-info" name="delete" onClick={this.changeStatus} value={this.state.petition[0]._id}>Eliminar</Button>
-                                        </>
-
-                                    :
-                                    
-                                    this.props.user.role === 'GIVER' &&
-
-                                        <>
-                                            <Button className="btn btn-info" name={this.state.changeButton ? 'unmatch' : 'match'} onClick={this.changeStatus} value={this.state.petition[0]._id}>{this.state.changeButton ? 'Desregalar' : 'Regalar'}</Button>
-
-                                            {this.state.changeButton && <Button className="btn btn-info" name="sent" onClick={this.changeStatus} value={this.state.petition[0]._id}>Enviado</Button>}
-                                        </>
-                                    : null
-                                }
-
                             </Col>
                         </Row>
                     </Container>

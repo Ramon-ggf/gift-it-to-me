@@ -34,7 +34,7 @@ export default class Navigation extends Component {
                             width="30"
                             height="30"
                             className="d-inline-block align-top"
-                        />{' '}<span style={{color: 'white'}}>Regala</span><span style={{color: '#ee6f57'}}>_me</span></Navbar.Brand>
+                        />{' '}<span style={{color: 'white'}}>Regala_</span><span style={{color: '#ee6f57'}}>me</span></Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

@@ -38,7 +38,7 @@ export default class GeneralPetitionForm extends Component {
         this.petitionService
             .createNew(petData)
             .then(() => this.props.history.push("/petitions"))
-            .catch(() => this.handleToast(true, 'Todos los campos deben estar completos'))
+            .catch(() => this.handleToast(true, 'Error: no se ha podido crear la petición.'))
 
     }
 
@@ -53,7 +53,7 @@ export default class GeneralPetitionForm extends Component {
                 this.props.history.push(`/petitions/${response.data._id}`)
 
             })
-            .catch(err => this.handleToast(true, err.message))
+            .catch(err => this.handleToast(true, 'Error: no se ha podido editar la petición.'))
 
     }
 
@@ -74,7 +74,7 @@ export default class GeneralPetitionForm extends Component {
                     this.setState({ petition: response[1].data, centers: response[0].data })
 
                 })
-                .catch(err => this.handleToast(true, err.message))
+                .catch(err => this.handleToast(true, 'Error al cargar la información.'))
 
 
         } else {
@@ -82,7 +82,7 @@ export default class GeneralPetitionForm extends Component {
             this.centerService
                 .getAll()
                 .then(response => this.setState({ petition: undefined, centers: response.data }))
-                .catch(err => this.handleToast(true, err.message))
+                .catch(err => this.handleToast(true, 'Error al cargar los centros.'))
 
         }
 
@@ -98,7 +98,7 @@ export default class GeneralPetitionForm extends Component {
                 {
                     this.state.petition ?
 
-                        this.state.petition.owner === this.props.user._id || this.props.user.role === 'ADMIN' ?
+                        this.state.petition.owner._id === this.props.user._id || this.props.user.role === 'ADMIN' ?
 
                             <Container>
                                 <Row>
@@ -112,8 +112,6 @@ export default class GeneralPetitionForm extends Component {
 
                             :
                             null
-
-
                         :
 
                         this.props.user.role === 'RECEIVER' || this.props.user.role === 'ADMIN' ?

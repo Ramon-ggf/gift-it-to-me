@@ -1,6 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import Logo from './Logo.png'
+import Logo from './Pictures/logo7.png'
 
 import './Homepage.css'
 

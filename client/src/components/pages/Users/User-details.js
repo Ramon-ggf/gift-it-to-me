@@ -51,7 +51,7 @@ export default class UserDetails extends Component {
 
                         <Container>
                             <Row>
-                                <Col md={{ span: 8, offset: 2 }}>
+                                <Col md={{ span: 6, offset: 3 }}>
 
                                     {this.props.user && this.props.user.role === 'ADMIN' ?
 
@@ -64,9 +64,9 @@ export default class UserDetails extends Component {
                                             <ListGroup className="list-group-flush">
                                                 <ListGroupItem>{`Email: ${this.state.user.email}`}</ListGroupItem>
                                                 <ListGroupItem>{`Rol: ${this.state.user.role}`}</ListGroupItem>
-                                                <ListGroupItem>
-                                                    <Link className="btn btn-info" to={`/profile/edit/${this.state.user._id}`}>Editar</Link>
-                                                    <Button className="btn btn-info" onClick={this.changeStatus} value={this.state.user._id}>Eliminar</Button>
+                                                <ListGroupItem className="card-btn">
+                                                    <Link className="btn btn-info edit-btn" to={`/profile/edit/${this.state.user._id}`}>Editar</Link>
+                                                    <Button className="btn btn-info delete-btn" onClick={this.changeStatus} value={this.state.user._id}>Eliminar</Button>
                                                 </ListGroupItem>
                                             </ListGroup>
 

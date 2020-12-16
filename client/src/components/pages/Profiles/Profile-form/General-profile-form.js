@@ -42,7 +42,7 @@ export default class GeneralUserForm extends Component {
                     this.props.storeUser(response.data.user)
 
             })
-            .catch(err => this.handleToast(true, err.message))
+            .catch(() => this.handleToast(true, 'Registro fallido, comprueba que todos los campos están rellenos.'))
 
     }
 
@@ -63,7 +63,7 @@ export default class GeneralUserForm extends Component {
                     this.props.history.push("/users")
 
             )
-            .catch(err => this.handleToast(true, err.message))
+            .catch(err => this.handleToast(true, 'Error: no se ha podido editar el perfil.'))
 
     }
 
@@ -93,14 +93,10 @@ export default class GeneralUserForm extends Component {
 
             <div>
 
-                <Container>
+                <Container style={{marginTop: "50px", marginBottom: "50px"}}>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
-
-
-
                             <ProfileForm adminUser={this.props.user} loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={this.props.match.path} />
-
                         </Col>
                     </Row>
                 </Container>

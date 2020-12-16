@@ -9,7 +9,6 @@ export default class UserForm extends Component {
         super(props)
 
         this.state = {
-
             name: this.props.loggedUser ? this.props.loggedUser.name : '',
             lastname: this.props.loggedUser ? this.props.loggedUser.lastname : '',
             password: undefined,
@@ -17,7 +16,6 @@ export default class UserForm extends Component {
             role: this.props.loggedUser ? this.props.loggedUser.name : '',
             image: undefined,
             status: true
-
         }
 
         this.uploaderService = new UploaderService()
@@ -59,19 +57,19 @@ export default class UserForm extends Component {
 
                     <Form.Group controlId="name">
                         <Form.Label>Nombre</Form.Label>
-                        <Form.Control name="name" type="text" value={this.state.name} onChange={this.onChangeHandler} />
+                        <Form.Control name="name" type="text" value={this.state.name} onChange={this.onChangeHandler} placeholder="Nombre"/>
                     </Form.Group>
                     <Form.Group controlId="lastname">
                         <Form.Label>Apellidos</Form.Label>
-                        <Form.Control name="lastname" type="text" value={this.state.lastname} onChange={this.onChangeHandler} />
+                        <Form.Control name="lastname" type="text" value={this.state.lastname} onChange={this.onChangeHandler}  placeholder="Apellidos"/>
                     </Form.Group>
                     <Form.Group controlId="password">
                         <Form.Label>Contraseña</Form.Label>
-                        <Form.Control name="password" type="password" value={this.state.password} onChange={this.onChangeHandler} />
+                        <Form.Control name="password" type="password" value={this.state.password} onChange={this.onChangeHandler}  placeholder="Contraseña" minLength="3"/>
                     </Form.Group>
                     <Form.Group controlId="email">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control name="email" type="email" value={this.state.email} onChange={this.onChangeHandler} />
+                        <Form.Control name="email" type="email" value={this.state.email} onChange={this.onChangeHandler}  placeholder="Correo electrónico"/>
                     </Form.Group>
                     <Form.Group controlId="role">
                         <Form.Label>Elige el tipo de perfil</Form.Label>
@@ -87,7 +85,7 @@ export default class UserForm extends Component {
                         <Form.Control name="image" type="file" onChange={this.handleImageUpload} />
                     </Form.Group>
 
-                    <Button variant="dark" block name={this.props.path.includes('edit') ? "button-edit" : "button-sign"} type="submit">
+                    <Button className="btn btn-info edit-btn" block name={this.props.path.includes('edit') ? "button-edit" : "button-sign"} type="submit">
                         {this.props.path.includes('edit') ? 'Editar perfil' : 'Registrar usuario'}
                     </Button>
 

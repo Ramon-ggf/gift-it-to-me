@@ -15,10 +15,11 @@ margin: 10px;
 }
 
 .edit-btn {
-margin-right: 100px;
+margin-right: 50px;
 }
 
 .delete-btn {
 background-color: rgba(238, 111, 87, .9);
-border: 1px solid #EE6F57
+border: 1px solid #EE6F57;
+margin-left: 50px;
 }

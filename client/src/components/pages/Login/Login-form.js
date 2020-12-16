@@ -35,7 +35,7 @@ export default class LoginForm extends Component {
                 this.props.storeUser(response.data)
                 this.props.history.push('/')
             })
-            .catch(err => this.handleToast(true, err.message))
+            .catch(() => this.handleToast(true, 'Error: no se ha podido iniciar sesión.'))
 
     }
 
@@ -46,7 +46,7 @@ export default class LoginForm extends Component {
         return (
 
             <div>
-                <Container>
+                <Container style={{marginTop: "50px", marginBottom: "50px"}}>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
 
@@ -54,14 +54,14 @@ export default class LoginForm extends Component {
 
                                 <Form.Group controlId="email">
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control name="email" type="email" value={this.state.email} onChange={this.onChangeHandler} />
+                                    <Form.Control name="email" type="email" value={this.state.email} onChange={this.onChangeHandler} placeholder="Correo electrónico" required/>
                                 </Form.Group>
                                 <Form.Group controlId="password">
                                     <Form.Label>Contraseña</Form.Label>
-                                    <Form.Control name="password" type="password" value={this.state.password} onChange={this.onChangeHandler} />
+                                    <Form.Control name="password" type="password" value={this.state.password} onChange={this.onChangeHandler} placeholder="Contraseña" minlength="3" required/>
                                 </Form.Group>
 
-                                <Button variant="dark" block type="submit">Iniciar sesión</Button>
+                                <Button className="btn btn-info btn-edit" block type="submit">Iniciar sesión</Button>
                             </Form>
                         </Col>
                     </Row>
