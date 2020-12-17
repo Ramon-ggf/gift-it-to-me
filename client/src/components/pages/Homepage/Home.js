@@ -1,6 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Logo from './Pictures/logo7.png'
+import Logo2 from './Pictures/Logo2.png'
 
 import './Homepage.css'
 
@@ -58,14 +59,14 @@ const HomePage = () => {
                 <Container>
                     <Row>
                         <Col md={8}>
-                            <h2 className="about-title">¿Quiénes somos?</h2>
-                            <p><span style={{color: '#F6F5F5'}}>Regala_</span><span style={{color: '#ee6f57'}}>me</span> es un sitio sin ánimo de lucro creado para ayudar a personas de bajos recursos a mantener la ilusión en estas fechas.</p>
-                            <Link className="btn btn-info btn-about" to="/about">Sobre nosotros</Link>
+                            <h2 className="about-title">Quienes somos?</h2>
+                            <p><span style={{color: '#F6F5F5', fontWeight: 'bold'}}>Regala_</span><span style={{color: '#ee6f57', fontWeight: 'bold'}}>me</span> es un sitio sin ánimo de lucro creado para ayudar a personas de bajos recursos a mantener la ilusión en estas fechas.</p>
+                           <p>Gracias a tu ayuda y la coolaboración de los centros de distribución, hacemos llegar a cientos de niños y ancianos una pequeña muestra de afecto y mostrar que nos importan.</p>
                         </Col>
                         <Col md={4}>
                             <div className="about-icon">
-                                <i class="fas fa-hand-holding-heart fa-10x" />
-                                </div>
+                                <img src={Logo2} alt='logo-white'/>
+                            </div>
                         </Col>
                     </Row>
 </Container>

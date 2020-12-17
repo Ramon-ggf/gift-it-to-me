@@ -58,7 +58,7 @@ export default class LoginForm extends Component {
                                 </Form.Group>
                                 <Form.Group controlId="password">
                                     <Form.Label>Contraseña</Form.Label>
-                                    <Form.Control name="password" type="password" value={this.state.password} onChange={this.onChangeHandler} placeholder="Contraseña" minlength="3" required/>
+                                    <Form.Control name="password" type="password" value={this.state.password} onChange={this.onChangeHandler} placeholder="Contraseña" minLength="3" required/>
                                 </Form.Group>
 
                                 <Button className="btn btn-info btn-edit" block type="submit">Iniciar sesión</Button>

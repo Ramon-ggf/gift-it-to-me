@@ -57,23 +57,23 @@ export default class CenterForm extends Component {
             <Form onSubmit={(e) => this.props.center ? this.props.edit(e, this.state) : this.props.create(e, this.state)}>
                 <Form.Group controlId="name">
                     <Form.Label>Nombre del centro</Form.Label>
-                    <Form.Control name="name" type="text" value={this.state.name} onChange={this.onChangeHandler} />
+                    <Form.Control name="name" type="text" value={this.state.name} onChange={this.onChangeHandler} placeholder="Nombre del centro" required/>
                 </Form.Group>
                 <Form.Group controlId="email">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control name="email" type="email" value={this.state.email} onChange={this.onChangeHandler} />
+                    <Form.Control name="email" type="email" value={this.state.email} onChange={this.onChangeHandler} placeholder="Correo electrónico" required/>
                 </Form.Group>
                 <Form.Group controlId="phone">
                     <Form.Label>Teléfono</Form.Label>
-                    <Form.Control name="phone" type="number" value={this.state.phone} onChange={this.onChangeHandler} />
+                    <Form.Control name="phone" type="number" value={this.state.phone} onChange={this.onChangeHandler} placeholder="Número de teléfono" required/>
                 </Form.Group>
                 <Form.Group controlId="address">
                     <Form.Label>Dirección</Form.Label>
-                    <Form.Control name="address" type="text" value={this.state.address} onChange={this.onChangeHandler} />
+                    <Form.Control name="address" type="text" value={this.state.address} onChange={this.onChangeHandler} placeholder="Dirección" required/>
                 </Form.Group>
                 <Form.Group controlId="opening">
                     <Form.Label>Horarios</Form.Label>
-                    <Form.Control name="opening" type="text" value={this.state.opening} onChange={this.onChangeHandler} />
+                    <Form.Control name="opening" type="text" value={this.state.opening} onChange={this.onChangeHandler} placeholder="Horarios de atención" required/>
                 </Form.Group>
                 <Form.Group controlId="image">
                     <Form.Label>Imagen</Form.Label>
@@ -81,7 +81,7 @@ export default class CenterForm extends Component {
                 </Form.Group>
 
 
-                <Button variant="dark" block type="submit">{this.props.center ? 'Editar centro' : 'Crear nuevo centro'} </Button>
+                <Button className="btn btn-info edit-btn" block type="submit">{this.props.center ? 'Editar centro' : 'Crear nuevo centro'} </Button>
             </Form>
 
         )
