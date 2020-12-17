@@ -45,7 +45,7 @@ export default class LoginForm extends Component {
 
         return (
 
-            <div>
+            <div style={{paddingBottom: '250px'}}>
                 <Container style={{marginTop: "50px", marginBottom: "50px"}}>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>

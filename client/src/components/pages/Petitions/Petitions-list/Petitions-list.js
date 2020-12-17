@@ -76,9 +76,7 @@ export default class PetitionsList extends Component {
                     <h1 style={{ marginBottom: '50px' }}>Lista de regalos</h1>
 
                     <Row>
-
                         {this.props.user ?
-
                             this.props.user.role === 'ADMIN' || this.props.user.role === 'RECEIVER' ?
 
                             <Link className="btn btn-info" style={{marginBottom: '25px'}} to="/petitions/new"> Crear nuevo regalo</Link>

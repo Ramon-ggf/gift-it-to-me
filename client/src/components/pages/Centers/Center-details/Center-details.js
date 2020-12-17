@@ -70,10 +70,10 @@ export default class CenterDetails extends Component {
                                         <Button className="btn btn-info delete-btn" onClick={this.changeStatus} value={this.state.center._id}>Eliminar</Button>
                                         </div>
                                     }
-
                                 </Card>
                             </Col>
                         </Row>
+                        <Link className="btn btn-info edit-btn" to={"/centers"}>Volver a la lista</Link>
                     </Container>
 
                     : 'Loading...'}

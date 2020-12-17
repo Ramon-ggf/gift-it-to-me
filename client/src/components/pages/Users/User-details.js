@@ -9,11 +9,7 @@ export default class UserDetails extends Component {
     constructor() {
         super()
 
-        this.state = {
-
-            user: undefined
-
-        }
+        this.state = { user: undefined }
 
         this.profileService = new ProfileService()
 
@@ -44,26 +40,17 @@ export default class UserDetails extends Component {
 
             <>
                 {this.state.user ?
-
                     <>
-
-                        
-
                         <Container style={{ padding: '50px' }} fluid>
-
                             <h1 style={{ marginBottom: '50px' }}>Detalles de {this.state.user.name}</h1>
-                            
                             <Row>
-
                                 <Col md={{ span: 4, offset: 4 }}>
-
                                     {this.props.user && this.props.user.role === 'ADMIN' ?
 
                                         <Card>
-                                            <Card.Img variant="top" src={this.state.user.image} style={{  height: 250, width: '100%', objectFit: 'cover'  }}/>
+                                            <Card.Img variant="top" src={this.state.user.image} style={{ height: '300px', width: '300px', objectFit: 'cover', margin: 'auto', marginTop: '20px' }} />
                                             <Card.Body>
                                                 <Card.Title>{this.state.user.name}{' '}{this.state.user.lastname}</Card.Title>
-
                                             </Card.Body>
                                             <ListGroup className="list-group-flush">
                                                 <ListGroupItem>{`Email: ${this.state.user.email}`}</ListGroupItem>
@@ -73,14 +60,11 @@ export default class UserDetails extends Component {
                                                     <Button className="btn btn-info delete-btn" onClick={this.changeStatus} value={this.state.user._id}>Eliminar</Button>
                                                 </ListGroupItem>
                                             </ListGroup>
-
                                         </Card>
-
                                         : <Redirect to="/" />}
                                 </Col>
-
                             </Row>
-                            
+                            <Link className="btn btn-info edit-btn" to={"/users"}>Volver a la lista</Link>
                         </Container>
 
                     </>

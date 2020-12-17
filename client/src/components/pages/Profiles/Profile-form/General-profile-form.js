@@ -52,7 +52,7 @@ export default class GeneralUserForm extends Component {
 
         this.profileService
             .editProfile(this.props.match.params.user_id, userData)
-            .then(response => 
+            .then(response =>
 
                 this.props.user._id === this.props.match.params.user_id ?
                     (this.props.storeUser(response.data.user),
@@ -63,7 +63,7 @@ export default class GeneralUserForm extends Component {
                     this.props.history.push("/users")
 
             )
-            .catch(err => this.handleToast(true, 'Error: no se ha podido editar el perfil.'))
+            .catch(() => this.handleToast(true, 'Error: no se ha podido editar el perfil.'))
 
     }
 
@@ -94,9 +94,12 @@ export default class GeneralUserForm extends Component {
             <div>
 
                 <Container style={{ marginTop: "50px", marginBottom: "50px" }}>
-                    
+
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
+
+                            <h1 style={{ marginBottom: '25px', textAlign: 'center' }}>{this.props.match.path.includes('edit') ? 'Editar perfil' : 'Registro de usuario'}</h1>
+
                             <ProfileForm adminUser={this.props.user} loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={this.props.match.path} />
                         </Col>
                     </Row>

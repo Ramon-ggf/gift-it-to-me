@@ -33,7 +33,7 @@ const HomePage = () => {
             </section>
             <section className="features">
                 <Container style={{padding: '30px'}}>
-                    <h2 className="feature-title2">Regalar es muy fácil!</h2>
+                    <h2 className="feature-title2">¡Regalar es muy fácil!</h2>
                     <Row>
                         <Col md={4}>
                             <div style={{textAlign: 'center'}}><i className="icon fas fa-sign-in-alt fa-6x"></i></div>
@@ -58,7 +58,7 @@ const HomePage = () => {
                 <Container>
                     <Row>
                         <Col md={8}>
-                            <h2 className="about-title">Quienes somos?</h2>
+                            <h2 className="about-title">¿Quiénes somos?</h2>
                             <p><span style={{color: '#F6F5F5'}}>Regala_</span><span style={{color: '#ee6f57'}}>me</span> es un sitio sin ánimo de lucro creado para ayudar a personas de bajos recursos a mantener la ilusión en estas fechas.</p>
                             <Link className="btn btn-info btn-about" to="/about">Sobre nosotros</Link>
                         </Col>

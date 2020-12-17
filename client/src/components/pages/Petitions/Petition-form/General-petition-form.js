@@ -48,13 +48,8 @@ export default class GeneralPetitionForm extends Component {
 
         this.petitionService
             .editPetition(this.props.match.params.petition_id, petData)
-            .then(response => {
-
-                this.props.history.push(`/petitions/${response.data._id}`)
-
-            })
+            .then(response => this.props.history.push(`/petitions/${response.data._id}`))
             .catch(err => this.handleToast(true, 'Error: no se ha podido editar la petición.'))
-
     }
 
     handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
@@ -76,16 +71,12 @@ export default class GeneralPetitionForm extends Component {
                 })
                 .catch(err => this.handleToast(true, 'Error al cargar la información.'))
 
-
         } else {
-
             this.centerService
                 .getAll()
                 .then(response => this.setState({ petition: undefined, centers: response.data }))
                 .catch(err => this.handleToast(true, 'Error al cargar los centros.'))
-
         }
-
     }
 
 
@@ -104,6 +95,8 @@ export default class GeneralPetitionForm extends Component {
                                 <Row>
                                     <Col md={{ span: 6, offset: 3 }}>
 
+                                        <h1 style={{ marginBottom: '25px', textAlign: 'center' }}>Editar regalo</h1>
+
                                         <PetitionForm centers={this.state.centers} petition={this.state.petition} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
 
                                     </Col>
@@ -116,10 +109,10 @@ export default class GeneralPetitionForm extends Component {
 
                         this.props.user.role === 'RECEIVER' || this.props.user.role === 'ADMIN' ?
                             <>
-                                <Container style={{padding: '50px'}} fluid>
+                                <Container style={{ padding: '50px' }} fluid>
                                     <Row>
                                         <Col md={{ span: 6, offset: 3 }}>
-
+                                            <h1 style={{ marginBottom: '25px', textAlign: 'center' }}>Crear regalo</h1>
                                             <PetitionForm petition={this.state.petition} centers={this.state.centers} create={this.onSubmitCreate} edit={this.onSubmitEdit} user={this.props.user} />
 
                                         </Col>

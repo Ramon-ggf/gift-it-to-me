@@ -63,9 +63,7 @@ export default class GeneralCenterForm extends Component {
             this.setState({ center: undefined })
 
         }
-
     }
-
 
     handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
@@ -81,6 +79,8 @@ export default class GeneralCenterForm extends Component {
 
                         <Row>
                             <Col md={{ span: 6, offset: 3 }}>
+
+                                <h1 style={{ marginBottom: '25px', textAlign: 'center' }}>{this.state.center ? 'Editar centro' : 'Crear centro' }</h1>
 
                                 <CentersForm center={this.state.center} edit={this.onSubmitEdit} create={this.onSubmitCreate} />
 

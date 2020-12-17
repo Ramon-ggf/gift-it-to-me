@@ -79,8 +79,6 @@ export default class PetitionDetails extends Component {
 
         return (
             <>
-                
-
                 { this.state.petition ?
 
                     <Container style={{ padding: '50px' }} fluid>
@@ -91,7 +89,7 @@ export default class PetitionDetails extends Component {
                             <Col md={{ span: 6, offset: 3 }}>
 
                                 <Card>
-                                    <Card.Img className="imagen" variant="top" src={this.state.petition[0].image} style={{ height: '300px', width: '300px', objectFit: 'contain' }}/>
+                                    <Card.Img variant="top" src={this.state.petition[0].image} style={{ height: '300px', width: '300px', objectFit: 'cover', margin: 'auto', marginTop: '20px' }}/>
                                     <Card.Body>
                                         <Card.Title>{this.state.petition[0].title}</Card.Title>
                                         <Card.Text>{this.state.petition[0].description}</Card.Text>
@@ -110,8 +108,8 @@ export default class PetitionDetails extends Component {
                                         this.props.user._id === this.state.petition[0].owner._id || this.props.user.role === 'ADMIN' ?
 
                                             <div className="card-btn">
-                                                <Link className="btn btn-info edit-btn" to={`/petitions/edit/${this.state.petition[0]._id}`}>Editar regalo</Link>
-                                                <Button className="btn btn-info delete-btn" name="delete" onClick={this.changeStatus} value={this.state.petition[0]._id}>Eliminar</Button>
+                                                <Link className="btn btn-info edit-btn" style={{marginBottom: '10px'}} to={`/petitions/edit/${this.state.petition[0]._id}`}>Editar regalo</Link>
+                                                <Button className="btn btn-info delete-btn" style={{marginBottom: '10px'}} name="delete" onClick={this.changeStatus} value={this.state.petition[0]._id}>Eliminar</Button>
                                             </div>
 
                                             :
@@ -128,6 +126,7 @@ export default class PetitionDetails extends Component {
                                 </Card>
                             </Col>
                         </Row>
+                        <Link className="btn btn-info edit-btn" to={"/petitions"}>Volver a la lista</Link>
                     </Container>
 
                     : 'Loading...'}

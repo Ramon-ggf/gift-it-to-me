@@ -85,7 +85,7 @@ class App extends Component {
               .user_id || this.state.loggedInUser.role === 'ADMIN' ?
               <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} /> : <Redirect to="/" /> : <Redirect to="/" />)
             } />
-            <Route path="/profile/mypetitions" render={props => <PetitionsList user={this.state.loggedInUser} {...props} />} />
+            <Route path="/profile/mypetitions" render={props => (this.state.loggedInUser ? <PetitionsList user={this.state.loggedInUser} {...props} /> : <Redirect to="/petitions"/>)} />
             
             
             <Route path="/users" exact render={() => <UsersList user={this.state.loggedInUser} />} />
