@@ -9,7 +9,11 @@ import Geocode from "react-geocode"
 import CenterService from '../../../../service/center.service'
 import CenterCard from '../Center-card/List-item'
 
-Geocode.setApiKey(process.env.REACT_APP_API_KEY);
+import runtimeEnv from '@mars/heroku-js-runtime-env';
+
+const env = runtimeEnv();
+
+Geocode.setApiKey(env.REACT_APP_API_KEY);
 
 class CentersList extends Component {
     constructor() {
@@ -115,5 +119,5 @@ class CentersList extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: (process.env.REACT_APP_API_KEY)
+    apiKey: (env.REACT_APP_API_KEY)
 })(CentersList)
