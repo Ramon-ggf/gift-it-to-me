@@ -62,15 +62,15 @@ export default class PetitionForm extends Component {
                         
                         <Form.Group controlId="title">
                             <Form.Label>Título</Form.Label>
-                            <Form.Control name="title" type="text" value={this.state.title} onChange={this.onChangeHandler} />
+                            <Form.Control name="title" type="text" value={this.state.title} onChange={this.onChangeHandler} placeholder="Título del regalo" minLength="10" required/>
                         </Form.Group>
                         <Form.Group controlId="description">
                             <Form.Label>Descripción</Form.Label>
-                            <Form.Control name="description" type="textarea" value={this.state.description} onChange={this.onChangeHandler} />
+                            <Form.Control name="description" type="textarea" value={this.state.description} onChange={this.onChangeHandler} placeholder="Descripción" minLength="10" required/>
                         </Form.Group>
                         <Form.Group controlId="age">
                             <Form.Label>Edad del soñador/a</Form.Label>
-                            <Form.Control name="age" type="number" value={this.state.age} onChange={this.onChangeHandler} />
+                            <Form.Control name="age" type="number" value={this.state.age} onChange={this.onChangeHandler} placeholder="Edad del soñador" required/>
                         </Form.Group>
                         <Form.Group controlId="sex">
                             <Form.Label>Sexo del soñador/a</Form.Label>
@@ -93,7 +93,7 @@ export default class PetitionForm extends Component {
                             <Form.Control name="image" type="file" onChange={this.handleImageUpload} />
                         </Form.Group>
 
-                        <Button variant="dark" block type="submit">{this.props.petition ? 'Editar regalo' : 'Crear regalo'}</Button>
+                        <Button className="btn btn-info edit-btn" block type="submit">{this.props.petition ? 'Editar regalo' : 'Crear regalo'}</Button>
 
                     </Form >
 

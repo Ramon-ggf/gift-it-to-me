@@ -86,9 +86,7 @@ width: 500px
 }
 
 .about-icon {
-   border-radius: 50%;
-   border: 8px solid #F6F5F5;
-   padding: 80px;
+  
    text-align: center;
-   margin-top: 35px;
+   margin-top: 50px;
 }
