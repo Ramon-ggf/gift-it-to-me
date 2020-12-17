@@ -10,7 +10,7 @@ const Petition = require('./../models/Petition.model')
 router.get('/', (req, res) => {
 
     Petition
-        .find({sent: false})
+        .find({status: true})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
@@ -54,7 +54,7 @@ router.post('/new', connectionChecker, roleChecker(['ADMIN', 'RECEIVER']),(req, 
 
 })
 
-router.put('/edit/:petition_id', connectionChecker, roleChecker(['ADMIN', 'RECEIVER']), idPetitionChecker, (req, res) => {
+router.put('/edit/:petition_id', connectionChecker, idPetitionChecker, (req, res) => {
 
     Petition
         .findByIdAndUpdate(req.params.petition_id, req.body, {new: true})
@@ -62,7 +62,5 @@ router.put('/edit/:petition_id', connectionChecker, roleChecker(['ADMIN', 'RECEI
         .catch(err => res.status(500).json(err))
 
 })
-
-
 
 module.exports = router

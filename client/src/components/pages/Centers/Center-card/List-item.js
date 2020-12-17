@@ -7,12 +7,12 @@ const ListItem = props => {
             {
                 props.address ?
 
-                    <li style={{ listStyle: 'none', border: '2px solid #8C8989', borderRadius: '10px', padding: '10px', margin:'15px 0 15px', boxShadow: '2px 2px 2px 3px rgba(0, 0, 0, 0.2)'}}>
+                <Link to={`/centers/${props._id}`} style={{textDecoration: 'none', color: '#393e46', marginBottom: '10px'}}><li style={{ listStyle: 'none', border: '2px solid #8C8989', borderRadius: '10px', padding: '10px', margin:'15px 0 15px', boxShadow: '2px 2px 2px 3px rgba(0, 0, 0, 0.2)'}}>
 
-                        <Link to={`/centers/${props._id}`} style={{textDecoration: 'none', color: '#393e46', fontWeight: 'bold', marginBottom: '10px'}}>{props.name}</Link>
+                        <p style={{ fontWeight: 'bold'}}>{props.name}</p>
                         <p>{props.address}</p>
 
-                    </li>
+                    </li></Link>
 
                     :
 
