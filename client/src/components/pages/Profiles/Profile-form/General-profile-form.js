@@ -60,7 +60,7 @@ export default class GeneralUserForm extends Component {
                             this.props.storeUser(response.data)
                             this.props.history.push("/profile")
                         })
-                        .catch(() => this.setUser(undefined))
+                        // .catch(() => this.props.storeUser(undefined))
 
                 } else {
 
