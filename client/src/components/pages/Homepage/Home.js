@@ -18,7 +18,7 @@ const HomePage = () => {
 
                             <article className="main-text">
                                 <figure>
-                                    <img src={Logo} style={{width: '500px'}}/>
+                                    <img src={Logo} style={{ width: '500px' }} />
                                 </figure>
 
                                 <div className="main-info">
@@ -33,21 +33,21 @@ const HomePage = () => {
                 </Container>
             </section>
             <section className="features">
-                <Container style={{padding: '30px'}}>
+                <Container style={{ padding: '30px' }}>
                     <h2 className="feature-title2">¡Regalar es muy fácil!</h2>
                     <Row>
                         <Col md={4}>
-                            <div style={{textAlign: 'center'}}><i className="icon fas fa-sign-in-alt fa-6x"></i></div>
+                            <div style={{ textAlign: 'center' }}><i className="icon fas fa-sign-in-alt fa-6x"></i></div>
                             <h3 className="feature-title3">Regístrate</h3>
-                            <p className="feature-text">Abre un perfil y forma parte de la comunidad <span style={{color: '#145374', fontWeight: '800'}}>Regala_</span><span style={{color: '#ee6f57', fontWeight: '800'}}>me</span></p>
+                            <p className="feature-text">Abre un perfil y forma parte de la comunidad <span style={{ color: '#145374', fontWeight: '800' }}>Regala_</span><span style={{ color: '#ee6f57', fontWeight: '800' }}>me</span></p>
                         </Col>
                         <Col md={4}>
-                            <div style={{textAlign: 'center'}}><i className="icon fas fa-search fa-6x"></i></div>
+                            <div style={{ textAlign: 'center' }}><i className="icon fas fa-search fa-6x"></i></div>
                             <h3 className="feature-title3">Busca</h3>
                             <p className="feature-text">Busca en la lista de regalos a quién quieres regalar</p>
                         </Col>
                         <Col md={4}>
-                            <div style={{textAlign: 'center'}}><i className="icon fas fa-gift fa-6x"></i></div>
+                            <div style={{ textAlign: 'center' }}><i className="icon fas fa-gift fa-6x"></i></div>
                             <h3 className="feature-title3">Regala</h3>
                             <p className="feature-text">Compra el regalo y llévalo al punto de recogida indicado</p>
                         </Col>
@@ -59,17 +59,17 @@ const HomePage = () => {
                 <Container>
                     <Row>
                         <Col md={8}>
-                            <h2 className="about-title">Quienes somos?</h2>
-                            <p><span style={{color: '#F6F5F5', fontWeight: 'bold'}}>Regala_</span><span style={{color: '#ee6f57', fontWeight: 'bold'}}>me</span> es un sitio sin ánimo de lucro creado para ayudar a personas de bajos recursos a mantener la ilusión en estas fechas.</p>
-                           <p>Gracias a tu ayuda y la coolaboración de los centros de distribución, hacemos llegar a cientos de niños y ancianos una pequeña muestra de afecto y mostrar que nos importan.</p>
+                            <h2 className="about-title">¿Quiénes somos?</h2>
+                            <p><span style={{ color: '#F6F5F5', fontWeight: 'bold' }}>Regala_</span><span style={{ color: '#ee6f57', fontWeight: 'bold' }}>me</span> es un sitio sin ánimo de lucro creado para ayudar a personas de bajos recursos a mantener la ilusión en estas fechas.</p>
+                            <p>Gracias a tu ayuda y la coolaboración de los centros de distribución, hacemos llegar a cientos de niños y ancianos una pequeña muestra de afecto y mostrar que nos importan.</p>
                         </Col>
                         <Col md={4}>
                             <div className="about-icon">
-                                <img src={Logo2} alt='logo-white'/>
+                                <img src={Logo2} alt='logo-white' />
                             </div>
                         </Col>
                     </Row>
-</Container>
+                </Container>
             </section>
         </>
     )

@@ -18,7 +18,8 @@ const userSchema = new Schema({
     email: {
         type: String,
         unique: true,
-        required: true
+        required: true,
+        match: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
     },
     role: {
         type: String,

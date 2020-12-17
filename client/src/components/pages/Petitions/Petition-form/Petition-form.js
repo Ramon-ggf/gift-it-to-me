@@ -43,7 +43,7 @@ export default class PetitionForm extends Component {
 
         this.uploaderService
             .uploadImage(uploadData)
-            .then(response =>this.setState({ image: response.data.secure_url }))
+            .then(response => this.setState({ image: response.data.secure_url }))
             .catch(err => console.log('ERRORRR!', err))
 
     }
@@ -59,18 +59,18 @@ export default class PetitionForm extends Component {
                 <>
 
                     <Form onSubmit={(e) => this.props.petition ? this.props.edit(e, this.state) : this.props.create(e, this.state)}>
-                        
+
                         <Form.Group controlId="title">
                             <Form.Label>Título</Form.Label>
-                            <Form.Control name="title" type="text" value={this.state.title} onChange={this.onChangeHandler} placeholder="Título del regalo" minLength="10" required/>
+                            <Form.Control name="title" type="text" value={this.state.title} onChange={this.onChangeHandler} placeholder="Título del regalo" minLength="10" required />
                         </Form.Group>
                         <Form.Group controlId="description">
                             <Form.Label>Descripción</Form.Label>
-                            <Form.Control name="description" type="textarea" value={this.state.description} onChange={this.onChangeHandler} placeholder="Descripción" minLength="10" required/>
+                            <Form.Control name="description" type="text" value={this.state.description} onChange={this.onChangeHandler} placeholder="Descripción" minLength="10" required />
                         </Form.Group>
                         <Form.Group controlId="age">
                             <Form.Label>Edad del soñador/a</Form.Label>
-                            <Form.Control name="age" type="number" value={this.state.age} onChange={this.onChangeHandler} placeholder="Edad del soñador" required/>
+                            <Form.Control name="age" type="number" value={this.state.age} onChange={this.onChangeHandler} placeholder="Edad del soñador" required />
                         </Form.Group>
                         <Form.Group controlId="sex">
                             <Form.Label>Sexo del soñador/a</Form.Label>
@@ -85,7 +85,7 @@ export default class PetitionForm extends Component {
                             <Form.Label>Centro de recogida</Form.Label>
                             <Form.Control as="select" name="center" value={this.state.center} onChange={this.onChangeHandler}>
                                 <option>Seleccionar</option>
-                                {this.props.centers && this.props.centers.map(elm => <option key={ elm._id} value={ elm._id}>{ elm.name}</option>)}
+                                {this.props.centers && this.props.centers.map(elm => <option key={elm._id} value={elm._id}>{elm.name}</option>)}
                             </Form.Control>
                         </Form.Group>
                         <Form.Group controlId="image">

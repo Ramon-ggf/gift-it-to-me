@@ -13,7 +13,9 @@ const centerSchema = new Schema({
     },
     phone: {
         type: Number,
-        required: true
+        required: true,
+        match: /^[679]{1}[0-9]{8}$/,
+        minlength: 9
     },
     address: {
         type: String,

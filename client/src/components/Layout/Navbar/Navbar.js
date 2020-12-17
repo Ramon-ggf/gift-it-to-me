@@ -25,7 +25,7 @@ export default class Navigation extends Component {
     render() {
 
         return (
-            <Navbar expand="md" style={{ marginBottom: '0px', backgroundColor: '#00334e'}}>
+            <Navbar expand="md" style={{ marginBottom: '0px', backgroundColor: '#00334e', height: '100%'}}>
                 <Link to="/">
                     <Navbar.Brand >
                         <img
@@ -42,11 +42,11 @@ export default class Navigation extends Component {
                         <Link to="/" style={{textDecoration: 'none'}}>
                             <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Inicio</Nav.Link>
                         </Link>
-                        <Link to="/centers" style={{textDecoration: 'none'}}>
-                            <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Centros</Nav.Link>
-                        </Link>
                         <Link to="/petitions" style={{textDecoration: 'none'}}>
                             <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Regalos</Nav.Link>
+                        </Link>
+                        <Link to="/centers" style={{textDecoration: 'none'}}>
+                            <Nav.Link as="div" style={{ color: '#F6F5F5' }}>Centros</Nav.Link>
                         </Link>
                         {
                             this.props.loggedUser

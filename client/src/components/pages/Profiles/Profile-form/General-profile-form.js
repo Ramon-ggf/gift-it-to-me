@@ -15,11 +15,9 @@ export default class GeneralUserForm extends Component {
         super()
 
         this.state = {
-
             user: undefined,
             showToast: false,
             toastText: ''
-
         }
 
         this.authService = new AuthService()
@@ -52,17 +50,25 @@ export default class GeneralUserForm extends Component {
 
         this.profileService
             .editProfile(this.props.match.params.user_id, userData)
-            .then(response =>
+            .then(response => {
 
-                this.props.user._id === this.props.match.params.user_id ?
-                    (this.props.storeUser(response.data.user),
-                        this.props.history.push("/profile"))
+                if (this.props.user._id === this.state.user._id) {
 
-                    :
+                    this.authService
+                        .isLoggedIn()
+                        .then(response => {
+                            this.props.storeUser(response.data)
+                            this.props.history.push("/profile")
+                        })
+                        .catch(() => this.setUser(undefined))
+
+                } else {
 
                     this.props.history.push("/users")
 
-            )
+                }
+
+            })
             .catch(() => this.handleToast(true, 'Error: no se ha podido editar el perfil.'))
 
     }
@@ -88,6 +94,8 @@ export default class GeneralUserForm extends Component {
 
 
     render() {
+
+        console.log(this.props)
 
         return (
 

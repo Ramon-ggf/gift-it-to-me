@@ -1,6 +1,6 @@
 import { Link, Redirect } from 'react-router-dom'
 
-import { Container, Row, Col} from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 
 import './Profile-page.css'
 
@@ -53,7 +53,7 @@ const Profile = ({user}) => {
                         <div className="profile-btn">
 
                             <Link className="btn btn-info action" to={`/profile/edit/${user._id}`}>Editar perfil</Link>
-                            <Link className="btn btn-info action" to="#">Darse de baja</Link>
+                            <Button className="btn btn-info delete-btn" >Darse de baja</Button>
 
                         </div>
                         

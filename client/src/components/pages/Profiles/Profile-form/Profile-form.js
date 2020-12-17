@@ -40,7 +40,7 @@ export default class UserForm extends Component {
         this.uploaderService
             .uploadImage(uploadData)
             .then(response =>this.setState({ image: response.data.secure_url }))
-            .catch(err => console.log('ERRORRR!', err))
+            .catch(err => console.log('Error:', err))
 
     }
 
@@ -48,6 +48,8 @@ export default class UserForm extends Component {
 
 
     render() {
+
+        console.log(this.props)
 
         return (
 

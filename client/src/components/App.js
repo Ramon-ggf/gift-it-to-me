@@ -54,28 +54,29 @@ class App extends Component {
 
     return (
 
-      <>
+      <div id="container">
 
-        <Navigation storeUser={this.setUser} loggedUser={this.state.loggedInUser} />
-        
-        
+        <div id="header">
+          <Navigation storeUser={this.setUser} loggedUser={this.state.loggedInUser} />
+        </div>
+
         <main>
           <Switch>
 
             <Route path="/" exact render={() => <HomePage storeUser={this.setUser} user={this.state.loggedInUser} />} />
             <Route path="/info" exact render={() => <Info storeUser={this.setUser} user={this.state.loggedInUser} />} />
-            
-            <Route path="/signup" render={props => (this.state.loggedInUser ? <Redirect to="/" /> : <GeneralProfileForm storeUser={this.setUser} user={ this.state.loggedInUser} {...props} /> )} />
+
+            <Route path="/signup" render={props => (this.state.loggedInUser ? <Redirect to="/" /> : <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} />)} />
             <Route path="/login" render={props => <LoginForm storeUser={this.setUser} {...props} />} />
 
-            <Route path="/petitions" exact render={props => <PetitionsList user={this.state.loggedInUser} {...props}/>} />
+            <Route path="/petitions" exact render={props => <PetitionsList user={this.state.loggedInUser} {...props} />} />
             <Route path="/petitions/new" render={props => <GeneralPetitionForm user={this.state.loggedInUser} {...props} />} />
             <Route path="/petitions/edit/:petition_id" exact render={props => <GeneralPetitionForm user={this.state.loggedInUser} {...props} />} />
             <Route path="/petitions/:petition_id" render={props => <PetitionDetails user={this.state.loggedInUser} {...props} />} />
-            
+
 
             <Route path="/centers" exact render={() => <CentersList user={this.state.loggedInUser} />} />
-            <Route path="/centers/new" render={props => <GeneralCenterForm user={this.state.loggedInUser} {...props}/>} />
+            <Route path="/centers/new" render={props => <GeneralCenterForm user={this.state.loggedInUser} {...props} />} />
             <Route path="/centers/:center_id" render={props => <CenterDetails user={this.state.loggedInUser} {...props} />} />
             <Route path="/center/edit/:center_id" render={props => <GeneralCenterForm user={this.state.loggedInUser} {...props} />} />
 
@@ -85,19 +86,21 @@ class App extends Component {
               .user_id || this.state.loggedInUser.role === 'ADMIN' ?
               <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} /> : <Redirect to="/" /> : <Redirect to="/" />)
             } />
-            <Route path="/profile/mypetitions" render={props => (this.state.loggedInUser ? <PetitionsList user={this.state.loggedInUser} {...props} /> : <Redirect to="/petitions"/>)} />
-            
-            
+            <Route path="/profile/mypetitions" render={props => (this.state.loggedInUser ? <PetitionsList user={this.state.loggedInUser} {...props} /> : <Redirect to="/petitions" />)} />
+
+
             <Route path="/users" exact render={() => <UsersList user={this.state.loggedInUser} />} />
-            <Route path="/users/new" render={props => (this.state.loggedInUser && this.state.loggedInUser.role === 'ADMIN' && <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} />)}/>
+            <Route path="/users/new" render={props => (this.state.loggedInUser && this.state.loggedInUser.role === 'ADMIN' && <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} />)} />
             <Route path="/users/:user_id" render={props => <UserDetails user={this.state.loggedInUser} {...props} />} />
-            
+
           </Switch>
         </main>
 
-        <Footer />
+        <div id="footer">
+          <Footer />
+        </div>
 
-      </>
+      </div>
 
     )
   }
