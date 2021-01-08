@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import AuthService from '../../../../service/auth.service'
 import ProfileService from '../../../../service/profile.service'
-
 import ProfileForm from '../Profile-form/Profile-form'
-
 import Alert from './../../../shared/Alert/Alert'
-
-import { Container, Row, Col } from 'react-bootstrap'
 
 export default class GeneralUserForm extends Component {
 
@@ -33,15 +30,12 @@ export default class GeneralUserForm extends Component {
         this.authService
             .signup(userData)
             .then(response => {
-
                 this.props.user ?
                     this.props.history.push("/users")
                     :
                     this.props.storeUser(response.data.user)
-
             })
             .catch(() => this.handleToast(true, 'Registro fallido, comprueba que todos los campos están rellenos.'))
-
     }
 
     onSubmitEdit = (e, userData) => {
@@ -60,7 +54,7 @@ export default class GeneralUserForm extends Component {
                             this.props.storeUser(response.data)
                             this.props.history.push("/profile")
                         })
-                        .catch(() => this.setUser(undefined))
+                        .catch(() => this.props.storeUser(undefined))
 
                 } else {
 
@@ -92,32 +86,19 @@ export default class GeneralUserForm extends Component {
 
     handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
-
     render() {
-
-        console.log(this.props)
-
         return (
-
             <div>
-
                 <Container style={{ marginTop: "50px", marginBottom: "50px" }}>
-
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
-
                             <h1 style={{ marginBottom: '25px', textAlign: 'center' }}>{this.props.match.path.includes('edit') ? 'Editar perfil' : 'Registro de usuario'}</h1>
-
                             <ProfileForm adminUser={this.props.user} loggedUser={this.state.user} create={this.onSubmitCreate} edit={this.onSubmitEdit} path={this.props.match.path} />
                         </Col>
                     </Row>
                 </Container>
-
                 <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
             </div>
-
         )
-
     }
-
 }

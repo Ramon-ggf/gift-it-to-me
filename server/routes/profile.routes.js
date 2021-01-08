@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-const {connectionChecker, roleChecker, idProfileChecker} = require ('../middlewares/custom.middlewares')
+const {connectionChecker, roleChecker, idMongooseChecker} = require ('../middlewares/custom.middlewares')
 
 const User = require('./../models/User.model')
 
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/userById/:user_id', idProfileChecker, (req, res) => {
+router.get('/userById/:user_id', idMongooseChecker, (req, res) => {
     
     User
         .findById(req.params.user_id)

@@ -30,12 +30,7 @@ class App extends Component {
   constructor() {
     super()
 
-    this.state = {
-
-      loggedInUser: ''
-
-    }
-
+    this.state = { loggedInUser: '' }
     this.authService = new AuthService()
   }
 
@@ -45,17 +40,13 @@ class App extends Component {
       .isLoggedIn()
       .then(response => this.setUser(response.data))
       .catch(() => this.setUser(undefined))
-
   }
 
   setUser = user => this.setState({ loggedInUser: user })
 
   render() {
-
     return (
-
       <div id="container">
-
         <div id="header">
           <Navigation storeUser={this.setUser} loggedUser={this.state.loggedInUser} />
         </div>
@@ -74,23 +65,21 @@ class App extends Component {
             <Route path="/petitions/edit/:petition_id" exact render={props => <GeneralPetitionForm user={this.state.loggedInUser} {...props} />} />
             <Route path="/petitions/:petition_id" render={props => <PetitionDetails user={this.state.loggedInUser} {...props} />} />
 
-
             <Route path="/centers" exact render={() => <CentersList user={this.state.loggedInUser} />} />
             <Route path="/centers/new" render={props => <GeneralCenterForm user={this.state.loggedInUser} {...props} />} />
             <Route path="/centers/:center_id" render={props => <CenterDetails user={this.state.loggedInUser} {...props} />} />
             <Route path="/center/edit/:center_id" render={props => <GeneralCenterForm user={this.state.loggedInUser} {...props} />} />
 
-            <Route path="/profile" exact render={() => <Profile user={this.state.loggedInUser}/>} />
+            <Route path="/profile" exact render={() => <Profile user={this.state.loggedInUser} />} />
             <Route path="/profile/edit/:user_id" render={props =>
-            (this.state.loggedInUser ? this.state.loggedInUser._id === props.match.params
-              .user_id || this.state.loggedInUser.role === 'ADMIN' ?
-              <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} /> : <Redirect to="/" /> : <Redirect to="/" />)
+            (this.state.loggedInUser?._id === props.match.params
+              .user_id || this.state.loggedInUser?.role === 'ADMIN' ?
+              <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} /> : <Redirect to="/" />)
             } />
             <Route path="/profile/mypetitions" render={props => (this.state.loggedInUser ? <PetitionsList user={this.state.loggedInUser} {...props} /> : <Redirect to="/petitions" />)} />
 
-
             <Route path="/users" exact render={() => <UsersList user={this.state.loggedInUser} />} />
-            <Route path="/users/new" render={props => (this.state.loggedInUser && this.state.loggedInUser.role === 'ADMIN' && <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} />)} />
+            <Route path="/users/new" render={props => (this.state.loggedInUser?.role === 'ADMIN' && <GeneralProfileForm storeUser={this.setUser} user={this.state.loggedInUser} {...props} />)} />
             <Route path="/users/:user_id" render={props => <UserDetails user={this.state.loggedInUser} {...props} />} />
 
           </Switch>
@@ -99,9 +88,7 @@ class App extends Component {
         <div id="footer">
           <Footer />
         </div>
-
       </div>
-
     )
   }
 }

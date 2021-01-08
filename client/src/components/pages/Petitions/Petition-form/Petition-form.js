@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import UploaderService from './../../../../service/uploader.service'
-
 import { Form, Button } from 'react-bootstrap'
+
+import UploaderService from './../../../../service/uploader.service'
 
 export default class PetitionForm extends Component {
 
@@ -9,7 +9,6 @@ export default class PetitionForm extends Component {
         super(props)
 
         this.state = {
-
             title: undefined,
             description: undefined,
             age: undefined,
@@ -19,19 +18,14 @@ export default class PetitionForm extends Component {
             center: undefined,
             status: undefined,
             sent: undefined
-
         }
-
         this.uploaderService = new UploaderService()
-
     }
 
     componentDidUpdate = (prevProps) => {
 
         if (this.props.petition !== prevProps.petition) {
-
             this.setState({ title: this.props.petition.title, description: this.props.petition.description, age: this.props.petition.age, sex: this.props.petition.sex, owner: this.props.user._id, center: this.props.petition.center })
-
         }
     }
 
@@ -45,21 +39,15 @@ export default class PetitionForm extends Component {
             .uploadImage(uploadData)
             .then(response => this.setState({ image: response.data.secure_url }))
             .catch(err => console.log('ERRORRR!', err))
-
     }
 
     onChangeHandler = e => this.setState({ [e.target.name]: e.target.value })
 
     render() {
-
         return (
-
             <div>
-
                 <>
-
                     <Form onSubmit={(e) => this.props.petition ? this.props.edit(e, this.state) : this.props.create(e, this.state)}>
-
                         <Form.Group controlId="title">
                             <Form.Label>Título</Form.Label>
                             <Form.Control name="title" type="text" value={this.state.title} onChange={this.onChangeHandler} placeholder="Título del regalo" minLength="10" required />
@@ -92,18 +80,10 @@ export default class PetitionForm extends Component {
                             <Form.Label>Imagen</Form.Label>
                             <Form.Control name="image" type="file" onChange={this.handleImageUpload} />
                         </Form.Group>
-
                         <Button className="btn btn-info edit-btn" block type="submit">{this.props.petition ? 'Editar regalo' : 'Crear regalo'}</Button>
-
                     </Form >
-
                 </>
-
-
             </div>
-
         )
     }
-
-
 }

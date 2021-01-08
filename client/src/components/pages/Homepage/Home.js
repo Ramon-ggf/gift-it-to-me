@@ -1,24 +1,20 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+
 import Logo from './Pictures/logo7.png'
 import Logo2 from './Pictures/Logo2.png'
-
 import './Homepage.css'
 
-
-
 const HomePage = () => {
-
     return (
         <>
             <section className="main-content">
                 <Container>
                     <Row>
                         <Col md={6}>
-
                             <article className="main-text">
                                 <figure>
-                                    <img src={Logo} style={{ width: '500px' }} />
+                                    <img src={Logo} style={{ width: '500px' }} alt={'Regalame_logo'}/>
                                 </figure>
 
                                 <div className="main-info">
@@ -27,11 +23,11 @@ const HomePage = () => {
                                     <Link className="btn btn-info btn-registro" to="/signup">Regístrate</Link>
                                 </div>
                             </article>
-
                         </Col>
                     </Row>
                 </Container>
             </section>
+
             <section className="features">
                 <Container style={{ padding: '30px' }}>
                     <h2 className="feature-title2">¡Regalar es muy fácil!</h2>
@@ -55,6 +51,7 @@ const HomePage = () => {
                     <Link className="btn btn-info btn-more" to="/info">Quiero saber más</Link>
                 </Container>
             </section>
+            
             <section className="about">
                 <Container>
                     <Row>

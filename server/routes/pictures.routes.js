@@ -9,7 +9,6 @@ router.post('/upload', uploader.single("image"), (req, res, next) => {
         res.status(500).json({ message: 'Error loading the file' });
         return;
     }
-
     res.json({ secure_url: req.file.path });
 })
 

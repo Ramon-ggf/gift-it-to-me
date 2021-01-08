@@ -49,11 +49,8 @@ const petitionSchema = new Schema({
     }
 
 }, {
-
     timestamps: true
-
 })
-
 
 const Petition = mongoose.model('Petition', petitionSchema)
 module.exports = Petition

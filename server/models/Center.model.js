@@ -35,11 +35,8 @@ const centerSchema = new Schema({
     }
 
 }, {
-
     timestamps: true
-
 })
-
 
 const Center = mongoose.model('Center', centerSchema)
 module.exports = Center

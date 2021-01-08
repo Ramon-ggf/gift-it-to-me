@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 
-const {connectionChecker, roleChecker, idPetitionChecker} = require('../middlewares/custom.middlewares')
+const { connectionChecker, roleChecker, idMongooseChecker } = require('../middlewares/custom.middlewares')
 
 const Petition = require('./../models/Petition.model')
 
@@ -10,31 +10,33 @@ const Petition = require('./../models/Petition.model')
 router.get('/', (req, res) => {
 
     Petition
-        .find({status: true})
+        .find({ status: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.get('/giverpetitions/:user_id', roleChecker(['GIVER']), (req, res) => {
+router.get('/mypetitions/:user_id', roleChecker(['GIVER', 'RECEIVER']), (req, res) => {
+
+    let searchCriteria;
+
+    if (req.user.role === 'GIVER') {
+        
+        searchCriteria = { giver: req.params.user_id, sent: false }
+
+    } else {
+
+        searchCriteria = {owner: req.params.user_id, sent: false}
+    }
 
     Petition
-        .find({giver: req.params.user_id, sent: false})
+        .find(searchCriteria)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.get('/ownerpetitions/:user_id', roleChecker(['RECEIVER']), (req, res) => {
-
-    Petition
-        .find({owner: req.params.user_id, sent: false})
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-
-})
-
-router.get('/petitionById/:petition_id', idPetitionChecker, (req, res) => {
+router.get('/petitionById/:petition_id', idMongooseChecker, (req, res) => {
 
     Petition
         .findById(req.params.petition_id)
@@ -45,7 +47,7 @@ router.get('/petitionById/:petition_id', idPetitionChecker, (req, res) => {
 
 })
 
-router.post('/new', connectionChecker, roleChecker(['ADMIN', 'RECEIVER']),(req, res) => {
+router.post('/new', connectionChecker, roleChecker(['ADMIN', 'RECEIVER']), (req, res) => {
 
     Petition
         .create(req.body)
@@ -54,10 +56,10 @@ router.post('/new', connectionChecker, roleChecker(['ADMIN', 'RECEIVER']),(req, 
 
 })
 
-router.put('/edit/:petition_id', connectionChecker, idPetitionChecker, (req, res) => {
+router.put('/edit/:petition_id', connectionChecker, idMongooseChecker, (req, res) => {
 
     Petition
-        .findByIdAndUpdate(req.params.petition_id, req.body, {new: true})
+        .findByIdAndUpdate(req.params.petition_id, req.body, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
