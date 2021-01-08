@@ -17,7 +17,6 @@ export default class UserForm extends Component {
             image: undefined,
             status: true
         }
-
         this.uploaderService = new UploaderService()
     }
 
@@ -41,22 +40,14 @@ export default class UserForm extends Component {
             .uploadImage(uploadData)
             .then(response =>this.setState({ image: response.data.secure_url }))
             .catch(err => console.log('Error:', err))
-
     }
 
     onChangeHandler = e => this.setState({ [e.target.name]: e.target.value })
 
-
     render() {
-
-        console.log(this.props)
-
         return (
-
             <div>
-
                 <Form onSubmit={(e) => e.target[6].name === 'button-edit' ? this.props.edit(e, this.state) : this.props.create(e, this.state)}>
-
                     <Form.Group controlId="name">
                         <Form.Label>Nombre</Form.Label>
                         <Form.Control name="name" type="text" value={this.state.name} onChange={this.onChangeHandler} placeholder="Nombre"/>
@@ -77,7 +68,7 @@ export default class UserForm extends Component {
                         <Form.Label>Elige el tipo de perfil</Form.Label>
                         <Form.Control as="select" name="role" value={this.state.role} onChange={this.onChangeHandler}>
                             <option>Seleccionar</option>
-                            {this.props.adminUser && this.props.adminUser.role === 'ADMIN' && <option value={"ADMIN"}>Admin</option>}
+                            { this.props.adminUser?.role === 'ADMIN' && <option value={"ADMIN"}>Admin</option>}
                             <option value={"GIVER"}>Donante</option>
                             <option value={"RECEIVER"}>Soñador/a</option>
                         </Form.Control>
@@ -86,17 +77,11 @@ export default class UserForm extends Component {
                         <Form.Label>Imagen</Form.Label>
                         <Form.Control name="image" type="file" onChange={this.handleImageUpload} />
                     </Form.Group>
-
                     <Button className="btn btn-info edit-btn" block name={this.props.path.includes('edit') ? "button-edit" : "button-sign"} type="submit">
                         {this.props.path.includes('edit') ? 'Editar perfil' : 'Registrar usuario'}
                     </Button>
-
                 </Form>
-
             </div>
-
         )
-
     }
-
 }

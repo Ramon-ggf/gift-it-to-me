@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
 
-const {connectionChecker, roleChecker, idCenterChecker} = require ('../middlewares/custom.middlewares')
+const {connectionChecker, roleChecker, idMongooseChecker} = require ('../middlewares/custom.middlewares')
 
 const Center = require('./../models/Center.model')
 
@@ -16,7 +15,7 @@ router.get('/', (req, res) => {
 
 })
 
-router.get('/centerById/:center_id', idCenterChecker, (req, res) => {
+router.get('/centerById/:center_id', idMongooseChecker, (req, res) => {
 
     Center
         .findById(req.params.center_id)
@@ -34,7 +33,7 @@ router.post('/new', connectionChecker, roleChecker(['ADMIN']), (req, res) => {
 
 })
 
-router.put('/edit/:center_id', connectionChecker, roleChecker(['ADMIN']), idCenterChecker, (req, res) => {
+router.put('/edit/:center_id', connectionChecker, roleChecker(['ADMIN']), idMongooseChecker, (req, res) => {
 
     Center
         .findByIdAndUpdate(req.params.center_id, req.body, {new: true})

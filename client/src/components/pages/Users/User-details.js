@@ -10,9 +10,7 @@ export default class UserDetails extends Component {
         super()
 
         this.state = { user: undefined }
-
         this.profileService = new ProfileService()
-
     }
 
     componentDidMount = () => this.refreshUser()
@@ -35,9 +33,7 @@ export default class UserDetails extends Component {
     }
 
     render() {
-
         return (
-
             <>
                 {this.state.user ?
                     <>
@@ -45,8 +41,7 @@ export default class UserDetails extends Component {
                             <h1 style={{ marginBottom: '50px' }}>Detalles de {this.state.user.name}</h1>
                             <Row>
                                 <Col md={{ span: 4, offset: 4 }}>
-                                    {this.props.user && this.props.user.role === 'ADMIN' ?
-
+                                    {this.props.user?.role === 'ADMIN' ?
                                         <Card>
                                             <Card.Img variant="top" src={this.state.user.image} style={{ height: '300px', width: '300px', objectFit: 'cover', margin: 'auto', marginTop: '20px' }} />
                                             <Card.Body>
@@ -66,12 +61,9 @@ export default class UserDetails extends Component {
                             </Row>
                             <Link className="btn btn-info edit-btn" to={"/users"}>Volver a la lista</Link>
                         </Container>
-
                     </>
-
                     : 'Loading...'}
             </>
-
         )
     }
 }
